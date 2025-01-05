@@ -91,3 +91,25 @@ class imageWithTextButton extends StatelessWidget {
     );
   }
 }
+
+
+class MainText extends StatelessWidget {
+  final String text;
+  final Color? color;
+  double? size;
+  FontWeight? weight;
+  bool? underlined = false;
+
+  MainText(
+      {super.key,
+        required this.text,
+        this.color,
+        this.size,
+        this.weight,
+      this.underlined});
+
+  @override
+  Widget build(BuildContext context) {
+    return  Text(overflow: TextOverflow.ellipsis,maxLines: 1,text,style: TextStyle(fontWeight: weight,fontSize: size,color: color,decoration: underlined == true ? TextDecoration.underline : null,decorationColor: AppColors.green),);
+  }
+}

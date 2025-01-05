@@ -42,14 +42,14 @@ class NavController extends GenericController {
       title: ("Home".tr),
       activeColorSecondary: Colors.white,
     ),
-    PersistentBottomNavBarItem(
-      inactiveIcon: SvgPicture.asset("assets/images/accountIcon.svg",
-          color: AppColors.grey2),
-      icon: SvgPicture.asset("assets/images/accountIcon.svg",
-          color: Colors.white),
-      title: ("Accounts".tr),
-      activeColorSecondary: Colors.white,
-    ),
+    // PersistentBottomNavBarItem(
+    //   inactiveIcon: SvgPicture.asset("assets/images/accountIcon.svg",
+    //       color: AppColors.grey2),
+    //   icon: SvgPicture.asset("assets/images/accountIcon.svg",
+    //       color: Colors.white),
+    //   title: ("Accounts".tr),
+    //   activeColorSecondary: Colors.white,
+    // ),
     PersistentBottomNavBarItem(
       inactiveIcon:
           SvgPicture.asset("assets/images/Icon.svg", color: AppColors.grey2),

@@ -151,15 +151,21 @@ class _OnBoardingState extends State<OnBoarding> {
                 child: RichText(
                   textAlign: TextAlign.center,
                   text: TextSpan(
-                    text: 'Find'.tr,
+                    text: 'From'.tr,
                     style: const TextStyle(color: AppColors.black,fontSize: 24,fontWeight: FontWeight.w500),
                     children: <TextSpan>[
                       TextSpan(
-                          text: ' Nearby Parking Spots '.tr, style: const TextStyle(fontSize: 24,fontWeight: FontWeight.w500,color: AppColors.green)),
+                          text: ' You '.tr, style: const TextStyle(fontSize: 24,fontWeight: FontWeight.w500,color: AppColors.green)),
                       TextSpan(
-                          text: 'With Ease'.tr,
+                          text: 'to Us ,'.tr,
                           style: const TextStyle(color: AppColors.black,fontSize: 24,fontWeight: FontWeight.w500)),
-
+                      TextSpan(
+                          text: ' Parking '.tr, style: const TextStyle(fontSize: 24,fontWeight: FontWeight.w500,color: AppColors.green)),
+                      TextSpan(
+                          text: 'Made'.tr,
+                          style: const TextStyle(color: AppColors.black,fontSize: 24,fontWeight: FontWeight.w500)),
+                      TextSpan(
+                          text: ' Easy '.tr, style: const TextStyle(fontSize: 24,fontWeight: FontWeight.w500,color: AppColors.green)),
                     ],
                   ),
                 ),
@@ -169,7 +175,7 @@ class _OnBoardingState extends State<OnBoarding> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Text(
-                  'Lorem ipsum dolor sit amet consectetur. Eget nunc placerat placerat lacinia quam.'.tr,
+                  'Hand over your car ,and let us handle parking with care and convenience.'.tr,
                   style:
                       const TextStyle(color: AppColors.grey1, fontSize: 16),
                   textAlign: TextAlign.center,
@@ -244,7 +250,7 @@ class _OnBoardingState extends State<OnBoarding> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Text(
-                  'Lorem ipsum dolor sit amet consectetur. Eget nunc placerat placerat lacinia quam.'.tr,
+                  'Discover stress- free parking and valet solutions with ease.'.tr,
                   style:
                   const TextStyle(color: AppColors.grey1, fontSize: 16),
                   textAlign: TextAlign.center,
@@ -301,15 +307,16 @@ class _OnBoardingState extends State<OnBoarding> {
                 child: RichText(
                   textAlign: TextAlign.center,
                   text: TextSpan(
-                    text: 'Find'.tr,
+                    text: 'Give Us'.tr,
                     style: const TextStyle(color: AppColors.black,fontSize: 24,fontWeight: FontWeight.w500),
                     children: <TextSpan>[
                       TextSpan(
-                          text: ' Nearby Parking Spots '.tr, style: const TextStyle(fontSize: 24,fontWeight: FontWeight.w500,color: AppColors.green)),
+                          text: ' Your Car, Enjoy '.tr, style: const TextStyle(fontSize: 24,fontWeight: FontWeight.w500,color: AppColors.green)),
                       TextSpan(
-                          text: 'With Ease'.tr,
+                          text: 'Your'.tr,
                           style: const TextStyle(color: AppColors.black,fontSize: 24,fontWeight: FontWeight.w500)),
-
+                      TextSpan(
+                          text: ' Day!'.tr, style: const TextStyle(fontSize: 24,fontWeight: FontWeight.w500,color: AppColors.green)),
                     ],
                   ),
                 ),
@@ -319,7 +326,7 @@ class _OnBoardingState extends State<OnBoarding> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Text(
-                  'Lorem ipsum dolor sit amet consectetur. Eget nunc placerat placerat lacinia quam.'.tr,
+                  'With our valet service , parking is no longer your problem - it’s ours.'.tr,
                   style:
                   const TextStyle(color: AppColors.grey1, fontSize: 16),
                   textAlign: TextAlign.center,
@@ -344,7 +351,7 @@ class _OnBoardingState extends State<OnBoarding> {
         } else {
           // Handle what to do when on the last page
           // Get.off(() => const SignUpPage());
-          Get.off(() => const SignupScreen());
+          Get.off(() => const LoginWithNumberScreen());
         }
       },
       child: Container(

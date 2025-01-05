@@ -139,7 +139,7 @@ class LoginWithNumberScreen extends GetView<LoginWithNumberController>{
             // if (controller.isDone.isTrue) {
             debugPrint(
                 "Submit button tapped");
-            Get.to(() => PinScreen());
+            Get.to(() => PinScreen(isFromLogin: true,));
             // Get.to(() => const NavScreen());
             // }
           }
