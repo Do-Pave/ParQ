@@ -7,14 +7,14 @@ import 'onboarding/onboarding.dart';
 
 void main() {
   runApp(
-    const MyApp()
-    // DevicePreview(
-    //   enabled: true,
-    //   tools: const [
-    //     ...DevicePreview.defaultTools,
-    //   ],
-    //   builder: (context) => const MyApp(),
-    // ),
+    // const MyApp()
+    DevicePreview(
+      enabled: true,
+      tools: const [
+        ...DevicePreview.defaultTools,
+      ],
+      builder: (context) => const MyApp(),
+    ),
   );
 }
 

@@ -60,69 +60,82 @@ class ProfileScreen extends GetView<ProfileController> {
                       padding: const EdgeInsets.all(20),
                       child: Column(
                         children: [
-                          nameRow(controller),
-                          const SizedBox(
-                            height: 30,
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(20)
-                            ),
-                            child: Column(
-                              children: [
-                                GestureDetector(
-                                    onTap: () {
-                                      debugPrint("Manage account");
-                                      Get.to(() => const ManageProfileScreen());
-                                    },
-                                    child: mainProfileRows("Manage Profile",
-                                        "assets/images/profile.svg")),
-                                const SizedBox(
-                                  height: 15,
-                                ),
-                                GestureDetector(
-                                    onTap: () {
-                                      debugPrint("Withdraws");
-                                      Get.to(() => const WithdrawRequestsScreen());
-                                    },
-                                    child: mainProfileRows("Withdraws",
-                                        "assets/images/withdraws.svg")),
-                                const SizedBox(
-                                  height: 15,
-                                ),
-                                // GestureDetector(
-                                //     onTap: () {
-                                //       debugPrint("Pin");
-                                //       Get.to(() => const ResetPasswordScreen());
-                                //     },
-                                //     child: mainProfileRows(
-                                //         "Pin", "assets/images/password.svg")),
-                                // const SizedBox(
-                                //   height: 15,
-                                // ),
-                                GestureDetector(
-                                    onTap: () {
-                                      debugPrint("privacy & policy");
-                                      Get.to(() => const PrivacyAndPolicyScreen());
-                                    },
-                                    child: mainProfileRows("privacy & policy",
-                                        "assets/images/privacy.svg")),
-                                const SizedBox(
-                                  height: 15,
-                                ),
-                                GestureDetector(
-                                    onTap: () {
-                                      debugPrint("Log out");
-                                      Get.offAll(() => const OnBoarding());
-                                    },
-                                    child: mainProfileRows(
-                                        "Log out", "assets/images/logout.svg")),
-                                const SizedBox(
-                                  height: 15,
-                                ),
-                              ],
-                            ),
+                          // nameRow(controller),
+                          // const SizedBox(
+                          //   height: 30,
+                          // ),
+                          Column(
+                            children: [
+                              GestureDetector(
+                                  onTap: () {
+                                    debugPrint("My Profile");
+                                    Get.to(() => const ManageProfileScreen());
+                                  },
+                                  child: mainProfileRows("Your Profile",
+                                      "assets/images/profIcon.svg")),
+                              const SizedBox(
+                                height: 15,
+                              ),
+                              GestureDetector(
+                                  onTap: () {
+                                    debugPrint("Password Manger");
+                                    Get.to(() => const WithdrawRequestsScreen());
+                                  },
+                                  child: mainProfileRows("Password Manger",
+                                      "assets/images/pass.svg")),
+                              const SizedBox(
+                                height: 15,
+                              ), GestureDetector(
+                                  onTap: () {
+                                    debugPrint("Payment Methods");
+                                    Get.to(() => const WithdrawRequestsScreen());
+                                  },
+                                  child: mainProfileRows("Payment Methods",
+                                      "assets/images/pay.svg")),
+                              const SizedBox(
+                                height: 15,
+                              ),
+                              // GestureDetector(
+                              //     onTap: () {
+                              //       debugPrint("Pin");
+                              //       Get.to(() => const ResetPasswordScreen());
+                              //     },
+                              //     child: mainProfileRows(
+                              //         "Pin", "assets/images/password.svg")),
+                              // const SizedBox(
+                              //   height: 15,
+                              // ),
+                              GestureDetector(
+                                  onTap: () {
+                                    debugPrint("privacy & policy");
+                                    Get.to(() => const PrivacyAndPolicyScreen());
+                                  },
+                                  child: mainProfileRows("privacy & policy",
+                                      "assets/images/Lock Keyhole.svg")),
+                              const SizedBox(
+                                height: 15,
+                              ),
+                              GestureDetector(
+                                  onTap: () {
+                                    debugPrint("Help Center");
+                                    Get.to(() => const PrivacyAndPolicyScreen());
+                                  },
+                                  child: mainProfileRows("Help Center",
+                                      "assets/images/DangerCircle.svg")),
+                              const SizedBox(
+                                height: 15,
+                              ),
+                              GestureDetector(
+                                  onTap: () {
+                                    debugPrint("Log out");
+                                    Get.offAll(() => const OnBoarding());
+                                  },
+                                  child: mainProfileRows(
+                                      "Logout", "assets/images/ArrowsLogout.svg")),
+                              const SizedBox(
+                                height: 15,
+                              ),
+                            ],
                           ),
 
                         ],
@@ -172,12 +185,13 @@ class ProfileScreen extends GetView<ProfileController> {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Row(children: [
-        ClipOval(
+        Container(
+          width: 24,
           child: SvgPicture.asset(
             image,
-            width: 40,
-            height: 40,
-            fit: BoxFit.cover,
+            // width: 24,
+            // height: 24,
+            fit: BoxFit.fill,
           ),
         ),
         const SizedBox(
@@ -194,6 +208,7 @@ class ProfileScreen extends GetView<ProfileController> {
         ),
         const Icon(
           Icons.arrow_forward_ios,
+          color: AppColors.green,
           size: 20,
         )
       ]),

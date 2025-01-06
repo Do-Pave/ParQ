@@ -17,7 +17,7 @@ class ProfileController extends GenericController{
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    getProfile();
+    // getProfile();
   }
 
 

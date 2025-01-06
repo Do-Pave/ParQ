@@ -37,10 +37,11 @@ class NavController extends GenericController {
   final List<PersistentBottomNavBarItem> items = [
     PersistentBottomNavBarItem(
       inactiveIcon:
-          SvgPicture.asset("assets/images/home.svg", color: AppColors.grey2),
-      icon: SvgPicture.asset("assets/images/home.svg", color: Colors.white),
+          SvgPicture.asset("assets/images/homeIcon.svg", color: AppColors.black),
+      icon: SvgPicture.asset("assets/images/homeIcon.svg", color: Colors.white),
       title: ("Home".tr),
       activeColorSecondary: Colors.white,
+      activeColorPrimary: AppColors.green
     ),
     // PersistentBottomNavBarItem(
     //   inactiveIcon: SvgPicture.asset("assets/images/accountIcon.svg",
@@ -52,10 +53,11 @@ class NavController extends GenericController {
     // ),
     PersistentBottomNavBarItem(
       inactiveIcon:
-          SvgPicture.asset("assets/images/Icon.svg", color: AppColors.grey2),
-      icon: SvgPicture.asset("assets/images/Icon.svg", color: Colors.white),
+          SvgPicture.asset("assets/images/profileIcon.svg", color: AppColors.black),
+      icon: SvgPicture.asset("assets/images/profileIcon.svg", color: Colors.white),
       title: ("Profile".tr),
       activeColorSecondary: Colors.white,
+        activeColorPrimary: AppColors.green
     ),
   ];
 
@@ -94,8 +96,8 @@ class NavController extends GenericController {
       // profileController.getProfile();
     }
     if (index == 2) {
-      final profileController = Get.find<ProfileController>();
-      profileController.getProfile();
+      // final profileController = Get.find<ProfileController>();
+      // profileController.getProfile();
     }
     return true;
   }

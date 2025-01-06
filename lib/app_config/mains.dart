@@ -34,15 +34,15 @@ class MainButton extends StatelessWidget {
           gradient: color == null
               ? gradient
               : null,
-          borderRadius: BorderRadius.circular(25.0),
+          borderRadius: BorderRadius.circular(20.0),
         ),
         child: Center(
           child: Text(
-            buttonText,
+            buttonText.tr,
             style: const TextStyle(
               color: Colors.white,
               fontSize: 17.0,
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.w500,
             ),
           ),
         ),

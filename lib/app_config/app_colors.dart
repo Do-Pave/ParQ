@@ -19,7 +19,7 @@ class AppColors {
   static const Color navBarColor = Color(0xffFBFCFF);
   static const Color red = Color(0xffFF0004);
   static const Color blueUp = Color(0xff0099FF);
-  static const Color bgColor = Color(0xffF8F9FD);
+  static const Color bgColor = Colors.white;
   static const Color mint = Color(0xffE7F7F5);
   static const Color textGrey = Color(0xff707070);
 

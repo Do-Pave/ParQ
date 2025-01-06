@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -8,6 +9,7 @@ import 'package:parq/app_config/app_colors.dart';
 import 'package:parq/app_config/custom_app_bar.dart';
 import 'package:parq/app_config/mains.dart';
 import 'package:parq/home/controller/home_controller.dart';
+import 'package:parq/home/screen/nearby_parking_screen.dart';
 import 'package:parq/home/screen/recent_transactions_screen.dart';
 import 'package:intl/intl.dart';
 import 'package:parq/map/map_screen.dart';
@@ -29,7 +31,6 @@ class HomeScreen extends GetView<HomeController> {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -120,28 +121,47 @@ class HomeScreen extends GetView<HomeController> {
                 height: 22,
               ),
               defaultParkValet(controller),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  MainText(
-                    text: "Nearby Parking",
-                    size: 20,
-                    weight: FontWeight.w500,
-                    color: AppColors.black,
-                  ),
-                  MainText(
-                    text: "See all",
-                    size: 16,
-                    weight: FontWeight.w400,
-                    color: AppColors.green,
-                    underlined: true,
-                  ),
-                ],
+              const SizedBox(
+                height: 22,
+              ),
+              mainHeaders("Nearby Parking", (){}),
+              const SizedBox(
+                height: 22,
+              ),
+              SizedBox(
+                height: 187 * 3 ,
+                child: ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: 3,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      child: nearbyParking(),
+                    );
+                  },
+                ),
               ),
               const SizedBox(
                 height: 22,
               ),
-              popularParking(),
+              mainHeaders("Popular Parking", (){}),
+              const SizedBox(
+                height: 22,
+              ),
+
+              SizedBox(
+                height: 250 ,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 2,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: popularParking(),
+                    );
+                  },
+                ),
+              ),
               const SizedBox(
                 height: 100,
               ),
@@ -149,6 +169,30 @@ class HomeScreen extends GetView<HomeController> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget mainHeaders(title,void Function()? onTap){
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        MainText(
+          text: title,
+          size: 20,
+          weight: FontWeight.w500,
+          color: AppColors.black,
+        ),
+        GestureDetector(
+          onTap: onTap,
+          child: MainText(
+            text: "See all",
+            size: 16,
+            weight: FontWeight.w400,
+            color: AppColors.green,
+            underlined: true,
+          ),
+        ),
+      ],
     );
   }
 
@@ -358,9 +402,6 @@ class HomeScreen extends GetView<HomeController> {
                         weight: FontWeight.w500,
                         color: AppColors.green,
                       ),
-                      const SizedBox(
-                        width: 8,
-                      ),
                       MainText(
                         text: "/hr",
                         size: 14,
@@ -379,137 +420,276 @@ class HomeScreen extends GetView<HomeController> {
         ));
   }
 
-  Widget popularParking() {
-    return Container(
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: AppColors.grey2)),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
-          child: Row(
-            children: [
-              Stack(
-                children: [
-                  Image.asset(
-                    "assets/images/Frame000005609.png",
-                    fit: BoxFit.fill,
-                    width: 125,
-                    height: 100,
-                  ),
-                  Positioned(
-                    top: 5,
-                    left: 5,
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.black.withOpacity(0.8)
-                      ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: Row(
-                                                children: [
-                          SvgPicture.asset("assets/images/fav.svg"),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          MainText(
-                            text: "5.0",
-                            size: 14,
-                            weight: FontWeight.w400,
-                            color: Colors.white,
-                          )
-                                                ],
-                                              ),
-                        )),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                width: 8,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                        color: AppColors.grey2),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: [
-                          SvgPicture.asset("assets/images/Car_Paking.svg"),
-                          const SizedBox(
-                            width: 8,
-                          ),
-                          MainText(
-                            text: "Car Parking",
-                            size: 14,
-                            weight: FontWeight.w400,
-                            color: AppColors.green,
-                          )
-                        ],
-                      ),
+  Widget nearbyParking() {
+    return GestureDetector(
+      onTap: (){
+        Get.to(()=> const NearbyParkingScreen());
+      },
+      child: Container(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: AppColors.grey2)),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
+            child: Row(
+              children: [
+                Stack(
+                  children: [
+                    Image.asset(
+                      "assets/images/Frame000005609.png",
+                      fit: BoxFit.fill,
+                      width: 135,
+                      height: 135,
                     ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    Positioned(
+                      top: 5,
+                      left: 5,
+                      child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.black.withOpacity(0.8)),
+                          child: Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: Row(
+                              children: [
+                                SvgPicture.asset("assets/images/fav.svg"),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                MainText(
+                                  text: "5.0",
+                                  size: 14,
+                                  weight: FontWeight.w400,
+                                  color: Colors.white,
+                                )
+                              ],
+                            ),
+                          )),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  width: 8,
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      MainText(
-                        text: "Blue Way city Parking",
-                        size: 16,
-                        weight: FontWeight.w500,
-                        color: AppColors.black,
-                      ),
-                      MainText(
-                        text: "\$3.00",
-                        size: 14,
-                        weight: FontWeight.w500,
-                        color: AppColors.green,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  MainText(
-                    text: "78 Ali Amen  , cairo",
-                    size: 14,
-                    weight: FontWeight.w400,
-                    color: AppColors.textGrey,
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      MainText(
-                        text: "60M Away",
-                        size: 12,
-                        weight: FontWeight.w400,
-                        color: AppColors.textGrey,
-                      ),
                       Container(
+                        // width: Get.size.width / 3,
+                        width: 117,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(16),
                             color: AppColors.grey2),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: MainText(
-                            text: "25 Spots",
-                            size: 14,
-                            weight: FontWeight.w400,
-                            color: AppColors.green,
+                          child: Row(
+                            children: [
+                              SvgPicture.asset("assets/images/Car_Paking.svg"),
+                              const SizedBox(
+                                width: 8,
+                              ),
+                              MainText(
+                                text: "Car Parking",
+                                size: 14,
+                                weight: FontWeight.w400,
+                                color: AppColors.green,
+                              )
+                            ],
                           ),
                         ),
                       ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          MainText(
+                            text: limitText("Blue Way city Parking", 13),
+                            size: 16,
+                            weight: FontWeight.w500,
+                            color: AppColors.black,
+                          ),
+                          Container(),
+                          MainText(
+                            text: "\$3.00",
+                            size: 14,
+                            weight: FontWeight.w500,
+                            color: AppColors.green,
+                          ),
+                          MainText(
+                            text: "/hr",
+                            size: 14,
+                            weight: FontWeight.w400,
+                            color: AppColors.textGrey,
+                          )
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      MainText(
+                        text: "78 Ali Amen  , cairo",
+                        size: 14,
+                        weight: FontWeight.w400,
+                        color: AppColors.textGrey,
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          MainText(
+                            text: "60M Away",
+                            size: 12,
+                            weight: FontWeight.w400,
+                            color: AppColors.textGrey,
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(16),
+                                color: AppColors.grey2),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: MainText(
+                                text: "25 Spots",
+                                size: 14,
+                                weight: FontWeight.w400,
+                                color: AppColors.green,
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
                     ],
-                  )
-                ],
+                  ),
+                )
+              ],
+            ),
+          )),
+    );
+  }
+
+  Widget popularParking(){
+    return Container(
+      width: Get.size.width / 2,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: AppColors.grey2)
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+          Stack(
+            children: [
+              Image.asset(
+                "assets/images/Frame000005609.png",
+                fit: BoxFit.fill,
+                width: 170,
+                height: 95,
+              ),
+              Positioned(
+                top: 5,
+                right: 5,
+                child: Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: SvgPicture.asset("assets/images/non-fav.svg"),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8,),
+          Row(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    color: Color.fromRGBO(18, 175, 152, 0.2)
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: MainText(
+                    text: "25 Spots",
+                    size: 14,
+                    weight: FontWeight.w400,
+                    color: AppColors.green,
+                  ),
+                ),
+              ),
+              const Spacer(),
+              MainText(
+                text: "\$3.00",
+                size: 14,
+                weight: FontWeight.w500,
+                color: AppColors.green,
+              ),
+              MainText(
+                text: "/hr",
+                size: 14,
+                weight: FontWeight.w400,
+                color: AppColors.textGrey,
               )
             ],
           ),
-        ));
+          const SizedBox(height: 8,),
+          MainText(
+            text: limitText("ParkEase Pro", 13),
+            size: 12,
+            weight: FontWeight.w500,
+            color: AppColors.black,
+          ),
+      const SizedBox(height: 8,),
+      const Divider(
+        color: AppColors.grey2,
+        height: 1,
+      ),
+      const SizedBox(
+        height: 20,
+      ),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              SvgPicture.asset("assets/images/locationIcon.svg"),
+              const SizedBox(
+                width: 8,
+              ),
+              MainText(
+                text: "60M Away",
+                size: 10,
+                weight: FontWeight.w400,
+                color: AppColors.textGrey,
+              )
+            ],
+          ),
+          Row(
+            children: [
+              SvgPicture.asset("assets/images/CarVector.svg"),
+              const SizedBox(
+                width: 8,
+              ),
+              MainText(
+                text: "25 Spots ",
+                size: 10,
+                weight: FontWeight.w400,
+                color: AppColors.textGrey,
+              )
+            ],
+          ),
+        ],),
+  ])),
+    );
+  }
+
+  String limitText(String text, int maxLength) {
+    if (text.length > maxLength) {
+      return '${text.substring(0, maxLength)}...';
+    }
+    return text;
   }
 }

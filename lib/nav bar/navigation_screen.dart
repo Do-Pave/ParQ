@@ -20,7 +20,7 @@ class NavScreen extends GetView<NavController> {
               ? const Center(child: CircularProgressIndicator())
               : PersistentTabView(
             context,
-            decoration: NavBarDecoration(borderRadius: BorderRadius.circular(50),boxShadow: [
+            decoration: NavBarDecoration(borderRadius: BorderRadius.circular(100),boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.1), // Shadow color
                 spreadRadius: 5, // Spread of the shadow
@@ -34,7 +34,7 @@ class NavScreen extends GetView<NavController> {
             items: controller.items,
             // screens: controller.organizationScreens,
             // items: controller.organizationItems,
-            backgroundColor: Colors.white,
+            backgroundColor: Colors.white.withOpacity(0.4),
             handleAndroidBackButtonPress: true,
             resizeToAvoidBottomInset: true,
             stateManagement: true,
