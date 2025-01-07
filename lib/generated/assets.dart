@@ -2,6 +2,7 @@
 class Assets {
   Assets._();
 
+  static const String assetsImagesApple = 'assets/images/apple.svg';
   static const String assetsImagesArrowsLogout = 'assets/images/ArrowsLogout.svg';
   static const String assetsImagesGoogle = 'assets/images/google.svg';
   static const String assetsImagesOnBoarding1 = 'assets/images/onBoarding1.svg';
@@ -15,6 +16,7 @@ class Assets {
   static const String imagesBankIcon = 'assets/images/bankIcon.svg';
   static const String imagesCarPaking = 'assets/images/Car_Paking.svg';
   static const String imagesCarVector = 'assets/images/CarVector.svg';
+  static const String imagesCardGreen = 'assets/images/cardGreen.svg';
   static const String imagesClearIcon = 'assets/images/clearIcon.svg';
   static const String imagesDangerCircle = 'assets/images/DangerCircle.svg';
   static const String imagesEmail = 'assets/images/email.svg';
@@ -61,14 +63,17 @@ class Assets {
   static const String imagesScan = 'assets/images/scan.png';
   static const String imagesScanIcon = 'assets/images/scanIcon.svg';
   static const String imagesSearchIcon = 'assets/images/searchIcon.svg';
+  static const String imagesSelected = 'assets/images/selected.svg';
   static const String imagesSend = 'assets/images/send.png';
   static const String imagesSplashImage = 'assets/images/splashImage.svg';
   static const String imagesSuccess = 'assets/images/success.svg';
   static const String imagesSuccessReq = 'assets/images/successReq.png';
   static const String imagesSwipeIcon = 'assets/images/swipeIcon.svg';
+  static const String imagesUnSelected = 'assets/images/unSelected.svg';
   static const String imagesValet = 'assets/images/valet.svg';
   static const String imagesVerified = 'assets/images/verified.png';
   static const String imagesVisa = 'assets/images/visa.png';
+  static const String imagesWalletGreen = 'assets/images/walletGreen.svg';
   static const String imagesWash = 'assets/images/wash.svg';
   static const String imagesWithdraw = 'assets/images/withdraw.png';
   static const String imagesWithdraws = 'assets/images/withdraws.svg';

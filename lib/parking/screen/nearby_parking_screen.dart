@@ -4,7 +4,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:parq/app_config/app_colors.dart';
 import 'package:parq/app_config/custom_app_bar.dart';
-import 'package:parq/home/controller/nearby_parking_controller.dart';
+import 'package:parq/parking/controller/nearby_parking_controller.dart';
+import 'package:parq/parking/screen/booking_details_screen.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../app_config/mains.dart';
@@ -96,68 +97,83 @@ class NearbyParkingScreen extends GetView<NearbyParkingController> {
                       const SizedBox(
                         height: 22,
                       ),
-                      MainText(
-                        text: "Blue Way city Parking",
-                        size: 22,
-                        weight: FontWeight.w500,
-                        color: AppColors.black,
-                      ),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      MainText(
-                        text: "78 Ali Amen  , cairo",
-                        size: 18,
-                        weight: FontWeight.w400,
-                        color: AppColors.textGrey,
-                      ),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
+                      Container(
+                        decoration: BoxDecoration(
+                          color: AppColors.greyContainerBG,
+                          borderRadius: BorderRadius.circular(8)
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              SvgPicture.asset(
-                                "assets/images/locationIcon.svg",
-                                color: const Color(0xffC2C2C2),
+                              MainText(
+                                text: "Blue Way city Parking",
+                                size: 22,
+                                weight: FontWeight.w500,
+                                color: AppColors.black,
                               ),
                               const SizedBox(
-                                width: 8,
+                                height: 16,
                               ),
                               MainText(
-                                text: "60M Away",
-                                size: 16,
+                                text: "78 Ali Amen  , cairo",
+                                size: 18,
                                 weight: FontWeight.w400,
-                                color: AppColors.black,
+                                color: AppColors.textGrey,
+                              ),
+                              const SizedBox(
+                                height: 16,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      SvgPicture.asset(
+                                        "assets/images/locationIcon.svg",
+                                        color: const Color(0xffC2C2C2),
+                                      ),
+                                      const SizedBox(
+                                        width: 8,
+                                      ),
+                                      MainText(
+                                        text: "60M Away",
+                                        size: 16,
+                                        weight: FontWeight.w400,
+                                        color: AppColors.black,
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      SvgPicture.asset("assets/images/CarVector.svg",
+                                          color: const Color(0xffC2C2C2)),
+                                      const SizedBox(
+                                        width: 8,
+                                      ),
+                                      MainText(
+                                        text: "25 Spots Available",
+                                        size: 16,
+                                        weight: FontWeight.w400,
+                                        color: AppColors.black,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 12,
                               ),
                             ],
                           ),
-                          Row(
-                            children: [
-                              SvgPicture.asset("assets/images/CarVector.svg",
-                                  color: const Color(0xffC2C2C2)),
-                              const SizedBox(
-                                width: 8,
-                              ),
-                              MainText(
-                                text: "25 Spots Available",
-                                size: 16,
-                                weight: FontWeight.w400,
-                                color: AppColors.black,
-                              ),
-                            ],
-                          ),
-                        ],
+                        ),
                       ),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      const Divider(
-                        color: AppColors.grey2,
-                        height: 1,
-                      ),
+
+                      // const Divider(
+                      //   color: AppColors.grey2,
+                      //   height: 1,
+                      // ),
                       const SizedBox(
                         height: 24,
                       ),
@@ -389,50 +405,52 @@ class NearbyParkingScreen extends GetView<NearbyParkingController> {
   }
 
   Widget total() {
-    return SizedBox(
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                MainText(
-                  text: "Total Price",
-                  size: 18,
-                  weight: FontWeight.w500,
-                ),
-                Row(
-                  children: [
-                    MainText(
-                      text: "\$3.00",
-                      size: 14,
-                      weight: FontWeight.w500,
-                      color: AppColors.green,
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    MainText(
-                      text: "/hr",
-                      size: 18,
-                      weight: FontWeight.w500,
-                      color: AppColors.textGrey,
-                    )
-                  ],
-                )
-              ],
-            ),
-            MainButton(
-                height: 50,
-                color: AppColors.green,
-                width: Get.size.width / 3,
-                onTap: () {
-                  debugPrint("Book pressed");
-                },
-                buttonText: "Book")
-          ],
+    return Obx(()=> SizedBox(
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  MainText(
+                    text: "Total Price",
+                    size: 18,
+                    weight: FontWeight.w500,
+                  ),
+                  Row(
+                    children: [
+                      MainText(
+                        text: "\$3.00",
+                        size: 14,
+                        weight: FontWeight.w500,
+                        color: AppColors.green,
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      MainText(
+                        text: "/hr",
+                        size: 18,
+                        weight: FontWeight.w500,
+                        color: AppColors.textGrey,
+                      )
+                    ],
+                  )
+                ],
+              ),
+              MainButton(
+                  height: 50,
+                  color: controller.checkbox1.value == true || controller.checkbox2.value == true ? AppColors.green : AppColors.grey2,
+                  width: Get.size.width / 3,
+                  onTap: () {
+                    debugPrint("Book pressed");
+                    controller.checkbox1.value == true || controller.checkbox2.value == true ? Get.to(()=> const BookingDetailsScreen()) : null;
+                  },
+                  buttonText: "Book")
+            ],
+          ),
         ),
       ),
     );

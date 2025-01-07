@@ -31,9 +31,7 @@ class MainButton extends StatelessWidget {
           // Apply solid color if color is provided
           color: color ?? null,
           // Apply gradient only if color is null
-          gradient: color == null
-              ? gradient
-              : null,
+          gradient: color == null ? gradient : null,
           borderRadius: BorderRadius.circular(20.0),
         ),
         child: Center(
@@ -55,6 +53,7 @@ class imageWithTextButton extends StatelessWidget {
   String? image;
   String? title;
   Function()? onTap;
+
   imageWithTextButton(
       {super.key,
       required this.image,
@@ -73,7 +72,9 @@ class imageWithTextButton extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: Row(
             children: [
-              Image.asset(image ?? "",),
+              Image.asset(
+                image ?? "",
+              ),
               const SizedBox(
                 width: 10,
               ),
@@ -92,24 +93,41 @@ class imageWithTextButton extends StatelessWidget {
   }
 }
 
-
 class MainText extends StatelessWidget {
   final String text;
   final Color? color;
   double? size;
   FontWeight? weight;
   bool? underlined = false;
+  bool? isOverflow = true;
+  bool? hasMaxLines = true;
+  TextAlign? textAlign;
+
 
   MainText(
       {super.key,
-        required this.text,
-        this.color,
-        this.size,
-        this.weight,
+      required this.text,
+      this.color,
+      this.size,
+      this.weight,
+      this.isOverflow,
+      this.hasMaxLines,
+      this.textAlign,
       this.underlined});
 
   @override
   Widget build(BuildContext context) {
-    return  Text(overflow: TextOverflow.ellipsis,maxLines: 1,text,style: TextStyle(fontWeight: weight,fontSize: size,color: color,decoration: underlined == true ? TextDecoration.underline : null,decorationColor: AppColors.green),);
+    return Text(
+      overflow: isOverflow == true ? TextOverflow.ellipsis : null,
+      maxLines: hasMaxLines == true ? 1 : 4,
+      text,
+      textAlign: textAlign,
+      style: TextStyle(
+          fontWeight: weight,
+          fontSize: size,
+          color: color,
+          decoration: underlined == true ? TextDecoration.underline : null,
+          decorationColor: AppColors.green),
+    );
   }
 }

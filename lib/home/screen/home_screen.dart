@@ -9,7 +9,7 @@ import 'package:parq/app_config/app_colors.dart';
 import 'package:parq/app_config/custom_app_bar.dart';
 import 'package:parq/app_config/mains.dart';
 import 'package:parq/home/controller/home_controller.dart';
-import 'package:parq/home/screen/nearby_parking_screen.dart';
+import 'package:parq/parking/screen/nearby_parking_screen.dart';
 import 'package:parq/home/screen/recent_transactions_screen.dart';
 import 'package:intl/intl.dart';
 import 'package:parq/map/map_screen.dart';
