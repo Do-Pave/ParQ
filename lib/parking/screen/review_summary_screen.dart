@@ -59,7 +59,7 @@ class ReviewSummaryScreen extends StatelessWidget {
               const SizedBox(
                 height: 15,
               ),
-              summeryRow("Total", "\$5.00", AppColors.green, () {}),
+              summeryRow("Total", "\$5.00", AppColors.mainColor, () {}),
               const SizedBox(
                 height: 30,
               ),
@@ -85,7 +85,7 @@ class ReviewSummaryScreen extends StatelessWidget {
                           text: "Change",
                           size: 16,
                           weight: FontWeight.w500,
-                          color: AppColors.green))
+                          color: AppColors.mainColor))
                 ],
               ),
               const SizedBox(
@@ -104,7 +104,7 @@ class ReviewSummaryScreen extends StatelessWidget {
         child: SizedBox(
           height: 50,
           child: MainButton(
-              color:AppColors.green,
+              color:AppColors.mainColor,
               buttonText: "Continue",
               onTap: () {
                 debugPrint("Continue pressed");
@@ -198,7 +198,7 @@ class ReviewSummaryScreen extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
                           children: [
-                            SvgPicture.asset("assets/images/Car_Paking.svg"),
+                            SvgPicture.asset("assets/images/carParkingIcon.svg"),
                             const SizedBox(
                               width: 8,
                             ),
@@ -206,7 +206,7 @@ class ReviewSummaryScreen extends StatelessWidget {
                               text: "Car Parking",
                               size: 14,
                               weight: FontWeight.w400,
-                              color: AppColors.green,
+                              color: AppColors.mainColor,
                             )
                           ],
                         ),
@@ -229,7 +229,7 @@ class ReviewSummaryScreen extends StatelessWidget {
                           text: "\$3.00",
                           size: 14,
                           weight: FontWeight.w500,
-                          color: AppColors.green,
+                          color: AppColors.mainColor,
                         ),
                         MainText(
                           text: "/hr",
@@ -270,7 +270,7 @@ class ReviewSummaryScreen extends StatelessWidget {
                               text: "25 Spots",
                               size: 14,
                               weight: FontWeight.w400,
-                              color: AppColors.green,
+                              color: AppColors.mainColor,
                             ),
                           ),
                         ),

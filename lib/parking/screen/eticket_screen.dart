@@ -132,7 +132,7 @@ class EticketScreen extends GetView<EticketController> {
                 isLoading.value ? const CircularProgressIndicator()
                     :
                 MainButton(
-                  color: AppColors.green,
+                  color: AppColors.mainColor,
                   buttonText: "Download E-Ticket",
                   onTap: isLoading.value
                       ? null // Disable the button while loading

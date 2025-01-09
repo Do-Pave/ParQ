@@ -147,7 +147,7 @@ class WithdrawRequestsScreen extends GetView<WithdrawRequestsController>{
                             width: 60,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
-                              color: AppColors.green
+                              color: AppColors.mainColor
                             ),
                             child: Center(child: Text("Success".tr,
                                 style: const TextStyle(

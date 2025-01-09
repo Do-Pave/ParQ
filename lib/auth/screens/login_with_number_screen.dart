@@ -131,7 +131,7 @@ class LoginWithNumberScreen extends GetView<LoginWithNumberController>{
           : SizedBox(
         height: 60,
         child: MainButton(
-          color: form.valid ? AppColors.green : Colors.grey,
+          color: form.valid ? AppColors.mainColor : Colors.grey,
           onTap: form.valid
               ? () async {
 
@@ -164,7 +164,7 @@ class LoginWithNumberScreen extends GetView<LoginWithNumberController>{
                 text: 'Sign up'.tr,
                 style: const TextStyle(
                   fontSize: 14,
-                  color: AppColors.green,
+                  color: AppColors.mainColor,
                 ),
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {

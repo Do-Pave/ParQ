@@ -53,7 +53,7 @@ class LocationScreen extends StatelessWidget {
               height: 40,
             ),
             MainButton(
-                color: AppColors.green,
+                color: AppColors.mainColor,
                 onTap: () {
                   // Get.to(() => const VerifyIdFaceScreen());
                 },
@@ -70,7 +70,7 @@ class LocationScreen extends StatelessWidget {
                 "Enter Location Manually".tr,
                 textAlign: TextAlign.center,
                 style: const TextStyle(
-                    color: AppColors.green,
+                    color: AppColors.mainColor,
                     fontSize: 16,
                     fontWeight: FontWeight.w600),
               ),

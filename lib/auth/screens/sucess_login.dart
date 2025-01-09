@@ -53,7 +53,7 @@ class SuccessLogin extends StatelessWidget {
             ),
             const Spacer(),
             MainButton(
-                color: AppColors.green,
+                color: AppColors.mainColor,
                 onTap: () {
                   Get.to(() => const LocationScreen());
                 },

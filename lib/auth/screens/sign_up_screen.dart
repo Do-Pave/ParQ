@@ -86,7 +86,7 @@ class SignupScreen extends GetView<SignUpController> {
                       children: [
                         Checkbox(
                           checkColor: Colors.white,
-                          activeColor: AppColors.green,
+                          activeColor: AppColors.mainColor,
                           value: controller.checkValue.value,
                           onChanged: (newValue) {
                             controller.checkValue.value = newValue ?? false;
@@ -103,7 +103,7 @@ class SignupScreen extends GetView<SignUpController> {
                                 text: 'Terms&condition'.tr,
                                 style: const TextStyle(
                                   fontSize: 16,
-                                  color: AppColors.green,
+                                  color: AppColors.mainColor,
                                   decoration: TextDecoration.underline,
                                 ),
                               ),
@@ -115,7 +115,7 @@ class SignupScreen extends GetView<SignUpController> {
 // const SizedBox(height: 10,),
 //                     CheckboxListTile(
 //                       checkColor: Colors.white,
-//                       activeColor: AppColors.green,
+//                       activeColor: AppColors.mainColor,
 //                       title: RichText(
 //                         textAlign: TextAlign.center,
 //                         text: TextSpan(
@@ -123,7 +123,7 @@ class SignupScreen extends GetView<SignUpController> {
 //                           style: const TextStyle(color: AppColors.black,fontSize: 16),
 //                           children: <TextSpan>[
 //                             TextSpan(
-//                                 text: 'Terms&condition'.tr, style: const TextStyle(fontSize: 16,color: AppColors.green,decoration: TextDecoration.underline)),
+//                                 text: 'Terms&condition'.tr, style: const TextStyle(fontSize: 16,color: AppColors.mainColor,decoration: TextDecoration.underline)),
 //                           ],
 //                         ),
 //                       ),
@@ -334,7 +334,7 @@ class SignupScreen extends GetView<SignUpController> {
               height: 60,
               child: MainButton(
                 // gradient: AppColors.homeScrGradientColor,
-                color: form.valid && controller.checkValue.value == true ? AppColors.green : Colors.grey,
+                color: form.valid && controller.checkValue.value == true ? AppColors.mainColor : Colors.grey,
                 onTap: form.valid && controller.checkValue.value == true
                     ? () async {
                         // await controller.signup();
@@ -366,7 +366,7 @@ class SignupScreen extends GetView<SignUpController> {
                 text: 'Sign in'.tr,
                 style: const TextStyle(
                   fontSize: 14,
-                  color: AppColors.green,
+                  color: AppColors.mainColor,
                 ),
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {

@@ -133,7 +133,7 @@ class PaymentMethodsScreen extends GetView<PaymentMethodsController> {
           child: Obx(
             () => MainButton(
               color: controller.selectedOption.value != ""
-                  ? AppColors.green
+                  ? AppColors.mainColor
                   : AppColors.grey2,
               buttonText: "Continue",
               onTap: () {

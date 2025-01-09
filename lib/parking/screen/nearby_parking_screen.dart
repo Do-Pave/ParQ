@@ -58,7 +58,7 @@ class NearbyParkingScreen extends GetView<NearbyParkingController> {
                                 child: Row(
                                   children: [
                                     SvgPicture.asset(
-                                        "assets/images/Car_Paking.svg"),
+                                        "assets/images/carParkingIcon.svg"),
                                     const SizedBox(
                                       width: 8,
                                     ),
@@ -66,7 +66,7 @@ class NearbyParkingScreen extends GetView<NearbyParkingController> {
                                       text: "Car Parking",
                                       size: 14,
                                       weight: FontWeight.w400,
-                                      color: AppColors.green,
+                                      color: AppColors.mainColor,
                                     )
                                   ],
                                 ),
@@ -186,7 +186,7 @@ class NearbyParkingScreen extends GetView<NearbyParkingController> {
                         child: Container(
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              border: Border.all(color: AppColors.green)),
+                              border: Border.all(color: AppColors.mainColor)),
                           height: 50,
                           child: Padding(
                             padding: const EdgeInsets.only(
@@ -201,17 +201,17 @@ class NearbyParkingScreen extends GetView<NearbyParkingController> {
                                   text: "Request Valet",
                                   size: 16,
                                   weight: FontWeight.w500,
-                                  color: AppColors.green,
+                                  color: AppColors.mainColor,
                                 ),
                                 const Spacer(),
                                 Obx(() => Checkbox(
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(5)),
-                                      activeColor: AppColors.green,
+                                      activeColor: AppColors.mainColor,
                                       side: MaterialStateBorderSide.resolveWith(
                                         (states) => const BorderSide(
-                                            width: 1.0, color: AppColors.green),
+                                            width: 1.0, color: AppColors.mainColor),
                                       ),
                                       value: controller.checkbox1.value,
                                       onChanged: (bool? value) {
@@ -236,7 +236,7 @@ class NearbyParkingScreen extends GetView<NearbyParkingController> {
                         child: Container(
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              border: Border.all(color: AppColors.green)),
+                              border: Border.all(color: AppColors.mainColor)),
                           height: 50,
                           child: Padding(
                             padding: const EdgeInsets.only(
@@ -245,7 +245,7 @@ class NearbyParkingScreen extends GetView<NearbyParkingController> {
                               children: [
                                 SvgPicture.asset(
                                   "assets/images/wash.svg",
-                                  color: AppColors.green,
+                                  color: AppColors.mainColor,
                                 ),
                                 const SizedBox(
                                   width: 8,
@@ -254,17 +254,17 @@ class NearbyParkingScreen extends GetView<NearbyParkingController> {
                                   text: "Car wash",
                                   size: 16,
                                   weight: FontWeight.w500,
-                                  color: AppColors.green,
+                                  color: AppColors.mainColor,
                                 ),
                                 const Spacer(),
                                 Obx(() => Checkbox(
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(5)),
-                                      activeColor: AppColors.green,
+                                      activeColor: AppColors.mainColor,
                                       side: MaterialStateBorderSide.resolveWith(
                                         (states) => const BorderSide(
-                                            width: 1.0, color: AppColors.green),
+                                            width: 1.0, color: AppColors.mainColor),
                                       ),
                                       value: controller.checkbox2.value,
                                       onChanged: (bool? value) {
@@ -314,7 +314,7 @@ class NearbyParkingScreen extends GetView<NearbyParkingController> {
                               text: "See all",
                               size: 16,
                               weight: FontWeight.w400,
-                              color: AppColors.green,
+                              color: AppColors.mainColor,
                               underlined: true,
                             ),
                           ),
@@ -392,7 +392,7 @@ class NearbyParkingScreen extends GetView<NearbyParkingController> {
                     effect: const ExpandingDotsEffect(
                       dotWidth: 12,
                       dotHeight: 8,
-                      activeDotColor: AppColors.green,
+                      activeDotColor: AppColors.mainColor,
                       dotColor: Color(0xffE1E1E1),
                       spacing: 4,
                     ),
@@ -425,7 +425,7 @@ class NearbyParkingScreen extends GetView<NearbyParkingController> {
                         text: "\$3.00",
                         size: 14,
                         weight: FontWeight.w500,
-                        color: AppColors.green,
+                        color: AppColors.mainColor,
                       ),
                       const SizedBox(
                         height: 16,
@@ -442,7 +442,7 @@ class NearbyParkingScreen extends GetView<NearbyParkingController> {
               ),
               MainButton(
                   height: 50,
-                  color: controller.checkbox1.value == true || controller.checkbox2.value == true ? AppColors.green : AppColors.grey2,
+                  color: controller.checkbox1.value == true || controller.checkbox2.value == true ? AppColors.mainColor : AppColors.grey2,
                   width: Get.size.width / 3,
                   onTap: () {
                     debugPrint("Book pressed");

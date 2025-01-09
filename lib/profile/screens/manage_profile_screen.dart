@@ -31,30 +31,67 @@ class ManageProfileScreen extends GetView<ManageProfileController> {
             },
             title: "Manage profile".tr,
           ),
-          body: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Obx(
-              () => Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  firstName(),
-                  const SizedBox(
-                    height: 25,
-                  ),
-                  lastName(),
-                  const SizedBox(
-                    height: 25,
-                  ),
-                  phoneNumber(),
-                  if (controller.isError.value) ...[
+          body: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Obx(
+                () => Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text(
+                      'Name'.tr,
+                      style:
+                      const TextStyle(color: AppColors.black, fontSize: 16),
+                      textAlign: TextAlign.start,
+                    ),
+                    const SizedBox(height: 8.0),
+                    name(),
                     const SizedBox(height: 20.0),
                     Text(
-                      controller.error?.value ?? "Error",
-                      style: const TextStyle(color: Colors.red),
+                      'Phone number'.tr,
+                      style:
+                      const TextStyle(color: AppColors.black, fontSize: 16),
+                      textAlign: TextAlign.start,
                     ),
+                    const SizedBox(height: 8.0),
+                    phone(),
                     const SizedBox(height: 20.0),
+                    Text(
+                      'Email'.tr,
+                      style:
+                      const TextStyle(color: AppColors.black, fontSize: 16),
+                      textAlign: TextAlign.start,
+                    ),
+                    const SizedBox(height: 8.0),
+                    email(),
+                    const SizedBox(height: 20.0),
+                    Text(
+                      'DOB'.tr,
+                      style:
+                      const TextStyle(color: AppColors.black, fontSize: 16),
+                      textAlign: TextAlign.start,
+                    ),
+                    const SizedBox(height: 8.0),
+                    datePickerField(),
+                    const SizedBox(height:  20.0),
+                    Text(
+                      'Gender'.tr,
+                      style:
+                      const TextStyle(color: AppColors.black, fontSize: 16),
+                      textAlign: TextAlign.start,
+                    ),
+                    const SizedBox(height: 8.0),
+                    SizedBox(height: 100,child: genderSelectionDropdown()),
+                    if (controller.isError.value) ...[
+                      const SizedBox(height: 20.0),
+                      Text(
+                        controller.error?.value ?? "Error",
+                        style: const TextStyle(color: Colors.red),
+                      ),
+                      const SizedBox(height: 20.0),
+                    ],
                   ],
-                ],
+                ),
               ),
             ),
           ),
@@ -67,18 +104,18 @@ class ManageProfileScreen extends GetView<ManageProfileController> {
     );
   }
 
-  Widget firstName() {
+  Widget name() {
     return ReactiveTextField(
-      formControlName: 'firstName',
+      formControlName: 'name',
       textInputAction: TextInputAction.next,
       onSubmitted: (_) {
-        controller.form.focus('lastName');
+        controller.form.focus('number');
       },
       validationMessages: {
-        ValidationMessage.required: (error) => 'First name must not be empty',
+        ValidationMessage.required: (error) => 'Name must not be empty',
       },
       decoration: InputDecoration(
-        labelText: 'First name',
+        // labelText: 'Name',
         labelStyle: const TextStyle(
           color: Colors.black,
         ),
@@ -86,21 +123,23 @@ class ManageProfileScreen extends GetView<ManageProfileController> {
         hintStyle: const TextStyle(
             color: AppColors.grey, fontSize: 12, fontWeight: FontWeight.w400),
         floatingLabelBehavior: FloatingLabelBehavior.always,
+        fillColor: AppColors.grey,
+        filled: true,
         enabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: AppColors.grey1),
-          borderRadius: BorderRadius.circular(8.0),
+          borderSide: const BorderSide(color: Colors.transparent),
+          borderRadius: BorderRadius.circular(10.0),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: AppColors.grey1),
-          borderRadius: BorderRadius.circular(8.0),
+          borderSide: const BorderSide(color: Colors.transparent),
+          borderRadius: BorderRadius.circular(10.0),
         ),
         errorBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.red),
-          borderRadius: BorderRadius.circular(8.0),
+          borderRadius: BorderRadius.circular(10.0),
         ),
         focusedErrorBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.red),
-          borderRadius: BorderRadius.circular(8.0),
+          // borderSide: const BorderSide(color: Colors.red),
+          borderRadius: BorderRadius.circular(10.0),
         ),
       ),
       style: const TextStyle(
@@ -109,61 +148,20 @@ class ManageProfileScreen extends GetView<ManageProfileController> {
     );
   }
 
-  Widget lastName() {
-    return ReactiveTextField(
-      formControlName: 'lastName',
-      textInputAction: TextInputAction.next,
-      onSubmitted: (_) {
-        controller.form.focus('phone');
-      },
-      validationMessages: {
-        ValidationMessage.required: (error) => 'Last name must not be empty',
-      },
-      decoration: InputDecoration(
-        labelText: 'Last name',
-        labelStyle: const TextStyle(
-          color: Colors.black,
-        ),
-        hintText: 'Ex: Amr',
-        hintStyle: const TextStyle(
-            color: AppColors.grey, fontSize: 12, fontWeight: FontWeight.w400),
-        floatingLabelBehavior: FloatingLabelBehavior.always,
-        enabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: AppColors.grey1),
-          borderRadius: BorderRadius.circular(8.0),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: AppColors.grey1),
-          borderRadius: BorderRadius.circular(8.0),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.red),
-          borderRadius: BorderRadius.circular(8.0),
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.red),
-          borderRadius: BorderRadius.circular(8.0),
-        ),
-      ),
-      style: const TextStyle(
-        color: Colors.black,
-      ),
-    );
-  }
-
-  Widget phoneNumber() {
+  Widget phone() {
     return ReactiveTextField(
       formControlName: 'phone',
+      // maxLength: 8,
       validationMessages: {
         ValidationMessage.required: (error) => 'Phone number must not be empty',
         ValidationMessage.maxLength: (error) =>
-            'Phone number can\'t exceed 11 digits',
+        'Phone number can\'t exceed 8 digits',
         ValidationMessage.minLength: (error) =>
-            'Phone number can\'t be less than 11 digits',
+        'Phone number can\'t be less than 8 digits',
       },
       keyboardType: TextInputType.phone,
       decoration: InputDecoration(
-        labelText: 'Phone number',
+        // labelText: 'Phone number',
         labelStyle: const TextStyle(
           color: Colors.black,
         ),
@@ -171,21 +169,23 @@ class ManageProfileScreen extends GetView<ManageProfileController> {
         hintStyle: const TextStyle(
             color: AppColors.grey, fontSize: 12, fontWeight: FontWeight.w400),
         floatingLabelBehavior: FloatingLabelBehavior.always,
+        fillColor: AppColors.grey,
+        filled: true,
         enabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: AppColors.grey1),
-          borderRadius: BorderRadius.circular(8.0),
+          borderSide: const BorderSide(color: AppColors.textFieldBg),
+          borderRadius: BorderRadius.circular(10.0),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: AppColors.grey1),
-          borderRadius: BorderRadius.circular(8.0),
+          borderSide: const BorderSide(color: AppColors.textFieldBg),
+          borderRadius: BorderRadius.circular(10.0),
         ),
         errorBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.red),
-          borderRadius: BorderRadius.circular(8.0),
+          borderRadius: BorderRadius.circular(10.0),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.red),
-          borderRadius: BorderRadius.circular(8.0),
+          borderRadius: BorderRadius.circular(10.0),
         ),
       ),
       style: const TextStyle(
@@ -193,6 +193,192 @@ class ManageProfileScreen extends GetView<ManageProfileController> {
       ),
     );
   }
+
+  Widget email() {
+    return ReactiveTextField(
+      formControlName: 'email',
+      textInputAction: TextInputAction.next,
+      keyboardType: TextInputType.emailAddress,
+      onSubmitted: (_) {
+        controller.form.focus('dob');
+      },
+      validationMessages: {
+        ValidationMessage.required: (error) => 'Email must not be empty',
+      },
+      decoration: InputDecoration(
+        // labelText: 'Name',
+        labelStyle: const TextStyle(
+          color: Colors.black,
+        ),
+        hintText: 'Ex: amfa.94@hotmail.com',
+        hintStyle: const TextStyle(
+            color: AppColors.grey, fontSize: 12, fontWeight: FontWeight.w400),
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        fillColor: AppColors.grey,
+        filled: true,
+        enabledBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.transparent),
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.transparent),
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.red),
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          // borderSide: const BorderSide(color: Colors.red),
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+      ),
+      style: const TextStyle(
+        color: Colors.black,
+      ),
+    );
+  }
+
+  Widget datePickerField() {
+    return ReactiveFormConsumer(
+      builder: (context, form, child) {
+        final dateControl = form.control('date') as FormControl<String>;
+
+        return GestureDetector(
+          onTap: () async {
+            final pickedDate = await showDatePicker(
+              context: context,
+              initialDate: DateTime.now(),
+              firstDate: DateTime(1900),
+              lastDate: DateTime(2100),
+            );
+
+            if (pickedDate != null) {
+              dateControl.value = pickedDate
+                  .toLocal()
+                  .toString()
+                  .split(' ')[0]; // Format the date as a string
+            }
+          },
+          child: AbsorbPointer(
+            child: ReactiveTextField(
+              formControlName: 'date',
+              textInputAction: TextInputAction.next,
+              onSubmitted: (_) {
+                controller.form.focus('gender');
+              },
+              validationMessages: {
+                ValidationMessage.required: (error) =>
+                'The date must not be empty',
+              },
+              decoration: InputDecoration(
+                labelStyle: const TextStyle(
+                  color: Colors.black,
+                ),
+                hintText: 'Select a date',
+                hintStyle: const TextStyle(
+                  color: AppColors.grey,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
+                ),
+                floatingLabelBehavior: FloatingLabelBehavior.always,
+                fillColor: AppColors.grey,
+                filled: true,
+                enabledBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.transparent),
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.transparent),
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                errorBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.red),
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                focusedErrorBorder: OutlineInputBorder(
+                  // borderSide: const BorderSide(color: Colors.red),
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+
+                suffixIcon: Icon(Icons.calendar_today,
+                    color: AppColors.grey1), // Add an icon for the calendar
+              ),
+              style: const TextStyle(
+                color: Colors.black,
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget genderSelectionDropdown() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Text(
+        //   'Gender',
+        //   style: const TextStyle(
+        //     color: AppColors.black,
+        //     fontSize: 16,
+        //     fontWeight: FontWeight.bold, // Matches the title text style
+        //   ),
+        //   textAlign: TextAlign.start,
+        // ),
+        const SizedBox(height: 8.0),
+        ReactiveDropdownField<String>(
+          formControlName: 'gender',
+          decoration: InputDecoration(
+            filled: true,
+            fillColor: Colors.white, // Same background color as other fields
+            contentPadding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 12.0),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: const BorderSide(color: Colors.grey),
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: const BorderSide(color: Colors.grey),
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderSide: const BorderSide(color: Colors.red),
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              // borderSide: const BorderSide(color: Colors.red),
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+
+            hintText: 'Select Gender', // Placeholder text
+            hintStyle: TextStyle(color: AppColors.grey.withOpacity(0.8)),
+          ),
+          items: const [
+            DropdownMenuItem(
+              value: 'Male',
+              child: Text('Male',style: TextStyle( color: AppColors.black,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,)),
+            ),
+            DropdownMenuItem(
+              value: 'Female',
+              child: Text('Female',style: TextStyle( color: AppColors.black,
+                fontSize: 12,
+                fontWeight: FontWeight.w400,),),
+            ),
+          ],
+          validationMessages: {
+            ValidationMessage.required: (_) => 'Please select a gender',
+          },
+        ),
+      ],
+    );
+  }
+
 
   Widget saveBtn() {
     return ReactiveFormConsumer(builder: (context, form, child) {
@@ -203,8 +389,7 @@ class ManageProfileScreen extends GetView<ManageProfileController> {
           : SizedBox(
               height: 60,
               child: MainButton(
-                gradient: AppColors.homeScrGradientColor,
-                color: form.valid ? null : Colors.grey,
+                color: form.valid ?  AppColors.mainColor : Colors.grey,
                 onTap: form.valid
                     ? () async {
                         // await controller.login();
@@ -219,7 +404,7 @@ class ManageProfileScreen extends GetView<ManageProfileController> {
                         // }
                       }
                     : null,
-                buttonText: "Save changes",
+                buttonText: "Update profile",
               ),
             );
     });

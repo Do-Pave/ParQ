@@ -9,6 +9,7 @@ import 'package:parq/app_config/app_colors.dart';
 import 'package:parq/app_config/custom_app_bar.dart';
 import 'package:parq/app_config/mains.dart';
 import 'package:parq/home/controller/home_controller.dart';
+import 'package:parq/map/search_map_screen.dart';
 import 'package:parq/parking/screen/nearby_parking_screen.dart';
 import 'package:parq/home/screen/recent_transactions_screen.dart';
 import 'package:intl/intl.dart';
@@ -58,7 +59,7 @@ class HomeScreen extends GetView<HomeController> {
                         style: const TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.w500,
-                            color: AppColors.green)),
+                            color: AppColors.mainColor)),
                     TextSpan(
                         text: ' Nearby '.tr,
                         style: const TextStyle(
@@ -68,7 +69,7 @@ class HomeScreen extends GetView<HomeController> {
                     TextSpan(
                         text: 'parking Spots.'.tr,
                         style: const TextStyle(
-                            color: AppColors.green,
+                            color: AppColors.mainColor,
                             fontSize: 24,
                             fontWeight: FontWeight.w500)),
                   ],
@@ -77,32 +78,37 @@ class HomeScreen extends GetView<HomeController> {
               const SizedBox(
                 height: 16,
               ),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: AppColors.grey2, width: 1),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      SvgPicture.asset(
-                        'assets/images/searchIcon.svg', // Path to your SVG file
-                        height: 20,
-                        width: 20,
-                        fit: BoxFit.scaleDown,
-                        color: Colors.grey, // Color of the SVG icon
-                      ),
-                      const SizedBox(
-                        width: 12,
-                      ),
-                      MainText(
-                        text: "Search Parking",
-                        color: AppColors.textGrey,
-                        size: 14,
-                        weight: FontWeight.w400,
-                      )
-                    ],
+              GestureDetector(
+                onTap: (){
+                  Get.to(()=> SearchMapScreen());
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: AppColors.grey2, width: 1),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        SvgPicture.asset(
+                          'assets/images/searchIcon.svg', // Path to your SVG file
+                          height: 20,
+                          width: 20,
+                          fit: BoxFit.scaleDown,
+                          color: Colors.grey, // Color of the SVG icon
+                        ),
+                        const SizedBox(
+                          width: 12,
+                        ),
+                        MainText(
+                          text: "Search Parking",
+                          color: AppColors.textGrey,
+                          size: 14,
+                          weight: FontWeight.w400,
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -188,7 +194,7 @@ class HomeScreen extends GetView<HomeController> {
             text: "See all",
             size: 16,
             weight: FontWeight.w400,
-            color: AppColors.green,
+            color: AppColors.mainColor,
             underlined: true,
           ),
         ),
@@ -233,7 +239,7 @@ class HomeScreen extends GetView<HomeController> {
                     width: 8,
                     height: 8,
                     decoration: BoxDecoration(
-                        color: AppColors.green,
+                        color: AppColors.mainColor,
                         borderRadius: BorderRadius.circular(16)),
                   ))
             ],
@@ -300,7 +306,7 @@ class HomeScreen extends GetView<HomeController> {
                               effect: const ExpandingDotsEffect(
                                 dotWidth: 12,
                                 dotHeight: 8,
-                                activeDotColor: AppColors.green,
+                                activeDotColor: AppColors.mainColor,
                                 dotColor: Color(0xffE1E1E1),
                                 spacing: 4,
                               ),
@@ -400,7 +406,7 @@ class HomeScreen extends GetView<HomeController> {
                         text: "\$3.00",
                         size: 14,
                         weight: FontWeight.w500,
-                        color: AppColors.green,
+                        color: AppColors.mainColor,
                       ),
                       MainText(
                         text: "/hr",
@@ -485,7 +491,7 @@ class HomeScreen extends GetView<HomeController> {
                           padding: const EdgeInsets.all(8.0),
                           child: Row(
                             children: [
-                              SvgPicture.asset("assets/images/Car_Paking.svg"),
+                              SvgPicture.asset("assets/images/carParkingIcon.svg"),
                               const SizedBox(
                                 width: 8,
                               ),
@@ -493,7 +499,7 @@ class HomeScreen extends GetView<HomeController> {
                                 text: "Car Parking",
                                 size: 14,
                                 weight: FontWeight.w400,
-                                color: AppColors.green,
+                                color: AppColors.mainColor,
                               )
                             ],
                           ),
@@ -516,7 +522,7 @@ class HomeScreen extends GetView<HomeController> {
                             text: "\$3.00",
                             size: 14,
                             weight: FontWeight.w500,
-                            color: AppColors.green,
+                            color: AppColors.mainColor,
                           ),
                           MainText(
                             text: "/hr",
@@ -557,7 +563,7 @@ class HomeScreen extends GetView<HomeController> {
                                 text: "25 Spots",
                                 size: 14,
                                 weight: FontWeight.w400,
-                                color: AppColors.green,
+                                color: AppColors.mainColor,
                               ),
                             ),
                           ),
@@ -616,7 +622,7 @@ class HomeScreen extends GetView<HomeController> {
                     text: "25 Spots",
                     size: 14,
                     weight: FontWeight.w400,
-                    color: AppColors.green,
+                    color: AppColors.mainColor,
                   ),
                 ),
               ),
@@ -625,7 +631,7 @@ class HomeScreen extends GetView<HomeController> {
                 text: "\$3.00",
                 size: 14,
                 weight: FontWeight.w500,
-                color: AppColors.green,
+                color: AppColors.mainColor,
               ),
               MainText(
                 text: "/hr",

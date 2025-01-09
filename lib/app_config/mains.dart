@@ -6,7 +6,10 @@ class MainButton extends StatelessWidget {
   final void Function()? onTap;
   final String buttonText;
   final Color? color;
+  final Color? textColor;
   double? width;
+  double? textSize;
+  FontWeight? textFont;
   double? height;
   Gradient? gradient;
 
@@ -15,6 +18,9 @@ class MainButton extends StatelessWidget {
       required this.onTap,
       required this.buttonText,
       this.color,
+      this.textColor,
+      this.textSize,
+      this.textFont,
       this.width,
       this.height,
       this.gradient});
@@ -26,7 +32,7 @@ class MainButton extends StatelessWidget {
       child: Container(
         width: width ?? Get.size.width,
         height: height,
-        padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 25.0),
+        padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
         decoration: BoxDecoration(
           // Apply solid color if color is provided
           color: color ?? null,
@@ -37,10 +43,10 @@ class MainButton extends StatelessWidget {
         child: Center(
           child: Text(
             buttonText.tr,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 17.0,
-              fontWeight: FontWeight.w500,
+            style: TextStyle(
+              color: textColor ?? Colors.white,
+              fontSize: textSize ?? 17.0,
+              fontWeight: textFont ?? FontWeight.w500,
             ),
           ),
         ),
@@ -127,7 +133,7 @@ class MainText extends StatelessWidget {
           fontSize: size,
           color: color,
           decoration: underlined == true ? TextDecoration.underline : null,
-          decorationColor: AppColors.green),
+          decorationColor: AppColors.mainColor),
     );
   }
 }

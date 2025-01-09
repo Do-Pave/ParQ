@@ -13,13 +13,15 @@ import '../../core/constants.dart';
 
 class ManageProfileController extends GenericController{
   final form = FormGroup({
-    'firstName': FormControl<String>(validators: [Validators.required]),
-    'lastName': FormControl<String>(validators: [Validators.required]),
+    'name': FormControl<String>(validators: [Validators.required]),
     'phone': FormControl<String>(validators: [
       Validators.required,
-      Validators.maxLength(11),
-      Validators.minLength(11)
+      // Validators.maxLength(8),
+      // Validators.minLength(8)
     ]),
+    'date': FormControl<String>(validators: [Validators.required]),
+    'email': FormControl<String>(validators: [Validators.required,Validators.email]),
+    'gender': FormControl<String>(validators: [Validators.required])
   });
 
   final biometricLoginService = BiometricLoginService();

@@ -3,8 +3,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:parq/app_config/app_colors.dart';
 import 'package:parq/app_config/custom_app_bar.dart';
+import 'package:parq/nav%20bar/navigation_screen.dart';
 import 'package:parq/onboarding/onboarding.dart';
+import 'package:parq/parking/screen/payment_methods_screen.dart';
 import 'package:parq/profile/controllers/profile_controller.dart';
+import 'package:parq/profile/screens/help_center_screen.dart';
 import 'package:parq/profile/screens/manage_profile_screen.dart';
 import 'package:parq/profile/screens/privace_policy_screen.dart';
 import 'package:parq/profile/screens/reset_password_screen.dart';
@@ -30,29 +33,33 @@ class ProfileScreen extends GetView<ProfileController> {
               ? const Center(child: CircularProgressIndicator())
               : controller.isError.value == true
                   ? Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+              child: Stack(
                 children: [
-                  Text(
-                    "Session expired, please login again.".tr,
-                    style: const TextStyle(
-                        color: AppColors.black,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  SizedBox(
-                    width: Get.size.width / 3,
-                    child: MainButton(
-                        gradient: AppColors.homeScrGradientColor,
-                        onTap: () async {
-                          // controller.onInit();
-                          controller.biometricLoginService
-                              .handleBiometricLogin<ProfileController>();
-                        },
-                        buttonText: "Reload".tr),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Session expired, please login again.".tr,
+                        style: const TextStyle(
+                            color: AppColors.black,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      SizedBox(
+                        width: Get.size.width / 3,
+                        child: MainButton(
+                            gradient: AppColors.homeScrGradientColor,
+                            onTap: () async {
+                              // controller.onInit();
+                              controller.biometricLoginService
+                                  .handleBiometricLogin<ProfileController>();
+                            },
+                            buttonText: "Reload".tr),
+                      ),
+                    ],
                   ),
                 ],
               ))
@@ -79,7 +86,7 @@ class ProfileScreen extends GetView<ProfileController> {
                               GestureDetector(
                                   onTap: () {
                                     debugPrint("Password Manger");
-                                    Get.to(() => const WithdrawRequestsScreen());
+                                    Get.to(() => const ResetPasswordScreen());
                                   },
                                   child: mainProfileRows("Password Manger",
                                       "assets/images/pass.svg")),
@@ -88,7 +95,7 @@ class ProfileScreen extends GetView<ProfileController> {
                               ), GestureDetector(
                                   onTap: () {
                                     debugPrint("Payment Methods");
-                                    Get.to(() => const WithdrawRequestsScreen());
+                                    Get.to(() => const PaymentMethodsScreen());
                                   },
                                   child: mainProfileRows("Payment Methods",
                                       "assets/images/pay.svg")),
@@ -118,7 +125,7 @@ class ProfileScreen extends GetView<ProfileController> {
                               GestureDetector(
                                   onTap: () {
                                     debugPrint("Help Center");
-                                    Get.to(() => const PrivacyAndPolicyScreen());
+                                    Get.to(() => const HelpCenterScreen());
                                   },
                                   child: mainProfileRows("Help Center",
                                       "assets/images/DangerCircle.svg")),
@@ -128,7 +135,7 @@ class ProfileScreen extends GetView<ProfileController> {
                               GestureDetector(
                                   onTap: () {
                                     debugPrint("Log out");
-                                    Get.offAll(() => const OnBoarding());
+                                    _showLogoutDialog(context);
                                   },
                                   child: mainProfileRows(
                                       "Logout", "assets/images/ArrowsLogout.svg")),
@@ -136,10 +143,10 @@ class ProfileScreen extends GetView<ProfileController> {
                                 height: 15,
                               ),
                             ],
-                          ),
-
+                          )
                         ],
                       ),
+
                     ),
         ));
   }
@@ -208,10 +215,45 @@ class ProfileScreen extends GetView<ProfileController> {
         ),
         const Icon(
           Icons.arrow_forward_ios,
-          color: AppColors.green,
+          color: AppColors.mainColor,
           size: 20,
         )
       ]),
+    );
+  }
+
+  void _showLogoutDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: MainText(text: "Logout",),
+          content: MainText(text: "Are you sure you want to log out?",),
+          actions: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(
+                  width: Get.size.width / 3.5,
+                  child: MainButton(onTap: (){
+                            Navigator.of(context).pop();
+                  }, buttonText: "Close",
+                    color: AppColors.grey2,),
+                ),
+
+
+                SizedBox(
+                  width: Get.size.width / 3.5,
+                  child: MainButton(buttonText:"Logout",onTap: (){
+                    Get.offAll(()=> const OnBoarding());
+                  },color: AppColors.mainColor,),
+                )
+              ],
+            ),
+
+          ],
+        );
+      },
     );
   }
 }

@@ -49,7 +49,7 @@ class PinScreen extends GetView<PinController> {
                       text: '0011022200'.tr,
                       style: const TextStyle(
                         fontSize: 14,
-                        color: AppColors.green,
+                        color: AppColors.mainColor,
                       ),
 
                     ),
@@ -99,10 +99,10 @@ class PinScreen extends GetView<PinController> {
                         child: Text('Resend code'.tr,
                           style: const TextStyle(
                             fontSize: 14,
-                            color: AppColors.green,
+                            color: AppColors.mainColor,
                             fontWeight: FontWeight.w400,
                             decoration: TextDecoration.underline,
-                            decorationColor: AppColors.green
+                            decorationColor: AppColors.mainColor
                           ),
                         ),
                       ),
@@ -121,7 +121,7 @@ class PinScreen extends GetView<PinController> {
                       ? const Center(child: CircularProgressIndicator())
                       : MainButton(
                       color: controller.isPinCompleted.value
-                              ? AppColors.green
+                              ? AppColors.mainColor
                               : AppColors.grey2,
                           onTap: controller.isPinCompleted.value
                               ? () async {

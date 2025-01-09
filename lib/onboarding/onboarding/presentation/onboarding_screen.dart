@@ -69,7 +69,7 @@ class _OnBoardingState extends State<OnBoarding> {
                                     vertical: 8.0, horizontal: 4.0),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
-                                  color: _currentPage == i ? AppColors.green : AppColors.mint
+                                  color: _currentPage == i ? AppColors.mainColor : AppColors.mint
                                 ),
                               ),
                             ),
@@ -128,7 +128,7 @@ class _OnBoardingState extends State<OnBoarding> {
                     child: Text(
                       "Skip".tr,
                       style:
-                      const TextStyle(color: AppColors.green, fontSize: 16),
+                      const TextStyle(color: AppColors.mainColor, fontSize: 16),
                       textAlign: TextAlign.end,
                     ),
                   ),
@@ -155,17 +155,17 @@ class _OnBoardingState extends State<OnBoarding> {
                     style: const TextStyle(color: AppColors.black,fontSize: 24,fontWeight: FontWeight.w500),
                     children: <TextSpan>[
                       TextSpan(
-                          text: ' You '.tr, style: const TextStyle(fontSize: 24,fontWeight: FontWeight.w500,color: AppColors.green)),
+                          text: ' You '.tr, style: const TextStyle(fontSize: 24,fontWeight: FontWeight.w500,color: AppColors.mainColor)),
                       TextSpan(
                           text: 'to Us ,'.tr,
                           style: const TextStyle(color: AppColors.black,fontSize: 24,fontWeight: FontWeight.w500)),
                       TextSpan(
-                          text: ' Parking '.tr, style: const TextStyle(fontSize: 24,fontWeight: FontWeight.w500,color: AppColors.green)),
+                          text: ' Parking '.tr, style: const TextStyle(fontSize: 24,fontWeight: FontWeight.w500,color: AppColors.mainColor)),
                       TextSpan(
                           text: 'Made'.tr,
                           style: const TextStyle(color: AppColors.black,fontSize: 24,fontWeight: FontWeight.w500)),
                       TextSpan(
-                          text: ' Easy '.tr, style: const TextStyle(fontSize: 24,fontWeight: FontWeight.w500,color: AppColors.green)),
+                          text: ' Easy '.tr, style: const TextStyle(fontSize: 24,fontWeight: FontWeight.w500,color: AppColors.mainColor)),
                     ],
                   ),
                 ),
@@ -209,7 +209,7 @@ class _OnBoardingState extends State<OnBoarding> {
                     child: Text(
                       "Skip".tr,
                       style:
-                      const TextStyle(color: AppColors.green, fontSize: 16),
+                      const TextStyle(color: AppColors.mainColor, fontSize: 16),
                       textAlign: TextAlign.end,
                     ),
                   ),
@@ -236,7 +236,7 @@ class _OnBoardingState extends State<OnBoarding> {
                     style: const TextStyle(color: AppColors.black,fontSize: 24,fontWeight: FontWeight.w500),
                     children: <TextSpan>[
                       TextSpan(
-                          text: ' Nearby Parking Spots '.tr, style: const TextStyle(fontSize: 24,fontWeight: FontWeight.w500,color: AppColors.green)),
+                          text: ' Nearby Parking Spots '.tr, style: const TextStyle(fontSize: 24,fontWeight: FontWeight.w500,color: AppColors.mainColor)),
                       TextSpan(
                           text: 'With Ease'.tr,
                           style: const TextStyle(color: AppColors.black,fontSize: 24,fontWeight: FontWeight.w500)),
@@ -284,7 +284,7 @@ class _OnBoardingState extends State<OnBoarding> {
                     child: Text(
                       "Skip".tr,
                       style:
-                      const TextStyle(color: AppColors.green, fontSize: 16),
+                      const TextStyle(color: AppColors.mainColor, fontSize: 16),
                       textAlign: TextAlign.end,
                     ),
                   ),
@@ -311,12 +311,12 @@ class _OnBoardingState extends State<OnBoarding> {
                     style: const TextStyle(color: AppColors.black,fontSize: 24,fontWeight: FontWeight.w500),
                     children: <TextSpan>[
                       TextSpan(
-                          text: ' Your Car, Enjoy '.tr, style: const TextStyle(fontSize: 24,fontWeight: FontWeight.w500,color: AppColors.green)),
+                          text: ' Your Car, Enjoy '.tr, style: const TextStyle(fontSize: 24,fontWeight: FontWeight.w500,color: AppColors.mainColor)),
                       TextSpan(
                           text: 'Your'.tr,
                           style: const TextStyle(color: AppColors.black,fontSize: 24,fontWeight: FontWeight.w500)),
                       TextSpan(
-                          text: ' Day!'.tr, style: const TextStyle(fontSize: 24,fontWeight: FontWeight.w500,color: AppColors.green)),
+                          text: ' Day!'.tr, style: const TextStyle(fontSize: 24,fontWeight: FontWeight.w500,color: AppColors.mainColor)),
                     ],
                   ),
                 ),
@@ -359,7 +359,7 @@ class _OnBoardingState extends State<OnBoarding> {
         height: 50,
         decoration: const BoxDecoration(
           shape: BoxShape.circle,
-         color: AppColors.green
+         color: AppColors.mainColor
         ),
         child: const Center(
           child: Icon(
@@ -384,13 +384,13 @@ class _OnBoardingState extends State<OnBoarding> {
         height: 50,
         decoration: BoxDecoration(
             shape: BoxShape.circle,
-            // color: AppColors.green
-            border: Border.all(color: AppColors.green)
+            // color: AppColors.mainColor
+            border: Border.all(color: AppColors.mainColor)
         ),
         child: const Center(
           child: Icon(
             Icons.arrow_back,
-            color: AppColors.green,
+            color: AppColors.mainColor,
           ),
         ),
       ),

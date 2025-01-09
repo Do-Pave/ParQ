@@ -142,7 +142,7 @@ class BookingDetailsScreen extends GetView<BookingDetailsController> {
                                     border: Border.all(
                                         color:
                                             controller.selectedOption.value == 1
-                                                ? AppColors.green
+                                                ? AppColors.mainColor
                                                 : AppColors.textGrey)),
                                 height: 50,
                                 width: Get.size.width / 2.3,
@@ -157,7 +157,7 @@ class BookingDetailsScreen extends GetView<BookingDetailsController> {
                                         weight: FontWeight.w500,
                                         color:
                                             controller.selectedOption.value == 1
-                                                ? AppColors.green
+                                                ? AppColors.mainColor
                                                 : AppColors.textGrey,
                                       ),
                                       const Spacer(),
@@ -165,14 +165,14 @@ class BookingDetailsScreen extends GetView<BookingDetailsController> {
                                             value: 1,
                                             groupValue:
                                                 controller.selectedOption.value,
-                                            activeColor: AppColors.green,
+                                            activeColor: AppColors.mainColor,
                                             fillColor: MaterialStateProperty
                                                 .resolveWith<Color>(
                                               (Set<MaterialState> states) {
                                                 if (states.contains(
                                                     MaterialState.selected)) {
                                                   return AppColors
-                                                      .green; // Checked color
+                                                      .mainColor; // Checked color
                                                 }
                                                 return AppColors
                                                     .textGrey; // Unchecked color
@@ -199,7 +199,7 @@ class BookingDetailsScreen extends GetView<BookingDetailsController> {
                                     border: Border.all(
                                         color:
                                             controller.selectedOption.value == 2
-                                                ? AppColors.green
+                                                ? AppColors.mainColor
                                                 : AppColors.textGrey)),
                                 height: 50,
                                 width: Get.size.width / 2.3,
@@ -218,7 +218,7 @@ class BookingDetailsScreen extends GetView<BookingDetailsController> {
                                           color:
                                               controller.selectedOption.value ==
                                                       2
-                                                  ? AppColors.green
+                                                  ? AppColors.mainColor
                                                   : AppColors.textGrey,
                                         ),
                                         const Spacer(),
@@ -226,14 +226,14 @@ class BookingDetailsScreen extends GetView<BookingDetailsController> {
                                           value: 2,
                                           groupValue:
                                               controller.selectedOption.value,
-                                          activeColor: AppColors.green,
+                                          activeColor: AppColors.mainColor,
                                           fillColor: MaterialStateProperty
                                               .resolveWith<Color>(
                                             (Set<MaterialState> states) {
                                               if (states.contains(
                                                   MaterialState.selected)) {
                                                 return AppColors
-                                                    .green; // Checked color
+                                                    .mainColor; // Checked color
                                               }
                                               return AppColors
                                                   .textGrey; // Unchecked color
@@ -334,7 +334,7 @@ class BookingDetailsScreen extends GetView<BookingDetailsController> {
                     effect: const ExpandingDotsEffect(
                       dotWidth: 12,
                       dotHeight: 8,
-                      activeDotColor: AppColors.green,
+                      activeDotColor: AppColors.mainColor,
                       dotColor: Color(0xffE1E1E1),
                       spacing: 4,
                     ),
@@ -367,7 +367,7 @@ class BookingDetailsScreen extends GetView<BookingDetailsController> {
                       text: "\$3.00",
                       size: 14,
                       weight: FontWeight.w500,
-                      color: AppColors.green,
+                      color: AppColors.mainColor,
                     ),
                     const SizedBox(
                       height: 16,
@@ -387,7 +387,7 @@ class BookingDetailsScreen extends GetView<BookingDetailsController> {
                   height: 50,
                   color: controller.selectedDateIndex.value != (-1) ||
                           controller.selectedTimeIndex.value != (-1)
-                      ? AppColors.green
+                      ? AppColors.mainColor
                       : AppColors.grey2,
                   width: Get.size.width / 3,
                   onTap: () {
@@ -453,7 +453,7 @@ class BookingDetailsScreen extends GetView<BookingDetailsController> {
                               border: Border.all(
                                   color: controller.selectedTimeIndex.value ==
                                           index
-                                      ? AppColors.green
+                                      ? AppColors.mainColor
                                       : Colors.white)),
                           child: Center(
                               child: MainText(
@@ -461,7 +461,7 @@ class BookingDetailsScreen extends GetView<BookingDetailsController> {
                             size: 14,
                             weight: FontWeight.w400,
                             color: controller.selectedTimeIndex.value == index
-                                ? AppColors.green
+                                ? AppColors.mainColor
                                 : AppColors.textGrey,
                           ))),
                     ),
@@ -523,7 +523,7 @@ class BookingDetailsScreen extends GetView<BookingDetailsController> {
                               border: Border.all(
                                   color: controller.selectedDateIndex.value ==
                                           index
-                                      ? AppColors.green
+                                      ? AppColors.mainColor
                                       : Colors.white)),
                           child: Center(
                               child: MainText(
@@ -531,7 +531,7 @@ class BookingDetailsScreen extends GetView<BookingDetailsController> {
                             size: 14,
                             weight: FontWeight.w400,
                             color: controller.selectedDateIndex.value == index
-                                ? AppColors.green
+                                ? AppColors.mainColor
                                 : AppColors.textGrey,
                           ))),
                     ),

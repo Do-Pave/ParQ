@@ -25,129 +25,230 @@ class ResetPasswordScreen extends GetView<ResetPasswordController> {
             onBackTap: () {
               Get.back();
             },
-            title: "Reset PIN".tr,
+            title: "Manage profile".tr,
           ),
-          body: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Obx(
-              () => Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Text("Reset password".tr,
-                      style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600,
-                          color: AppColors.black)),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  Text(
-                      "Enter the email associated with your account and we’ll send an email with instructions to reset your password"
-                          .tr,
-                      style: const TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: AppColors.grey2)),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  phoneNumber(),
-                  if (controller.isError.value) ...[
-                    const SizedBox(height: 20.0),
+          body: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Obx(
+                    () => Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
                     Text(
-                      controller.error?.value ?? "Error",
-                      style: const TextStyle(color: Colors.red),
+                      'Current Password'.tr,
+                      style:
+                      const TextStyle(color: AppColors.black, fontSize: 16),
+                      textAlign: TextAlign.start,
+                    ),
+                    const SizedBox(height: 8.0),
+                    currentPassword(),
+                    const SizedBox(height: 16.0),
+                    Row(
+                      children: [
+                        const Spacer(),
+                        MainText(
+                          text: "Forgot Password",
+                          size: 16,
+                          weight: FontWeight.w400,
+                          color: AppColors.mainColor,
+                          underlined: true,
+                        ),
+                      ],
                     ),
                     const SizedBox(height: 20.0),
+                    Text(
+                      'New Password'.tr,
+                      style:
+                      const TextStyle(color: AppColors.black, fontSize: 16),
+                      textAlign: TextAlign.start,
+                    ),
+                    const SizedBox(height: 8.0),
+                    newPassword(),
+                    const SizedBox(height: 20.0),
+                    Text(
+                      'Confirm New Password'.tr,
+                      style:
+                      const TextStyle(color: AppColors.black, fontSize: 16),
+                      textAlign: TextAlign.start,
+                    ),
+                    const SizedBox(height: 8.0),
+                    confirmNewPassword(),
+                    const SizedBox(height: 20.0),
+
+                    if (controller.isError.value) ...[
+                      const SizedBox(height: 20.0),
+                      Text(
+                        controller.error?.value ?? "Error",
+                        style: const TextStyle(color: Colors.red),
+                      ),
+                      const SizedBox(height: 20.0),
+                    ],
                   ],
-                ],
+                ),
               ),
             ),
           ),
           bottomNavigationBar: Padding(
             padding: const EdgeInsets.all(20.0),
-            child: sendBtn(),
+            child: saveBtn(),
           ),
         ),
       ),
     );
   }
 
-  Widget phoneNumber() {
-    return ReactiveTextField(
-      formControlName: 'phone',
-      textInputAction: TextInputAction.next,
-      onSubmitted: (_) {
-        controller.form.focus('id');
-      },
-      validationMessages: {
-        ValidationMessage.required: (error) => 'Phone number must not be empty',
-        ValidationMessage.maxLength: (error) =>
-        'Phone number can\'t exceed 11 digits',
-        ValidationMessage.minLength: (error) =>
-        'Phone number can\'t be less than 11 digits',
-      },
-      keyboardType: TextInputType.phone,
-      decoration: InputDecoration(
-        labelText: 'Phone number',
-        labelStyle: const TextStyle(
-          color: Colors.black,
+  Widget currentPassword() {
+    return Obx(() {
+      return ReactiveTextField(
+        formControlName: 'currentPassword',
+        obscureText: controller.isCurrentPasswordVisible.value,
+        textInputAction: TextInputAction.next,
+        onSubmitted: (_) {
+          controller.form.focus('newPassword');
+        },
+        validationMessages: {
+          ValidationMessage.required: (error) => 'Current Password must not be empty',
+        },
+        decoration: InputDecoration(
+          hintText: '**********',
+          hintStyle: const TextStyle(
+              color: AppColors.grey, fontSize: 12, fontWeight: FontWeight.w400),
+          floatingLabelBehavior: FloatingLabelBehavior.always,
+          fillColor: AppColors.grey,
+          filled: true,
+          enabledBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.transparent),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.transparent),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          suffixIcon: IconButton(
+            icon: Icon(
+              controller.isCurrentPasswordVisible.value
+                  ? Icons.visibility
+                  : Icons.visibility_off,
+            ),
+            onPressed: () {
+              controller.toggleCurrentPasswordVisibility();
+            },
+          ),
         ),
-        hintText: 'Ex: 01012345678',
-        hintStyle: const TextStyle(
-            color: AppColors.grey, fontSize: 12, fontWeight: FontWeight.w400),
-        floatingLabelBehavior: FloatingLabelBehavior.always,
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: AppColors.grey1),
-          borderRadius: BorderRadius.circular(8.0),
+        style: const TextStyle(color: Colors.black),
+      );
+    });
+  }
+
+  Widget newPassword() {
+    return Obx(() {
+      return ReactiveTextField(
+        formControlName: 'newPassword',
+        obscureText: controller.isNewPasswordVisible.value,
+        validationMessages: {
+          ValidationMessage.required: (error) => 'Password must not be empty'
+        },
+        decoration: InputDecoration(
+          hintText: '**********',
+          hintStyle: const TextStyle(
+              color: AppColors.grey, fontSize: 12, fontWeight: FontWeight.w400),
+          floatingLabelBehavior: FloatingLabelBehavior.always,
+          fillColor: AppColors.grey,
+          filled: true,
+          enabledBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: AppColors.textFieldBg),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: AppColors.textFieldBg),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          suffixIcon: IconButton(
+            icon: Icon(
+              controller.isNewPasswordVisible.value
+                  ? Icons.visibility
+                  : Icons.visibility_off,
+            ),
+            onPressed: () {
+              controller.toggleNewPasswordVisibility();
+            },
+          ),
         ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: AppColors.grey1),
-          borderRadius: BorderRadius.circular(8.0),
+        style: const TextStyle(color: Colors.black),
+      );
+    });
+  }
+
+  Widget confirmNewPassword() {
+    return Obx(() {
+      return ReactiveTextField(
+        formControlName: 'confirmNewPass',
+        obscureText: controller.isConfirmPasswordVisible.value,
+        textInputAction: TextInputAction.next,
+        validationMessages: {
+          ValidationMessage.required: (error) => 'Password must not be empty',
+        },
+        decoration: InputDecoration(
+          hintText: '**********',
+          hintStyle: const TextStyle(
+              color: AppColors.grey, fontSize: 12, fontWeight: FontWeight.w400),
+          floatingLabelBehavior: FloatingLabelBehavior.always,
+          fillColor: AppColors.grey,
+          filled: true,
+          enabledBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.transparent),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.transparent),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          suffixIcon: IconButton(
+            icon: Icon(
+              controller.isConfirmPasswordVisible.value
+                  ? Icons.visibility
+                  : Icons.visibility_off,
+            ),
+            onPressed: () {
+              controller.toggleConfirmPasswordVisibility();
+            },
+          ),
         ),
-        errorBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.red),
-          borderRadius: BorderRadius.circular(8.0),
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.red),
-          borderRadius: BorderRadius.circular(8.0),
-        ),
-      ),
-      style: const TextStyle(
-        color: Colors.black,
-      ),
-    );
+        style: const TextStyle(color: Colors.black),
+      );
+    });
   }
 
 
-  Widget sendBtn() {
+
+  Widget saveBtn() {
     return ReactiveFormConsumer(builder: (context, form, child) {
       return controller.isBusy.value
           ? const Center(
-              child: CircularProgressIndicator(),
-            )
+        child: CircularProgressIndicator(),
+      )
           : SizedBox(
-              height: 60,
-              child: MainButton(
-                gradient: AppColors.homeScrGradientColor,
-                color: form.valid ? null : Colors.grey,
-                onTap: form.valid
-                    ? () async {
-                        // await controller.login();
-                        // if (controller.isDone.isTrue) {
-                        //   Get.offAllNamed(RouteNames.homePageName);
-                        // }
+        height: 60,
+        child: MainButton(
+          color: form.valid ?  AppColors.mainColor : Colors.grey,
+          onTap: form.valid
+              ? () async {
+            // await controller.login();
+            // if (controller.isDone.isTrue) {
+            //   Get.offAllNamed(RouteNames.homePageName);
+            // }
 
-                        // if (controller.isDone.isTrue) {
-                        debugPrint("Send button tapped");
-                        Get.to(() => const OtpScreen());
-                        // }
-                      }
-                    : null,
-                buttonText: "Send code",
-              ),
-            );
+            // if (controller.isDone.isTrue) {
+            debugPrint(
+                "Sign up button inside signup screen tapped");
+            // Get.to(() => const PinScreen());
+            // }
+          }
+              : null,
+          buttonText: "Update password",
+        ),
+      );
     });
   }
 }
+

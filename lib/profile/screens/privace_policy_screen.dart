@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:parq/app_config/app_colors.dart';
 import 'package:parq/app_config/custom_app_bar.dart';
+import 'package:parq/app_config/mains.dart';
 
 class PrivacyAndPolicyScreen extends StatelessWidget {
   const PrivacyAndPolicyScreen({super.key});
@@ -13,18 +14,14 @@ class PrivacyAndPolicyScreen extends StatelessWidget {
         onBackTap: () {
           Get.back();
         },
-        title: "Cancelation Policy".tr,
+        title: "Privacy Policy".tr,
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Create new password".tr,
-                style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600,
-                    color: AppColors.black)),
+            MainText(text: "Cancelation Policy",size: 22,weight: FontWeight.w500,color: AppColors.mainColor,),
             const SizedBox(
               height: 15,
             ),
@@ -38,11 +35,7 @@ class PrivacyAndPolicyScreen extends StatelessWidget {
             const SizedBox(
               height: 35,
             ),
-            Text("Terms & Condition".tr,
-                style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600,
-                    color: AppColors.black)),
+            MainText(text: "Terms & Condition",size: 22,weight: FontWeight.w500,color: AppColors.mainColor,),
             const SizedBox(
               height: 15,
             ),

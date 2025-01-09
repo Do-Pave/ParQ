@@ -8,6 +8,7 @@ import 'package:parq/home/screen/home_screen.dart';
 import 'package:parq/profile/screens/profile_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import '../app_config/biometrics_login_service.dart';
+import '../booking/screen/my_booking_screen.dart';
 import '../home/screen/organization/home_organization_screen.dart';
 import '../profile/controllers/profile_controller.dart';
 
@@ -23,7 +24,7 @@ class NavController extends GenericController {
   // List of screens
   final List<Widget> screens = [
     HomeScreen(),
-    // const BankAccountScreen(),
+    const MyBookingScreen(),
     const ProfileScreen(),
   ];
 
@@ -41,7 +42,15 @@ class NavController extends GenericController {
       icon: SvgPicture.asset("assets/images/homeIcon.svg", color: Colors.white),
       title: ("Home".tr),
       activeColorSecondary: Colors.white,
-      activeColorPrimary: AppColors.green
+      activeColorPrimary: AppColors.mainColor
+    ),
+    PersistentBottomNavBarItem(
+        inactiveIcon:
+        SvgPicture.asset("assets/images/homeIcon.svg", color: AppColors.black),
+        icon: SvgPicture.asset("assets/images/homeIcon.svg", color: Colors.white),
+        title: ("Booking".tr),
+        activeColorSecondary: Colors.white,
+        activeColorPrimary: AppColors.mainColor
     ),
     // PersistentBottomNavBarItem(
     //   inactiveIcon: SvgPicture.asset("assets/images/accountIcon.svg",
@@ -57,7 +66,7 @@ class NavController extends GenericController {
       icon: SvgPicture.asset("assets/images/profileIcon.svg", color: Colors.white),
       title: ("Profile".tr),
       activeColorSecondary: Colors.white,
-        activeColorPrimary: AppColors.green
+        activeColorPrimary: AppColors.mainColor
     ),
   ];
 

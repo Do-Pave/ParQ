@@ -9,7 +9,7 @@ class AppColors {
   static const Color textFieldBg = Color(0xffF6F6F6);
   static const Color blueWhite = Color(0xffF5F6FF);
   static const Color blue = Color(0xff3366CC);
-  static const Color green = Color(0xff12AF98);
+  static const Color mainColor = Color(0xffFFBF00);
 // static const Color blue = Color(0xff2F65DD);
   static const Color purble = Color(0xff6145D0);
   static const Color green2 = Color(0xff3EAC98);

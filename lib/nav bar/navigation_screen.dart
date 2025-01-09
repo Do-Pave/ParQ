@@ -28,7 +28,7 @@ class NavScreen extends GetView<NavController> {
                 offset: Offset(0, 4), // Position of the shadow
               ),
             ],),
-            margin: const EdgeInsets.all(10),
+            margin: const EdgeInsets.all(15),
             controller: controller.persistentTabController,
             screens: controller.screens,
             items: controller.items,
@@ -38,7 +38,7 @@ class NavScreen extends GetView<NavController> {
             handleAndroidBackButtonPress: true,
             resizeToAvoidBottomInset: true,
             stateManagement: true,
-            navBarHeight: 75,
+            navBarHeight: 70,
             navBarStyle: NavBarStyle.style7,
             onItemSelected: (index) {
               controller.changeScreen(index);
