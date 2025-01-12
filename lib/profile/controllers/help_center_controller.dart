@@ -7,16 +7,17 @@ class HelpCenterController extends GenericController implements TickerProvider {
   late TabController tabController;
   RxInt selectedIndex = 0.obs;
   RxInt expandedIndex = (-1).obs;
-
+  var isExpanded = false.obs;
+  var expandedIndices = <int>[].obs;
   @override
   void onInit() {
     super.onInit();
-    tabController = TabController(length: 3, vsync: this);
+    tabController = TabController(length: 2, vsync: this);
   }
 
   @override
   void onClose() {
-    tabController.dispose(); // Dispose of the TabController when the controller is disposed
+    tabController.dispose();
     super.onClose();
   }
 

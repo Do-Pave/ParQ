@@ -14,23 +14,27 @@ class Assets {
   static const String imagesApple = 'assets/images/apple.png';
   static const String imagesArrowsLogout = 'assets/images/ArrowsLogout.png';
   static const String imagesBankIcon = 'assets/images/bankIcon.svg';
-  static const String imagesCarPaking = 'assets/images/carParkingIcon.svg';
+  static const String imagesBookingIcon = 'assets/images/bookingIcon.svg';
+  static const String imagesCarParkingIcon = 'assets/images/carParkingIcon.svg';
   static const String imagesCarVector = 'assets/images/CarVector.svg';
   static const String imagesCardGreen = 'assets/images/cardGreen.svg';
   static const String imagesClearIcon = 'assets/images/clearIcon.svg';
   static const String imagesDangerCircle = 'assets/images/DangerCircle.svg';
   static const String imagesEmail = 'assets/images/email.svg';
   static const String imagesFacebook = 'assets/images/facebook.png';
+  static const String imagesFacebookYellow = 'assets/images/facebookYellow.svg';
   static const String imagesFav = 'assets/images/fav.svg';
   static const String imagesFrame000005609 = 'assets/images/Frame000005609.png';
   static const String imagesFrame1000005667 = 'assets/images/Frame1000005667.png';
   static const String imagesGoogle = 'assets/images/google.png';
   static const String imagesHawaity = 'assets/images/hawaity.png';
+  static const String imagesHeadPhoneYellow = 'assets/images/headPhoneYellow.svg';
   static const String imagesHome = 'assets/images/home.svg';
   static const String imagesHomeIcom = 'assets/images/homeIcom.svg';
   static const String imagesHomeIcon = 'assets/images/homeIcon.svg';
   static const String imagesIcon = 'assets/images/Icon.svg';
   static const String imagesId = 'assets/images/id.svg';
+  static const String imagesInstgramYellow = 'assets/images/instgramYellow.svg';
   static const String imagesKnet = 'assets/images/knet.svg';
   static const String imagesLocation = 'assets/images/location.png';
   static const String imagesLocationIcon = 'assets/images/locationIcon.svg';
@@ -75,8 +79,11 @@ class Assets {
   static const String imagesVisa = 'assets/images/visa.png';
   static const String imagesWalletGreen = 'assets/images/walletGreen.svg';
   static const String imagesWash = 'assets/images/wash.svg';
+  static const String imagesWebYellow = 'assets/images/webYellow.svg';
+  static const String imagesWhatsappYellow = 'assets/images/whatsappYellow.svg';
   static const String imagesWithdraw = 'assets/images/withdraw.png';
   static const String imagesWithdraws = 'assets/images/withdraws.svg';
   static const String imagesWs = 'assets/images/ws.svg';
+  static const String imagesXYellow = 'assets/images/xYellow.svg';
 
 }
