@@ -36,7 +36,7 @@ class _SplashPageState extends State<SplashPage> {
           child: Center(
             child: SizedBox(
                 width: MediaQuery.of(context).size.width / 2,
-                child: SvgPicture.asset("assets/images/parqLogo.svg")),
+                child: SvgPicture.asset("assets/images/PrqLogo.svg")),
           ),
         ));
   }
