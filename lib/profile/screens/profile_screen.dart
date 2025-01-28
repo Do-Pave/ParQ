@@ -6,6 +6,7 @@ import 'package:parq/app_config/custom_app_bar.dart';
 import 'package:parq/nav%20bar/navigation_screen.dart';
 import 'package:parq/onboarding/onboarding.dart';
 import 'package:parq/parking/screen/payment_methods_screen.dart';
+import 'package:parq/parking/screen/pick_parking_spots_screen.dart';
 import 'package:parq/profile/controllers/profile_controller.dart';
 import 'package:parq/profile/screens/help_center_screen.dart';
 import 'package:parq/profile/screens/manage_profile_screen.dart';
@@ -139,6 +140,16 @@ class ProfileScreen extends GetView<ProfileController> {
                                   },
                                   child: mainProfileRows(
                                       "Logout", "assets/images/ArrowsLogout.svg")),
+                              const SizedBox(
+                                height: 15,
+                              ),
+                              GestureDetector(
+                                  onTap: () {
+                                    debugPrint("Pick spot");
+                                    Get.to(() => const PickParkingSpotsScreen());
+                                  },
+                                  child: mainProfileRows("Pick spot",
+                                      "assets/images/pass.svg")),
                               const SizedBox(
                                 height: 15,
                               ),
