@@ -10,8 +10,10 @@ import 'package:parq/nav%20bar/navigation_screen.dart';
 import 'package:pinput/pinput.dart';
 
 class PinScreen extends GetView<PinController> {
-   PinScreen({super.key,this.isFromLogin});
+  PinScreen({super.key, this.isFromLogin});
+
   bool? isFromLogin;
+
   @override
   Widget build(BuildContext context) {
     Get.put(PinController());
@@ -33,104 +35,122 @@ class PinScreen extends GetView<PinController> {
                   Center(
                     child: Text(
                       "Verify Code".tr,
-                      style:
-                      const TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
+                      style: const TextStyle(
+                          fontSize: 24, fontWeight: FontWeight.w500),
                     ),
                   ),
-                  const SizedBox(height: 15,),
-                        Text.rich(
-              TextSpan(
-                  text: "${'Please enter the code we just sent to number '.tr} ",
-                  style: const TextStyle(
-                    color: AppColors.black,
-                    fontSize: 14,),
-                  children: [
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Text.rich(
                     TextSpan(
-                      text: '0011022200'.tr,
-                      style: const TextStyle(
-                        fontSize: 14,
-                        color: AppColors.mainColor,
-                      ),
-
-                    ),
-                  ]),
-              textAlign: TextAlign.center,
+                        text:
+                            "${'Please enter the code we just sent to number '.tr} ",
+                        style: const TextStyle(
+                          color: AppColors.black,
+                          fontSize: 14,
                         ),
+                        children: [
+                          TextSpan(
+                            text: '0011022200'.tr,
+                            style: const TextStyle(
+                              fontSize: 14,
+                              color: AppColors.mainColor,
+                            ),
+                          ),
+                        ]),
+                    textAlign: TextAlign.center,
+                  ),
                   const SizedBox(
                     height: 100,
                   ),
                   // Pinput field
                   Pinput(
-                      obscureText: false,
-                      autofocus: true,
-                      length: 6,
-                      // obscuringCharacter: "●",
-                      defaultPinTheme: controller.defaultPinTheme,
-                      controller: controller.pinController,
-                      onChanged: (pin) {
-                        controller.isPinCompleted.value = pin.length == 6;
-                      },
-                      onCompleted: (pin) {
-                        controller.isPinCompleted.value = true;
-                        debugPrint(pin);
-                        controller.finalPin = pin;
-                      },
-                      inputFormatters: [
-                        FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))
-                      ],),
+                    obscureText: false,
+                    autofocus: true,
+                    length: 6,
+                    // obscuringCharacter: "●",
+                    defaultPinTheme: controller.defaultPinTheme,
+                    controller: controller.pinController,
+                    onChanged: (pin) {
+                      controller.isPinCompleted.value = pin.length == 6;
+                    },
+                    onCompleted: (pin) {
+                      controller.isPinCompleted.value = true;
+                      debugPrint(pin);
+                      controller.finalPin = pin;
+                    },
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))
+                    ],
+                  ),
 
                   const SizedBox(
                     height: 20,
                   ),
                   Text(
                     "Didn’t receive OTP?".tr,
-                    style:
-                    const TextStyle(fontSize: 16,color: AppColors.textGrey),
+                    style: const TextStyle(
+                        fontSize: 16, color: AppColors.textGrey),
                   ),
 
-                  const SizedBox(height: 20,),
+                  const SizedBox(
+                    height: 20,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       GestureDetector(
-                        onTap: (){
+                        onTap: () {
                           debugPrint("Resend code tapped");
                         },
-                        child: Text('Resend code'.tr,
+                        child: Text(
+                          'Resend code'.tr,
                           style: const TextStyle(
-                            fontSize: 14,
-                            color: AppColors.mainColor,
-                            fontWeight: FontWeight.w400,
-                            decoration: TextDecoration.underline,
-                            decorationColor: AppColors.mainColor
-                          ),
+                              fontSize: 14,
+                              color: AppColors.mainColor,
+                              fontWeight: FontWeight.w400,
+                              decoration: TextDecoration.underline,
+                              decorationColor: AppColors.mainColor),
                         ),
                       ),
-                      const SizedBox(width: 16,),
+                      const SizedBox(
+                        width: 16,
+                      ),
                       Text(
                         "00:40".tr,
-                        style:
-                        const TextStyle(fontSize: 14,fontWeight: FontWeight.w700,color: AppColors.textGrey),
+                        style: const TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w700,
+                            color: AppColors.textGrey),
                       ),
                     ],
                   ),
 
-                  const SizedBox(height: 50,),
+                  const SizedBox(
+                    height: 50,
+                  ),
                   // Continue button and timer
                   controller.isBusy.isTrue
                       ? const Center(child: CircularProgressIndicator())
-                      : MainButton(
-                      color: controller.isPinCompleted.value
-                              ? AppColors.mainColor
-                              : AppColors.grey2,
-                          onTap: controller.isPinCompleted.value
-                              ? () async {
-                                  debugPrint("Verify");
-                                  isFromLogin == true ? Get.to(() => const NavScreen()) :
-                                  Get.to(() => const SuccessLogin());
-                                }
-                              : null,
-                          buttonText: isFromLogin == true ? "Verify".tr : "Verify".tr),
+                      : SizedBox(
+                          height: 60,
+                          child: MainButton(
+                              color: controller.isPinCompleted.value
+                                  ? AppColors.mainColor
+                                  : AppColors.grey2,
+                              onTap: controller.isPinCompleted.value
+                                  ? () async {
+                                      debugPrint("Verify");
+                                      isFromLogin == true
+                                          ? Get.to(() => const NavScreen())
+                                          : Get.to(() => const SuccessLogin());
+                                    }
+                                  : null,
+                              buttonText: isFromLogin == true
+                                  ? "Verify".tr
+                                  : "Verify".tr),
+                        ),
 
                   const SizedBox(height: 20),
                   if (controller.isError.isTrue) ...[

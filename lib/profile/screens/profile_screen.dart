@@ -119,7 +119,7 @@ class ProfileScreen extends GetView<ProfileController> {
                                     Get.to(() => const PrivacyAndPolicyScreen());
                                   },
                                   child: mainProfileRows("privacy & policy",
-                                      "assets/images/Lock Keyhole.svg")),
+                                      "assets/images/LockKeyhole.svg")),
                               const SizedBox(
                                 height: 15,
                               ),
@@ -140,16 +140,16 @@ class ProfileScreen extends GetView<ProfileController> {
                                   },
                                   child: mainProfileRows(
                                       "Logout", "assets/images/ArrowsLogout.svg")),
-                              const SizedBox(
-                                height: 15,
-                              ),
-                              GestureDetector(
-                                  onTap: () {
-                                    debugPrint("Pick spot");
-                                    Get.to(() => const PickParkingSpotsScreen());
-                                  },
-                                  child: mainProfileRows("Pick spot",
-                                      "assets/images/pass.svg")),
+                              // const SizedBox(
+                              //   height: 15,
+                              // ),
+                              // GestureDetector(
+                              //     onTap: () {
+                              //       debugPrint("Pick spot");
+                              //       Get.to(() => const PickParkingSpotsScreen());
+                              //     },
+                              //     child: mainProfileRows("Pick spot",
+                              //         "assets/images/pass.svg")),
                               const SizedBox(
                                 height: 15,
                               ),
@@ -205,6 +205,7 @@ class ProfileScreen extends GetView<ProfileController> {
       child: Row(children: [
         Container(
           width: 24,
+          // height: 25,
           child: SvgPicture.asset(
             image,
             // width: 24,

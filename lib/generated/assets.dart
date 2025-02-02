@@ -39,6 +39,7 @@ class Assets {
   static const String imagesKnet = 'assets/images/knet.svg';
   static const String imagesLocation = 'assets/images/location.png';
   static const String imagesLocationIcon = 'assets/images/locationIcon.svg';
+  static const String imagesLockKeyhole = 'assets/images/LockKeyhole.svg';
   static const String imagesLogo = 'assets/images/logo.png';
   static const String imagesLogout = 'assets/images/logout.svg';
   static const String imagesMainIcon = 'assets/images/mainIcon.svg';
@@ -61,6 +62,7 @@ class Assets {
   static const String imagesProfIcon = 'assets/images/profIcon.svg';
   static const String imagesProfile = 'assets/images/profile.svg';
   static const String imagesProfileIcon = 'assets/images/profileIcon.png';
+  static const String imagesPrqLogo = 'assets/images/PrqLogo.svg';
   static const String imagesQr = 'assets/images/qr.png';
   static const String imagesQrBtnIc = 'assets/images/qrBtnIc.png';
   static const String imagesRecive = 'assets/images/recive.png';
