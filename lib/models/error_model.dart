@@ -46,3 +46,40 @@ class ErrorModel {
     }
   }
 }
+
+
+
+class ParqErrorModel {
+  int? statusCode;
+  List<String>? message;
+  String? timestamp;
+  String? path;
+
+  ParqErrorModel({this.statusCode, this.message, this.timestamp, this.path});
+
+  ParqErrorModel.fromJson(Map<String, dynamic> json) {
+    statusCode = json['statusCode'];
+    message = json['message'].cast<String>();
+    timestamp = json['timestamp'];
+    path = json['path'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['statusCode'] = this.statusCode;
+    data['message'] = this.message;
+    data['timestamp'] = this.timestamp;
+    data['path'] = this.path;
+    return data;
+  }
+
+  List<String> getResponseMessages() {
+    if (message is String) {
+      return [message as String];
+    } else if (message is List) {
+      return (message as List).map((e) => e.toString()).toList();
+    } else {
+      return [];
+    }
+  }
+}

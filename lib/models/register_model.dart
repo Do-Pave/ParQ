@@ -1,10 +1,10 @@
-class LoginModel {
+class RegisterModel {
   Data? data;
   bool? success;
 
-  LoginModel({this.data, this.success});
+  RegisterModel({this.data, this.success});
 
-  LoginModel.fromJson(Map<String, dynamic> json) {
+  RegisterModel.fromJson(Map<String, dynamic> json) {
     data = json['data'] != null ? new Data.fromJson(json['data']) : null;
     success = json['success'];
   }
@@ -20,20 +20,23 @@ class LoginModel {
 }
 
 class Data {
-  String? accessToken;
-  String? refreshToken;
+  String? phone;
+  String? otp;
+  String? expiresAt;
 
-  Data({this.accessToken, this.refreshToken});
+  Data({this.phone, this.otp, this.expiresAt});
 
   Data.fromJson(Map<String, dynamic> json) {
-    accessToken = json['accessToken'];
-    refreshToken = json['refreshToken'];
+    phone = json['phone'];
+    otp = json['otp'];
+    expiresAt = json['expiresAt'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['accessToken'] = this.accessToken;
-    data['refreshToken'] = this.refreshToken;
+    data['phone'] = this.phone;
+    data['otp'] = this.otp;
+    data['expiresAt'] = this.expiresAt;
     return data;
   }
 }

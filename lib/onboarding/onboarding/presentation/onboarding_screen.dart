@@ -127,7 +127,7 @@ class _OnBoardingState extends State<OnBoarding> {
                   child: Image.asset(
                     "assets/images/onBoarding1.png",
                     fit: BoxFit.fill,
-                    height: Get.size.height / 3,
+                    height: Get.size.height / 2.5,
                   )),
               Positioned(
                 top: 30,

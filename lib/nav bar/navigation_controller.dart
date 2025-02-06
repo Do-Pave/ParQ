@@ -46,8 +46,8 @@ class NavController extends GenericController {
     ),
     PersistentBottomNavBarItem(
         inactiveIcon:
-        SvgPicture.asset("assets/images/homeIcon.svg", color: AppColors.black),
-        icon: SvgPicture.asset("assets/images/homeIcon.svg", color: Colors.white),
+        SvgPicture.asset("assets/images/bookingIcon.svg", color: AppColors.black),
+        icon: SvgPicture.asset("assets/images/bookingIcon.svg", color: Colors.white),
         title: ("Booking".tr),
         activeColorSecondary: Colors.white,
         activeColorPrimary: AppColors.mainColor

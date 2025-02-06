@@ -10,9 +10,10 @@ import 'package:parq/nav%20bar/navigation_screen.dart';
 import 'package:pinput/pinput.dart';
 
 class PinScreen extends GetView<PinController> {
-  PinScreen({super.key, this.isFromLogin});
+  PinScreen({super.key, this.isFromLogin, this.phone});
 
   bool? isFromLogin;
+  String? phone;
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +53,7 @@ class PinScreen extends GetView<PinController> {
                         ),
                         children: [
                           TextSpan(
-                            text: '0011022200'.tr,
+                            text: phone,
                             style: const TextStyle(
                               fontSize: 14,
                               color: AppColors.mainColor,
@@ -142,9 +143,13 @@ class PinScreen extends GetView<PinController> {
                               onTap: controller.isPinCompleted.value
                                   ? () async {
                                       debugPrint("Verify");
-                                      isFromLogin == true
-                                          ? Get.to(() => const NavScreen())
-                                          : Get.to(() => const SuccessLogin());
+                                      await controller.signIn(phone);
+                                      if (controller.isDone.isTrue) {
+                                        isFromLogin == true
+                                            ? Get.to(() => const NavScreen())
+                                            : Get.to(
+                                                () => const SuccessLogin());
+                                      }
                                     }
                                   : null,
                               buttonText: isFromLogin == true

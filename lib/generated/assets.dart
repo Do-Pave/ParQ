@@ -35,6 +35,7 @@ class Assets {
   static const String imagesHomeIcon = 'assets/images/homeIcon.svg';
   static const String imagesIcon = 'assets/images/Icon.svg';
   static const String imagesId = 'assets/images/id.svg';
+  static const String imagesImage4 = 'assets/images/image 4.png';
   static const String imagesInstgramYellow = 'assets/images/instgramYellow.svg';
   static const String imagesKnet = 'assets/images/knet.svg';
   static const String imagesLocation = 'assets/images/location.png';

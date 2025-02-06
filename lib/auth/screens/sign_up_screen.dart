@@ -337,14 +337,14 @@ class SignupScreen extends GetView<SignUpController> {
                 color: form.valid && controller.checkValue.value == true ? AppColors.mainColor : Colors.grey,
                 onTap: form.valid && controller.checkValue.value == true
                     ? () async {
-                        // await controller.signup();
-                        // if (controller.isDone.isTrue) {
+                        await controller.signup();
+                        if (controller.isDone.isTrue) {
                         debugPrint(
                             "Sign up button inside signup screen tapped");
-                        Get.to(() => PinScreen(isFromLogin: false));
+                        Get.to(() => PinScreen(isFromLogin: false,phone: controller.phone,));
                         // Get.to(() => const NavScreen());
                         }
-                      // }
+                      }
                     : null,
                 buttonText: "Create an account",
               ),

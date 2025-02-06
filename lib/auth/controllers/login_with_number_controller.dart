@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:parq/app_config/generic_controller.dart';
+import 'package:parq/models/register_model.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -15,16 +16,17 @@ class LoginWithNumberController extends GenericController{
     'phone': FormControl<String>(validators: [
       Validators.required,
       Validators.number,
-      Validators.minLength(8),
-      Validators.maxLength(8)
+      Validators.minLength(11),
+      Validators.maxLength(11)
     ]),
      });
 
+  String? phone;
 
   final Dio _dio = Dio();
   Constants constants = Constants();
 
-  Future<void> signIn() async {
+  Future<void> sendOtp() async {
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     isBusy.value = true;
@@ -33,46 +35,45 @@ class LoginWithNumberController extends GenericController{
 
     try {
       final response = await _dio.post(
-        constants.loginUrl,
+        constants.baseUrl +
+        constants.sendOtp,
         data: {
-          // Below is phone number but saved as username in body !
-          // "username": "+201060205932@example.com",
-          "username": form.control('email').value,
-          'password': form.control('password').value,
-          // 'password': "password123",
-          "client_id": "api-users",
-          "grant_type": "password",
-          "scope": "openid",
-          "client_secret": "yX8WeMlrSJIJReaGUoXdcxJvd5kNY4tH",
-        },
-        options: Options(
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-        ),
+          "phone": form.control('phone').value,
+        }
       );
       debugPrint("Response Data: ${response.data}");
 
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      // prefs.setString("email",form.control('email').value);
+
       if (response.statusCode == 200 || response.statusCode == 201) {
-        final signInData = SignInModel.fromJson(response.data);
-        prefs.setString("access_token", "${signInData.accessToken}");
-        prefs.setString("refresh_token", "${signInData.refreshToken}");
-        if (signInData.accessToken != null) {
+        final signUpData = RegisterModel.fromJson(response.data);
+        prefs.setString("phone", "${signUpData.data?.phone}");
+        var savedPhone = prefs.getString("phone");
+        debugPrint("Saved phone is: $savedPhone");
+
+        if (signUpData.success == true) {
+          phone = savedPhone ?? "";
           isDone.value = true;
+          debugPrint("Data: ${response.data}");
         } else {
           isError.value = true;
+          error?.value = 'Sign up failed';
           Get.snackbar("Error", error?.value ?? "", colorText: AppColors.black);
         }
       }
     } on DioException catch (e) {
       // Handle DioException errors
       if (e.response != null && e.response?.data != null) {
-        final errorData = ErrorModel.fromJson(e.response!.data);
+        final errorData = ParqErrorModel.fromJson(e.response!.data);
         isError.value = true;
-        error?.value = errorData.errorDescription ?? 'An error occurred';
+        final responseMessages = errorData.getResponseMessages();
+        error?.value = responseMessages.isNotEmpty
+            ? responseMessages.join('\n')
+            : 'An error occurred';
         Get.snackbar("Error", error?.value ?? "", colorText: AppColors.black);
         debugPrint("Error Value: ${error?.value}");
-        debugPrint("Error Data: ${errorData.errorDescription}");
+        debugPrint("Error Data: ${errorData.message}");
       } else {
         isError.value = true;
         error?.value = e.message ?? 'An error occurred. Please try again.';

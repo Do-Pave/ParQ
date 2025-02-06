@@ -39,10 +39,10 @@ class RefreshTokenClass extends GenericController{
       debugPrint("Response Data: ${response.data}");
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        final signInData = SignInModel.fromJson(response.data);
-        prefs.setString("access_token", "${signInData.accessToken}");
-        prefs.setString("refresh_token", "${signInData.refreshToken}");
-        if (signInData.accessToken != null) {
+        final signInData = LoginModel.fromJson(response.data);
+        prefs.setString("access_token", "${signInData.data?.accessToken}");
+        prefs.setString("refresh_token", "${signInData.data?.refreshToken}");
+        if (signInData.data?.accessToken != null) {
           isDone.value = true;
         } else {
           isError.value = true;

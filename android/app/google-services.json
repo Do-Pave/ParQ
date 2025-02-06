@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "184549664373",
+    "project_id": "parq-438f5",
+    "storage_bucket": "parq-438f5.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:184549664373:android:c402f2edb2977224fc7a3c",
+        "android_client_info": {
+          "package_name": "com.parq.app.parq"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdHAkvUQjx-9P2V0ZkrLUSeblSSBNqwPw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -13,7 +14,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 import '../../app_config/mains.dart';
 
-class LoginWithNumberScreen extends GetView<LoginWithNumberController>{
+class LoginWithNumberScreen extends GetView<LoginWithNumberController> {
   const LoginWithNumberScreen({super.key});
 
   @override
@@ -35,27 +36,29 @@ class LoginWithNumberScreen extends GetView<LoginWithNumberController>{
         body: Padding(
           padding: EdgeInsets.all(20),
           child: Obx(
-                () => ReactiveForm(
+            () => ReactiveForm(
               formGroup: controller.form,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                   Text(
+                  Text(
                     "login with a valid local Mobile number".tr,
-                    style:
-                    const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.w500),
                   ),
                   const SizedBox(height: 20.0),
                   // Phone number
                   Text(
                     'Phone number'.tr,
                     style:
-                    const TextStyle(color: AppColors.black, fontSize: 16),
+                        const TextStyle(color: AppColors.black, fontSize: 16),
                     textAlign: TextAlign.start,
                   ),
                   const SizedBox(height: 8.0),
                   phoneNumber(),
-                  const SizedBox(height: 30,),
+                  const SizedBox(
+                    height: 30,
+                  ),
                   signUp(),
                   // Submit button
                   const Spacer(),
@@ -81,13 +84,13 @@ class LoginWithNumberScreen extends GetView<LoginWithNumberController>{
   Widget phoneNumber() {
     return ReactiveTextField(
       formControlName: 'phone',
-      maxLength: 8,
+      maxLength: 11,
       validationMessages: {
         ValidationMessage.required: (error) => 'Phone number must not be empty',
         ValidationMessage.maxLength: (error) =>
-        'Phone number can\'t exceed 8 digits',
+            'Phone number can\'t exceed 11 digits',
         ValidationMessage.minLength: (error) =>
-        'Phone number can\'t be less than 8 digits',
+            'Phone number can\'t be less than 11 digits',
       },
       keyboardType: TextInputType.phone,
       decoration: InputDecoration(
@@ -126,27 +129,39 @@ class LoginWithNumberScreen extends GetView<LoginWithNumberController>{
     return ReactiveFormConsumer(builder: (context, form, child) {
       return controller.isBusy.value
           ? const Center(
-        child: CircularProgressIndicator(),
-      )
+              child: CircularProgressIndicator(),
+            )
           : SizedBox(
-        height: 60,
-        child: MainButton(
-          color: form.valid ? AppColors.mainColor : Colors.grey,
-          onTap: form.valid
-              ? () async {
-
-            // await controller.signIn();
-            // if (controller.isDone.isTrue) {
-            debugPrint(
-                "Submit button tapped");
-            Get.to(() => PinScreen(isFromLogin: true,));
-            // Get.to(() => const NavScreen());
-            // }
-          }
-              : null,
-          buttonText: "Login",
-        ),
-      );
+              height: 60,
+              child: MainButton(
+                color: form.valid ? AppColors.mainColor : Colors.grey,
+                onTap: form.valid
+                    ? () async {
+                        Get.to(() => const NavScreen());
+                        // await controller.sendOtp();
+                        // if (controller.isDone.isTrue) {
+                        // debugPrint(
+                        //     "Submit button tapped");
+                        // // Get.to(() => PinScreen(isFromLogin: true,phone: controller.phone,));
+                        // // Get.to(() => const NavScreen());
+                        //
+                        // await FirebaseAuth.instance.verifyPhoneNumber(
+                        //   phoneNumber: '+201092347574',
+                        //   verificationCompleted: (PhoneAuthCredential credential) {},
+                        //   verificationFailed: (FirebaseAuthException e) {
+                        //     if (e.code == 'invalid-phone-number') {
+                        //       debugPrint('The provided phone number is not valid.');
+                        //     }
+                        //   },
+                        //   codeSent: (String verificationId, int? resendToken) {},
+                        //   codeAutoRetrievalTimeout: (String verificationId) {},
+                        // );
+                        // }
+                      }
+                    : null,
+                buttonText: "Login",
+              ),
+            );
     });
   }
 
@@ -158,7 +173,8 @@ class LoginWithNumberScreen extends GetView<LoginWithNumberController>{
             text: "${'Don\'t have an account? '.tr} ",
             style: const TextStyle(
               color: AppColors.black,
-              fontSize: 14,),
+              fontSize: 14,
+            ),
             children: [
               TextSpan(
                 text: 'Sign up'.tr,
@@ -178,4 +194,3 @@ class LoginWithNumberScreen extends GetView<LoginWithNumberController>{
     );
   }
 }
-
