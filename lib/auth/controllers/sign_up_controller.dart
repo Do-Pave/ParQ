@@ -25,8 +25,8 @@ class SignUpController extends GenericController {
     'phone': FormControl<String>(validators: [
       Validators.required,
       Validators.number,
-      Validators.minLength(8),
-      Validators.maxLength(8)
+      Validators.minLength(11),
+      Validators.maxLength(11)
     ]),
   });
 
@@ -45,7 +45,7 @@ class SignUpController extends GenericController {
 
     try {
       final response = await _dio.post(
-        constants.baseUrl + constants.signUp,
+        constants.authBaseUrl + constants.signUp,
         data: {
           "firstName": form.control("firstName").value,
           "lastName": form.control("lastName").value,

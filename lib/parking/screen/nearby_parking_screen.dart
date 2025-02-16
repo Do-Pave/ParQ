@@ -1,17 +1,22 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 import 'package:parq/app_config/app_colors.dart';
 import 'package:parq/app_config/custom_app_bar.dart';
 import 'package:parq/parking/controller/nearby_parking_controller.dart';
 import 'package:parq/parking/screen/booking_details_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../app_config/mains.dart';
+import '../../models/all_parking_model.dart';
 
 class NearbyParkingScreen extends GetView<NearbyParkingController> {
-  const NearbyParkingScreen({super.key});
+  NearbyParkingScreen({super.key, this.parkingData});
+
+  AllParking? parkingData;
 
   @override
   Widget build(BuildContext context) {
@@ -71,27 +76,32 @@ class NearbyParkingScreen extends GetView<NearbyParkingController> {
                                   ],
                                 ),
                               )),
-                          Row(
-                            children: [
-                              const Icon(
-                                Icons.star_rounded,
-                                color: AppColors.grey1,
-                              ),
-                              MainText(
-                                text: "5.0",
-                                size: 14,
-                                weight: FontWeight.w400,
-                              ),
-                              const SizedBox(
-                                width: 5,
-                              ),
-                              MainText(
-                                text: "(250 Reviews)",
-                                size: 14,
-                                weight: FontWeight.w400,
-                              ),
-                            ],
-                          )
+                          parkingData?.reviews?.length != 0
+                              ? Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.star_rounded,
+                                      color: AppColors.grey1,
+                                    ),
+                                    MainText(
+                                      text: parkingData?.reviews?.first.rate
+                                              .toString() ??
+                                          "",
+                                      size: 14,
+                                      weight: FontWeight.w400,
+                                    ),
+                                    const SizedBox(
+                                      width: 5,
+                                    ),
+                                    MainText(
+                                      text:
+                                          "(${parkingData?.reviews?.length ?? 0} Reviews)",
+                                      size: 14,
+                                      weight: FontWeight.w400,
+                                    ),
+                                  ],
+                                )
+                              : Container()
                         ],
                       ),
                       const SizedBox(
@@ -99,16 +109,15 @@ class NearbyParkingScreen extends GetView<NearbyParkingController> {
                       ),
                       Container(
                         decoration: BoxDecoration(
-                          color: AppColors.greyContainerBG,
-                          borderRadius: BorderRadius.circular(8)
-                        ),
+                            color: AppColors.greyContainerBG,
+                            borderRadius: BorderRadius.circular(8)),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               MainText(
-                                text: "Blue Way city Parking",
+                                text: parkingData?.parkingName ?? "",
                                 size: 22,
                                 weight: FontWeight.w500,
                                 color: AppColors.black,
@@ -117,7 +126,7 @@ class NearbyParkingScreen extends GetView<NearbyParkingController> {
                                 height: 16,
                               ),
                               MainText(
-                                text: "78 Ali Amen  , cairo",
+                                text: parkingData?.location?.address ?? "",
                                 size: 18,
                                 weight: FontWeight.w400,
                                 color: AppColors.textGrey,
@@ -126,7 +135,8 @@ class NearbyParkingScreen extends GetView<NearbyParkingController> {
                                 height: 16,
                               ),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Row(
                                     children: [
@@ -147,13 +157,15 @@ class NearbyParkingScreen extends GetView<NearbyParkingController> {
                                   ),
                                   Row(
                                     children: [
-                                      SvgPicture.asset("assets/images/CarVector.svg",
+                                      SvgPicture.asset(
+                                          "assets/images/CarVector.svg",
                                           color: const Color(0xffC2C2C2)),
                                       const SizedBox(
                                         width: 8,
                                       ),
                                       MainText(
-                                        text: "25 Spots Available",
+                                        text:
+                                            "${parkingData?.spots?.length ?? 0} Spots Available",
                                         size: 16,
                                         weight: FontWeight.w400,
                                         color: AppColors.black,
@@ -177,106 +189,163 @@ class NearbyParkingScreen extends GetView<NearbyParkingController> {
                       const SizedBox(
                         height: 24,
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          controller.checkbox1.value == true
-                              ? controller.updateCheckbox(1, false)
-                              : controller.updateCheckbox(1, true);
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(color: AppColors.mainColor)),
-                          height: 50,
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                                right: 0, left: 20, top: 13, bottom: 13),
-                            child: Row(
-                              children: [
-                                SvgPicture.asset("assets/images/valet.svg"),
-                                const SizedBox(
-                                  width: 8,
+                      SizedBox(
+                        height: (parkingData?.services?.length ?? 0) * 80,
+                        child: ListView.separated(
+                          itemCount: parkingData?.services?.length ?? 0,
+                          separatorBuilder: (context, index) => const SizedBox(height: 10),
+                          itemBuilder: (context, index) {
+                            var service = parkingData?.services?[index];
+
+                            return GestureDetector(
+                              onTap: () {
+                                controller.updateCheckbox(service?.name ?? "", !controller.isSelected(service?.name ?? ""));
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  border: Border.all(color: AppColors.mainColor),
                                 ),
-                                MainText(
-                                  text: "Request Valet",
-                                  size: 16,
-                                  weight: FontWeight.w500,
-                                  color: AppColors.mainColor,
-                                ),
-                                const Spacer(),
-                                Obx(() => Checkbox(
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(5)),
-                                      activeColor: AppColors.mainColor,
-                                      side: MaterialStateBorderSide.resolveWith(
-                                        (states) => const BorderSide(
-                                            width: 1.0, color: AppColors.mainColor),
+                                height: 50,
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 13),
+                                  child: Row(
+                                    children: [
+                                      SvgPicture.asset("assets/images/valet.svg", color: AppColors.mainColor),
+                                      const SizedBox(width: 8),
+                                      MainText(
+                                        text: service?.name ?? "",
+                                        size: 16,
+                                        weight: FontWeight.w500,
+                                        color: AppColors.mainColor,
                                       ),
-                                      value: controller.checkbox1.value,
-                                      onChanged: (bool? value) {
-                                        if (value != null)
-                                          controller.updateCheckbox(1, value);
-                                      },
-                                    )),
-                              ],
-                            ),
-                          ),
+                                      const Spacer(),
+                                      Obx(() => Checkbox(
+                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                                        activeColor: AppColors.mainColor,
+                                        side: MaterialStateBorderSide.resolveWith(
+                                              (states) => const BorderSide(width: 1.0, color: AppColors.mainColor),
+                                        ),
+                                        value: controller.isSelected(service?.name ?? ""),
+                                        onChanged: (bool? value) {
+                                          if (value != null) {
+                                            controller.updateCheckbox(service?.name ?? "", value);
+                                          }
+                                        },
+                                      )),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
                         ),
                       ),
-                      const SizedBox(
-                        height: 24,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          controller.checkbox2.value == true
-                              ? controller.updateCheckbox(2, false)
-                              : controller.updateCheckbox(2, true);
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(color: AppColors.mainColor)),
-                          height: 50,
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                                right: 0, left: 20, top: 13, bottom: 13),
-                            child: Row(
-                              children: [
-                                SvgPicture.asset(
-                                  "assets/images/wash.svg",
-                                  color: AppColors.mainColor,
-                                ),
-                                const SizedBox(
-                                  width: 8,
-                                ),
-                                MainText(
-                                  text: "Car wash",
-                                  size: 16,
-                                  weight: FontWeight.w500,
-                                  color: AppColors.mainColor,
-                                ),
-                                const Spacer(),
-                                Obx(() => Checkbox(
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(5)),
-                                      activeColor: AppColors.mainColor,
-                                      side: MaterialStateBorderSide.resolveWith(
-                                        (states) => const BorderSide(
-                                            width: 1.0, color: AppColors.mainColor),
-                                      ),
-                                      value: controller.checkbox2.value,
-                                      onChanged: (bool? value) {
-                                        if (value != null)
-                                          controller.updateCheckbox(2, value);
-                                      },
-                                    )),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
+
+
+                      // GestureDetector(
+                      //   onTap: () {
+                      //     controller.checkbox1.value == true
+                      //         ? controller.updateCheckbox(1, false)
+                      //         : controller.updateCheckbox(1, true);
+                      //   },
+                      //   child: Container(
+                      //     decoration: BoxDecoration(
+                      //         borderRadius: BorderRadius.circular(10),
+                      //         border: Border.all(color: AppColors.mainColor)),
+                      //     height: 50,
+                      //     child: Padding(
+                      //       padding: const EdgeInsets.only(
+                      //           right: 0, left: 20, top: 13, bottom: 13),
+                      //       child: Row(
+                      //         children: [
+                      //           SvgPicture.asset("assets/images/valet.svg",
+                      //               color: AppColors.mainColor),
+                      //           const SizedBox(
+                      //             width: 8,
+                      //           ),
+                      //           MainText(
+                      //             text: "Request Valet",
+                      //             size: 16,
+                      //             weight: FontWeight.w500,
+                      //             color: AppColors.mainColor,
+                      //           ),
+                      //           const Spacer(),
+                      //           Obx(() => Checkbox(
+                      //                 shape: RoundedRectangleBorder(
+                      //                     borderRadius:
+                      //                         BorderRadius.circular(5)),
+                      //                 activeColor: AppColors.mainColor,
+                      //                 side: MaterialStateBorderSide.resolveWith(
+                      //                   (states) => const BorderSide(
+                      //                       width: 1.0,
+                      //                       color: AppColors.mainColor),
+                      //                 ),
+                      //                 value: controller.checkbox1.value,
+                      //                 onChanged: (bool? value) {
+                      //                   if (value != null)
+                      //                     controller.updateCheckbox(1, value);
+                      //                 },
+                      //               )),
+                      //         ],
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
+                      // const SizedBox(
+                      //   height: 24,
+                      // ),
+                      // GestureDetector(
+                      //   onTap: () {
+                      //     controller.checkbox2.value == true
+                      //         ? controller.updateCheckbox(2, false)
+                      //         : controller.updateCheckbox(2, true);
+                      //   },
+                      //   child: Container(
+                      //     decoration: BoxDecoration(
+                      //         borderRadius: BorderRadius.circular(10),
+                      //         border: Border.all(color: AppColors.mainColor)),
+                      //     height: 50,
+                      //     child: Padding(
+                      //       padding: const EdgeInsets.only(
+                      //           right: 0, left: 20, top: 13, bottom: 13),
+                      //       child: Row(
+                      //         children: [
+                      //           SvgPicture.asset(
+                      //             "assets/images/wash.svg",
+                      //             color: AppColors.mainColor,
+                      //           ),
+                      //           const SizedBox(
+                      //             width: 8,
+                      //           ),
+                      //           MainText(
+                      //             text: "Car wash",
+                      //             size: 16,
+                      //             weight: FontWeight.w500,
+                      //             color: AppColors.mainColor,
+                      //           ),
+                      //           const Spacer(),
+                      //           Obx(() => Checkbox(
+                      //                 shape: RoundedRectangleBorder(
+                      //                     borderRadius:
+                      //                         BorderRadius.circular(5)),
+                      //                 activeColor: AppColors.mainColor,
+                      //                 side: MaterialStateBorderSide.resolveWith(
+                      //                   (states) => const BorderSide(
+                      //                       width: 1.0,
+                      //                       color: AppColors.mainColor),
+                      //                 ),
+                      //                 value: controller.checkbox2.value,
+                      //                 onChanged: (bool? value) {
+                      //                   if (value != null)
+                      //                     controller.updateCheckbox(2, value);
+                      //                 },
+                      //               )),
+                      //         ],
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                       const SizedBox(
                         height: 24,
                       ),
@@ -288,9 +357,9 @@ class NearbyParkingScreen extends GetView<NearbyParkingController> {
                       const SizedBox(
                         height: 16,
                       ),
-                      const Text(
-                        "Lorem ipsum dolor sit amet consectetur. Eget rhoncus malesuada aenean lectus consequat posuere purus viverra quis. Pellentesque pellentesque viverra scelerisque morbi donec tempor.",
-                        style: TextStyle(
+                      Text(
+                        parkingData?.description ?? "",
+                        style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
                             color: AppColors.textGrey),
@@ -400,12 +469,36 @@ class NearbyParkingScreen extends GetView<NearbyParkingController> {
                 ),
               ),
             ),
+            Positioned(
+              top: 20,
+              left: 10,
+              child: InkWell(
+                onTap: () {
+                  Get.back();
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        // border: Border.all(color: Colors.grey.shade300),
+                        color: AppColors.grey,
+                        borderRadius: BorderRadius.circular(20)),
+                    child: const Icon(
+                      Icons.arrow_back_rounded,
+                      color: Colors.black,
+                      size: 24,
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ],
         ));
   }
 
   Widget total() {
-    return Obx(()=> SizedBox(
+    return Obx(
+      () => SizedBox(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Row(
@@ -422,7 +515,7 @@ class NearbyParkingScreen extends GetView<NearbyParkingController> {
                   Row(
                     children: [
                       MainText(
-                        text: "\$3.00",
+                        text: "\$${parkingData?.netPrice ?? ""}",
                         size: 14,
                         weight: FontWeight.w500,
                         color: AppColors.mainColor,
@@ -440,15 +533,22 @@ class NearbyParkingScreen extends GetView<NearbyParkingController> {
                   )
                 ],
               ),
-              MainButton(
-                  height: 50,
-                  color: controller.checkbox1.value == true || controller.checkbox2.value == true ? AppColors.mainColor : AppColors.grey2,
-                  width: Get.size.width / 3,
-                  onTap: () {
-                    debugPrint("Book pressed");
-                    controller.checkbox1.value == true || controller.checkbox2.value == true ? Get.to(()=> const BookingDetailsScreen()) : null;
-                  },
-                  buttonText: "Book")
+             MainButton(
+                height: 50,
+                color: controller.selectedServices.isNotEmpty ? AppColors.mainColor : AppColors.grey2,
+                width: Get.size.width / 3,
+                onTap: () async {
+                  SharedPreferences prefs = await SharedPreferences.getInstance();
+                  prefs.setString("parking_id",parkingData?.sId ?? "");
+
+                  if (controller.selectedServices.isNotEmpty) {
+                    debugPrint("Book pressed with: ${controller.selectedServices}");
+                    Get.to(() => const BookingDetailsScreen());
+                  }
+                },
+                buttonText: "Book",
+              )
+
             ],
           ),
         ),

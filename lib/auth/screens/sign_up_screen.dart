@@ -7,6 +7,7 @@ import 'package:parq/app_config/app_colors.dart';
 import 'package:parq/app_config/custom_app_bar.dart';
 import 'package:parq/app_config/mains.dart';
 import 'package:parq/auth/controllers/sign_up_controller.dart';
+import 'package:parq/auth/screens/login_with_number_screen.dart';
 import 'package:parq/auth/screens/pin_screen.dart';
 import 'package:parq/home/screen/home_screen.dart';
 import 'package:parq/nav%20bar/navigation_screen.dart';
@@ -283,13 +284,13 @@ class SignupScreen extends GetView<SignUpController> {
   Widget phoneNumber() {
     return ReactiveTextField(
       formControlName: 'phone',
-      maxLength: 8,
+      maxLength: 11,
       validationMessages: {
         ValidationMessage.required: (error) => 'Phone number must not be empty',
         ValidationMessage.maxLength: (error) =>
-            'Phone number can\'t exceed 8 digits',
+            'Phone number can\'t exceed 11 digits',
         ValidationMessage.minLength: (error) =>
-            'Phone number can\'t be less than 8 digits',
+            'Phone number can\'t be less than 11 digits',
       },
       keyboardType: TextInputType.phone,
       decoration: InputDecoration(
@@ -371,7 +372,7 @@ class SignupScreen extends GetView<SignUpController> {
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
                     debugPrint("Sign in");
-                    // Get.to(() => const SignInPage());
+                    Get.to(() => const LoginWithNumberScreen());
                   },
               ),
             ]),

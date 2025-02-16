@@ -34,36 +34,37 @@ class ProfileScreen extends GetView<ProfileController> {
               ? const Center(child: CircularProgressIndicator())
               : controller.isError.value == true
                   ? Center(
-              child: Stack(
-                children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Session expired, please login again.".tr,
-                        style: const TextStyle(
-                            color: AppColors.black,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      SizedBox(
-                        width: Get.size.width / 3,
-                        child: MainButton(
-                            gradient: AppColors.homeScrGradientColor,
-                            onTap: () async {
-                              // controller.onInit();
-                              controller.biometricLoginService
-                                  .handleBiometricLogin<ProfileController>();
-                            },
-                            buttonText: "Reload".tr),
-                      ),
-                    ],
-                  ),
-                ],
-              ))
+                      child: Stack(
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Session expired, please login again.".tr,
+                              style: const TextStyle(
+                                  color: AppColors.black,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            SizedBox(
+                              width: Get.size.width / 3,
+                              child: MainButton(
+                                  gradient: AppColors.homeScrGradientColor,
+                                  onTap: () async {
+                                    // controller.onInit();
+                                    controller.biometricLoginService
+                                        .handleBiometricLogin<
+                                            ProfileController>();
+                                  },
+                                  buttonText: "Reload".tr),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ))
                   : Padding(
                       padding: const EdgeInsets.all(20),
                       child: Column(
@@ -93,7 +94,8 @@ class ProfileScreen extends GetView<ProfileController> {
                                       "assets/images/pass.svg")),
                               const SizedBox(
                                 height: 15,
-                              ), GestureDetector(
+                              ),
+                              GestureDetector(
                                   onTap: () {
                                     debugPrint("Payment Methods");
                                     Get.to(() => const PaymentMethodsScreen());
@@ -116,7 +118,8 @@ class ProfileScreen extends GetView<ProfileController> {
                               GestureDetector(
                                   onTap: () {
                                     debugPrint("privacy & policy");
-                                    Get.to(() => const PrivacyAndPolicyScreen());
+                                    Get.to(
+                                        () => const PrivacyAndPolicyScreen());
                                   },
                                   child: mainProfileRows("privacy & policy",
                                       "assets/images/LockKeyhole.svg")),
@@ -138,8 +141,8 @@ class ProfileScreen extends GetView<ProfileController> {
                                     debugPrint("Log out");
                                     _showLogoutDialog(context);
                                   },
-                                  child: mainProfileRows(
-                                      "Logout", "assets/images/ArrowsLogout.svg")),
+                                  child: mainProfileRows("Logout",
+                                      "assets/images/ArrowsLogout.svg")),
                               // const SizedBox(
                               //   height: 15,
                               // ),
@@ -157,7 +160,6 @@ class ProfileScreen extends GetView<ProfileController> {
                           )
                         ],
                       ),
-
                     ),
         ));
   }
@@ -165,9 +167,7 @@ class ProfileScreen extends GetView<ProfileController> {
   Widget nameRow(controller) {
     return Container(
       decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20)
-      ),
+          color: Colors.white, borderRadius: BorderRadius.circular(20)),
       child: Row(
         children: [
           // ClipOval(
@@ -239,30 +239,41 @@ class ProfileScreen extends GetView<ProfileController> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: MainText(text: "Logout",),
-          content: MainText(text: "Are you sure you want to log out?",),
+          title: MainText(
+            text: "Logout",
+          ),
+          content: MainText(
+            text: "Are you sure you want to log out?",
+          ),
           actions: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 SizedBox(
                   width: Get.size.width / 3.5,
-                  child: MainButton(onTap: (){
-                            Navigator.of(context).pop();
-                  }, buttonText: "Close",
-                    color: AppColors.grey2,),
+                  child: MainButton(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    buttonText: "Close",
+                    color: AppColors.grey2,
+                  ),
                 ),
-
-
+                Container(
+                  width: 10,
+                ),
                 SizedBox(
                   width: Get.size.width / 3.5,
-                  child: MainButton(buttonText:"Logout",onTap: (){
-                    Get.offAll(()=> const OnBoarding());
-                  },color: AppColors.mainColor,),
+                  child: MainButton(
+                    buttonText: "Logout",
+                    onTap: () {
+                      Get.offAll(() => const OnBoarding());
+                    },
+                    color: AppColors.mainColor,
+                  ),
                 )
               ],
             ),
-
           ],
         );
       },

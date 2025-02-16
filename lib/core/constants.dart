@@ -1,8 +1,11 @@
 class Constants {
-  final baseUrl = "http://192.168.3.12:3100/api/";
+  final authBaseUrl = "http://192.168.3.12:3030/api/";
+  final parkBaseUrl = "http://192.168.3.12:3000/api/";
   final signUp = "auth/signup";
   final loginUrl = "auth/login";
   final sendOtp = "auth/send-otp";
+  final createBooking = "bookings/create";
+  final allParking = "parkings/all";
   final myTransactionsUrl = "https://monorepo-api.khardahapp.com/treasury/transactions/my";
   final myWalletsUrl = "https://monorepo-api.khardahapp.com/treasury/wallets/my";
   final methodsUrl = "https://monorepo-api.khardahapp.com/payout/methods/list/";

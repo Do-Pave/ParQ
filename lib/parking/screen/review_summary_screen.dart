@@ -165,7 +165,7 @@ class ReviewSummaryScreen extends StatelessWidget {
                           padding: const EdgeInsets.all(4.0),
                           child: Row(
                             children: [
-                              SvgPicture.asset("assets/images/fav.svg"),
+                              SvgPicture.asset("assets/images/fav.svg",color: AppColors.mainColor),
                               const SizedBox(
                                 width: 10,
                               ),
@@ -224,19 +224,24 @@ class ReviewSummaryScreen extends StatelessWidget {
                           weight: FontWeight.w500,
                           color: AppColors.black,
                         ),
-                        Container(),
-                        MainText(
-                          text: "\$3.00",
-                          size: 14,
-                          weight: FontWeight.w500,
-                          color: AppColors.mainColor,
+                        // Container(),
+                        Row(
+                          children: [
+                            MainText(
+                              text: "\$3.00",
+                              size: 14,
+                              weight: FontWeight.w500,
+                              color: AppColors.mainColor,
+                            ),
+                            MainText(
+                              text: "/hr",
+                              size: 14,
+                              weight: FontWeight.w400,
+                              color: AppColors.textGrey,
+                            )
+                          ],
                         ),
-                        MainText(
-                          text: "/hr",
-                          size: 14,
-                          weight: FontWeight.w400,
-                          color: AppColors.textGrey,
-                        )
+
                       ],
                     ),
                     const SizedBox(

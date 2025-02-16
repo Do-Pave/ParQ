@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:parq/app_config/mains.dart';
 import 'package:parq/parking/controller/booking_details_controller.dart';
 import 'package:parq/parking/screen/payment_methods_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../app_config/app_colors.dart';
@@ -133,7 +134,9 @@ class BookingDetailsScreen extends GetView<BookingDetailsController> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Obx(() => GestureDetector(
-                              onTap: () {
+                              onTap: () async{
+                                SharedPreferences prefs = await SharedPreferences.getInstance();
+                                prefs.setString("bookingType","hourly");
                                 controller.updateOption(1);
                               },
                               child: Container(
@@ -145,7 +148,7 @@ class BookingDetailsScreen extends GetView<BookingDetailsController> {
                                                 ? AppColors.mainColor
                                                 : AppColors.textGrey)),
                                 height: 50,
-                                width: Get.size.width / 2.3,
+                                width: Get.size.width / 2.4,
                                 child: Padding(
                                   padding: const EdgeInsets.only(
                                       right: 0, left: 20, top: 13, bottom: 13),
@@ -178,9 +181,11 @@ class BookingDetailsScreen extends GetView<BookingDetailsController> {
                                                     .textGrey; // Unchecked color
                                               },
                                             ),
-                                            onChanged: (value) {
+                                            onChanged: (value) async {
                                               if (value != null) {
                                                 controller.updateOption(value);
+                                                SharedPreferences prefs = await SharedPreferences.getInstance();
+                                                prefs.setString("bookingType","hourly");
                                               }
                                             },
                                           )),
@@ -190,7 +195,9 @@ class BookingDetailsScreen extends GetView<BookingDetailsController> {
                               ),
                             )),
                         Obx(() => GestureDetector(
-                              onTap: () {
+                              onTap: () async {
+                                SharedPreferences prefs = await SharedPreferences.getInstance();
+                                prefs.setString("bookingType","daily");
                                 controller.updateOption(2);
                               },
                               child: Container(
@@ -202,7 +209,7 @@ class BookingDetailsScreen extends GetView<BookingDetailsController> {
                                                 ? AppColors.mainColor
                                                 : AppColors.textGrey)),
                                 height: 50,
-                                width: Get.size.width / 2.3,
+                                width: Get.size.width / 2.4,
                                 child: Padding(
                                     padding: const EdgeInsets.only(
                                         right: 0,
@@ -239,9 +246,11 @@ class BookingDetailsScreen extends GetView<BookingDetailsController> {
                                                   .textGrey; // Unchecked color
                                             },
                                           ),
-                                          onChanged: (value) {
+                                          onChanged: (value) async{
                                             if (value != null) {
                                               controller.updateOption(value);
+                                              SharedPreferences prefs = await SharedPreferences.getInstance();
+                                              prefs.setString("bookingType","daily");
                                             }
                                           },
                                         ),

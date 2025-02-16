@@ -29,156 +29,164 @@ class HomeScreen extends GetView<HomeController> {
       appBar: ParqAppBar(
         hasBack: false,
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              MainText(
-                text: "Location",
-                size: 16,
-                weight: FontWeight.w400,
-                color: AppColors.grey1,
-              ),
-              locationAndNotification(),
-              const SizedBox(
-                height: 16,
-              ),
-              RichText(
-                textAlign: TextAlign.start,
-                text: TextSpan(
-                  text: 'Hi, Find The '.tr,
-                  style: const TextStyle(
-                      color: AppColors.black,
-                      fontSize: 24,
-                      fontWeight: FontWeight.w500),
-                  children: <TextSpan>[
-                    TextSpan(
-                        text: 'Best '.tr,
-                        style: const TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.w500,
-                            color: AppColors.mainColor)),
-                    TextSpan(
-                        text: ' Nearby '.tr,
-                        style: const TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.w500,
-                            color: AppColors.black)),
-                    TextSpan(
-                        text: 'parking Spots.'.tr,
-                        style: const TextStyle(
-                            color: AppColors.mainColor,
-                            fontSize: 24,
-                            fontWeight: FontWeight.w500)),
-                  ],
+      body: RefreshIndicator(
+        onRefresh: () async {
+          controller.getAllParking();
+        },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                MainText(
+                  text: "Location",
+                  size: 16,
+                  weight: FontWeight.w400,
+                  color: AppColors.grey1,
                 ),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              GestureDetector(
-                onTap: (){
-                  Get.to(()=> SearchMapScreen());
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: AppColors.grey2, width: 1),
+                locationAndNotification(),
+                const SizedBox(
+                  height: 16,
+                ),
+                RichText(
+                  textAlign: TextAlign.start,
+                  text: TextSpan(
+                    text: 'Hi, Find The '.tr,
+                    style: const TextStyle(
+                        color: AppColors.black,
+                        fontSize: 24,
+                        fontWeight: FontWeight.w500),
+                    children: <TextSpan>[
+                      TextSpan(
+                          text: 'Best '.tr,
+                          style: const TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.w500,
+                              color: AppColors.mainColor)),
+                      TextSpan(
+                          text: ' Nearby '.tr,
+                          style: const TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.w500,
+                              color: AppColors.black)),
+                      TextSpan(
+                          text: 'parking Spots.'.tr,
+                          style: const TextStyle(
+                              color: AppColors.mainColor,
+                              fontSize: 24,
+                              fontWeight: FontWeight.w500)),
+                    ],
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      children: [
-                        SvgPicture.asset(
-                          'assets/images/searchIcon.svg', // Path to your SVG file
-                          height: 20,
-                          width: 20,
-                          fit: BoxFit.scaleDown,
-                          color: Colors.grey, // Color of the SVG icon
-                        ),
-                        const SizedBox(
-                          width: 12,
-                        ),
-                        MainText(
-                          text: "Search Parking",
-                          color: AppColors.textGrey,
-                          size: 14,
-                          weight: FontWeight.w400,
-                        )
-                      ],
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Get.to(() => SearchMapScreen());
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: AppColors.grey2, width: 1),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          SvgPicture.asset(
+                            'assets/images/searchIcon.svg',
+                            // Path to your SVG file
+                            height: 20,
+                            width: 20,
+                            fit: BoxFit.scaleDown,
+                            color: Colors.grey, // Color of the SVG icon
+                          ),
+                          const SizedBox(
+                            width: 12,
+                          ),
+                          MainText(
+                            text: "Search Parking",
+                            color: AppColors.textGrey,
+                            size: 14,
+                            weight: FontWeight.w400,
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(
-                height: 22,
-              ),
-              Container(
-                width: Get.size.width,
-                height: 200,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(100),
+                const SizedBox(
+                  height: 22,
                 ),
-                child: MapScreen(),
-              ),
-              const SizedBox(
-                height: 22,
-              ),
-              defaultParkValet(controller),
-              const SizedBox(
-                height: 22,
-              ),
-              mainHeaders("Nearby Parking", (){}),
-              const SizedBox(
-                height: 22,
-              ),
-              SizedBox(
-                height: 187 * 3 ,
-                child: ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: 3,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8),
-                      child: nearbyParking(),
-                    );
-                  },
+                Container(
+                  width: Get.size.width,
+                  height: 200,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                  child: MapScreen(),
                 ),
-              ),
-              const SizedBox(
-                height: 22,
-              ),
-              mainHeaders("Popular Parking", (){}),
-              const SizedBox(
-                height: 22,
-              ),
-
-              SizedBox(
-                height: 250 ,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 2,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: popularParking(),
-                    );
-                  },
+                const SizedBox(
+                  height: 22,
                 ),
-              ),
-              const SizedBox(
-                height: 100,
-              ),
-            ],
+                defaultParkValet(controller),
+                const SizedBox(
+                  height: 22,
+                ),
+                mainHeaders("Nearby Parking", () {}),
+                const SizedBox(
+                  height: 22,
+                ),
+                SizedBox(
+                  height: 187 * 3,
+                  child: ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: 3,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8),
+                        child: nearbyParking(),
+                      );
+                    },
+                  ),
+                ),
+                const SizedBox(
+                  height: 22,
+                ),
+                mainHeaders("Popular Parking", () {}),
+                const SizedBox(
+                  height: 22,
+                ),
+                SizedBox(
+                  height: 250,
+                  child: Obx(
+                    () => ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: controller.allParking.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        var parkingData = controller.allParking[index];
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          child: popularParking(parkingData),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 100,
+                ),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 
-  Widget mainHeaders(title,void Function()? onTap){
+  Widget mainHeaders(title, void Function()? onTap) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -205,7 +213,10 @@ class HomeScreen extends GetView<HomeController> {
   Widget locationAndNotification() {
     return Row(
       children: [
-        SvgPicture.asset("assets/images/locationIcon.svg"),
+        SvgPicture.asset(
+          "assets/images/locationIcon.svg",
+          color: AppColors.mainColor,
+        ),
         const SizedBox(
           width: 10,
         ),
@@ -352,11 +363,8 @@ class HomeScreen extends GetView<HomeController> {
                     ],
                   ),
                   const Spacer(),
-                  Image.asset(
-                    "assets/images/rightArrow.png",
-                    width: 30,
-                    height: 30,
-                  )
+                  Image.asset("assets/images/rightArrow.png",
+                      width: 30, height: 30, color: AppColors.mainColor)
                 ],
               ),
               const SizedBox(
@@ -374,7 +382,10 @@ class HomeScreen extends GetView<HomeController> {
                 children: [
                   Row(
                     children: [
-                      SvgPicture.asset("assets/images/locationIcon.svg"),
+                      SvgPicture.asset(
+                        "assets/images/locationIcon.svg",
+                        color: AppColors.mainColor,
+                      ),
                       const SizedBox(
                         width: 8,
                       ),
@@ -388,7 +399,8 @@ class HomeScreen extends GetView<HomeController> {
                   ),
                   Row(
                     children: [
-                      SvgPicture.asset("assets/images/CarVector.svg"),
+                      SvgPicture.asset("assets/images/CarVector.svg",
+                          color: AppColors.mainColor),
                       const SizedBox(
                         width: 8,
                       ),
@@ -428,8 +440,8 @@ class HomeScreen extends GetView<HomeController> {
 
   Widget nearbyParking() {
     return GestureDetector(
-      onTap: (){
-        Get.to(()=> const NearbyParkingScreen());
+      onTap: () {
+        Get.to(() => NearbyParkingScreen());
       },
       child: Container(
           decoration: BoxDecoration(
@@ -491,7 +503,8 @@ class HomeScreen extends GetView<HomeController> {
                           padding: const EdgeInsets.all(8.0),
                           child: Row(
                             children: [
-                              SvgPicture.asset("assets/images/carParkingIcon.svg"),
+                              SvgPicture.asset(
+                                  "assets/images/carParkingIcon.svg"),
                               const SizedBox(
                                 width: 8,
                               ),
@@ -517,7 +530,7 @@ class HomeScreen extends GetView<HomeController> {
                             weight: FontWeight.w500,
                             color: AppColors.black,
                           ),
-                          Container(),
+                          const Spacer(),
                           MainText(
                             text: "\$3.00",
                             size: 14,
@@ -578,117 +591,128 @@ class HomeScreen extends GetView<HomeController> {
     );
   }
 
-  Widget popularParking(){
-    return Container(
-      width: Get.size.width / 2,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: AppColors.grey2)
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-          Stack(
-            children: [
-              Image.asset(
-                "assets/images/Frame000005609.png",
-                fit: BoxFit.fill,
-                width: 170,
-                height: 95,
+  Widget popularParking(parkingData) {
+    return GestureDetector(
+      onTap: () {
+        debugPrint(jsonEncode(parkingData).toString());
+        Get.to(() => NearbyParkingScreen(parkingData : parkingData));
+      },
+      child: Container(
+        width: Get.size.width / 2,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(color: AppColors.grey2)),
+        child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Stack(
+                children: [
+                  Image.asset(
+                    "assets/images/Frame000005609.png",
+                    fit: BoxFit.fill,
+                    width: 170,
+                    height: 95,
+                  ),
+                  Positioned(
+                    top: 5,
+                    right: 5,
+                    child: Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: SvgPicture.asset("assets/images/non-fav.svg"),
+                    ),
+                  ),
+                ],
               ),
-              Positioned(
-                top: 5,
-                right: 5,
-                child: Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: SvgPicture.asset("assets/images/non-fav.svg"),
-                ),
+              const SizedBox(
+                height: 8,
               ),
-            ],
-          ),
-          const SizedBox(height: 8,),
-          Row(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    color: Color.fromRGBO(18, 175, 152, 0.2)
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: MainText(
-                    text: "25 Spots",
+              Row(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        color: const Color.fromRGBO(18, 175, 152, 0.2)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: MainText(
+                        text:
+                            " ${parkingData.spots.length.toString()} ${parkingData.spots.length < 2 ? "Spot" : "Spots"}",
+                        size: 14,
+                        weight: FontWeight.w400,
+                        color: AppColors.mainColor,
+                      ),
+                    ),
+                  ),
+                  const Spacer(),
+                  MainText(
+                    text: "\$${parkingData.netPrice}",
                     size: 14,
-                    weight: FontWeight.w400,
+                    weight: FontWeight.w500,
                     color: AppColors.mainColor,
                   ),
-                ),
+                  MainText(
+                    text: "/hr",
+                    size: 14,
+                    weight: FontWeight.w400,
+                    color: AppColors.textGrey,
+                  )
+                ],
               ),
-              const Spacer(),
+              const SizedBox(
+                height: 8,
+              ),
               MainText(
-                text: "\$3.00",
-                size: 14,
+                text: limitText(parkingData.parkingName, 13),
+                size: 12,
                 weight: FontWeight.w500,
-                color: AppColors.mainColor,
+                color: AppColors.black,
               ),
-              MainText(
-                text: "/hr",
-                size: 14,
-                weight: FontWeight.w400,
-                color: AppColors.textGrey,
-              )
-            ],
-          ),
-          const SizedBox(height: 8,),
-          MainText(
-            text: limitText("ParkEase Pro", 13),
-            size: 12,
-            weight: FontWeight.w500,
-            color: AppColors.black,
-          ),
-      const SizedBox(height: 8,),
-      const Divider(
-        color: AppColors.grey2,
-        height: 1,
-      ),
-      const SizedBox(
-        height: 20,
-      ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              SvgPicture.asset("assets/images/locationIcon.svg"),
               const SizedBox(
-                width: 8,
+                height: 8,
               ),
-              MainText(
-                text: "60M Away",
-                size: 10,
-                weight: FontWeight.w400,
-                color: AppColors.textGrey,
-              )
-            ],
-          ),
-          Row(
-            children: [
-              SvgPicture.asset("assets/images/CarVector.svg"),
+              const Divider(
+                color: AppColors.grey2,
+                height: 1,
+              ),
               const SizedBox(
-                width: 8,
+                height: 20,
               ),
-              MainText(
-                text: "25 Spots ",
-                size: 10,
-                weight: FontWeight.w400,
-                color: AppColors.textGrey,
-              )
-            ],
-          ),
-        ],),
-  ])),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      SvgPicture.asset("assets/images/locationIcon.svg"),
+                      const SizedBox(
+                        width: 8,
+                      ),
+                      MainText(
+                        text: "60M Away",
+                        size: 10,
+                        weight: FontWeight.w400,
+                        color: AppColors.textGrey,
+                      )
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      SvgPicture.asset("assets/images/CarVector.svg"),
+                      const SizedBox(
+                        width: 8,
+                      ),
+                      MainText(
+                        text: "${parkingData.spots.length.toString()} spots",
+                        size: 10,
+                        weight: FontWeight.w400,
+                        color: AppColors.textGrey,
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            ])),
+      ),
     );
   }
 

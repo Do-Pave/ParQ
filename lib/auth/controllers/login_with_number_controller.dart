@@ -35,7 +35,7 @@ class LoginWithNumberController extends GenericController{
 
     try {
       final response = await _dio.post(
-        constants.baseUrl +
+        constants.authBaseUrl +
         constants.sendOtp,
         data: {
           "phone": form.control('phone').value,

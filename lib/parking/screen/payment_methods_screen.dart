@@ -138,9 +138,10 @@ class PaymentMethodsScreen extends GetView<PaymentMethodsController> {
               buttonText: "Continue",
               onTap: () {
                 debugPrint("Continue pressed");
-                controller.selectedOption.value != ""
-                    ? Get.to(() => const ReviewSummaryScreen())
-                    : null;
+                controller.createBooking();
+                // controller.selectedOption.value != ""
+                //     ? Get.to(() => const ReviewSummaryScreen())
+                //     : null;
               },
             ),
           ),
