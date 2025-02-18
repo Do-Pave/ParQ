@@ -24,6 +24,7 @@ class PaymentMethodsController extends GenericController{
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString("access_token");
     String? date = prefs.getString("date");
+    String? arrivingTime = prefs.getString("arriving_time");
     String? parkingId = prefs.getString("parking_id");
     String? parkingSpot = prefs.getString("parking_spot");
     String? vehicleType = prefs.getString("vehicle_type");
@@ -48,7 +49,7 @@ class PaymentMethodsController extends GenericController{
           data: {
             "bookingType": "hourly",
             "date": "2025-02-10T00:00:00.000Z",
-            "arrivingTime": "2025-02-10T08:30:00.000Z",
+            "arrivingTime": arrivingTime,
             "exitTime": "2025-02-10T09:30:00.000Z",
             "parking": parkingId,
             "services": [0, 1],
@@ -64,6 +65,8 @@ class PaymentMethodsController extends GenericController{
         final createBookingData = CreateBookingModel.fromJson(response.data);
 
         if (createBookingData.success == true) {
+          var bookingID = createBookingData.data?.sId;
+          prefs.setString("booking_id", bookingID ?? "");
           isDone.value = true;
           debugPrint("Data: ${response.data}");
         } else {

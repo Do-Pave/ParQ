@@ -7,13 +7,18 @@ import 'package:get/get.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:parq/app_config/custom_app_bar.dart';
 import 'package:parq/app_config/mains.dart';
+import 'package:parq/models/create_booking_model.dart';
 import 'package:parq/nav%20bar/navigation_screen.dart';
 import 'package:parq/parking/controller/eticket_controller.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:parq/app_config/app_colors.dart';
 
+import '../../app_config/date_utils.dart';
+import '../../models/create_booking_model.dart';
+
 class EticketScreen extends GetView<EticketController> {
-  const EticketScreen({super.key});
+  Data? eTicketData;
+  EticketScreen({super.key, this.eTicketData});
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +92,7 @@ class EticketScreen extends GetView<EticketController> {
                   height: 180,
                   child: Center(
                     child: QrImageView(
-                      data: "123456789",
+                      data: eTicketData?.qrCode ?? "",
                       version: QrVersions.auto,
                     ),
                   ),
@@ -106,17 +111,17 @@ class EticketScreen extends GetView<EticketController> {
                   dashGapRadius: 0.0,
                 ),
                 const SizedBox(height: 25),
-                eticketRow("Name", "Amr"),
+                eticketRow("Name", eTicketData?.booking?.userInfo?.fullName ?? ""),
                 const SizedBox(height: 15),
-                eticketRow("Parking Area", "Blue Way City Parking "),
+                eticketRow("Parking Area", eTicketData?.parking?.location?.address ?? ""),
                 const SizedBox(height: 15),
-                eticketRow("Arrival Time ", "March 15 / 7:30 AM"),
+                eticketRow("Arrival Time ", DateUtil.convertDate(eTicketData?.booking?.arrivingTime ?? "")),
                 const SizedBox(height: 15),
-                eticketRow("Exit Time", "March 15 / 7:30 AM"),
+                eticketRow("Exit Time", DateUtil.convertDate(eTicketData?.booking?.exitTime ?? "")),
                 const SizedBox(height: 15),
-                eticketRow("Spot", "A17"),
+                eticketRow("Spot", eTicketData?.booking?.parkingSpot ?? ""),
                 const SizedBox(height: 15),
-                eticketRow("Duration", "1 Hour"),
+                eticketRow("Duration", "${eTicketData?.booking?.totalHours.toString() ?? ""} ${eTicketData?.booking?.totalHours?.isGreaterThan(1) == true  ? "Hours" : "Hour" }"),
                 const SizedBox(height: 15),
               ],
             ),
