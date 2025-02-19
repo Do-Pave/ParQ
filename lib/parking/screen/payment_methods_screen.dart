@@ -37,7 +37,7 @@ class PaymentMethodsScreen extends GetView<PaymentMethodsController> {
                 height: 20,
               ),
               Obx(() => mainRow(
-                  "assets/images/walletYe.svg",
+                  "assets/images/walletGreen.svg",
                   "Wallet",
                   controller.selectedOption.value == "Wallet"
                       ? "assets/images/selected.svg"
@@ -61,7 +61,7 @@ class PaymentMethodsScreen extends GetView<PaymentMethodsController> {
                 height: 20,
               ),
               Obx(() => mainRow(
-                  "assets/images/addCard.svg",
+                  "assets/images/cardGreen.svg",
                   "Add Card",
                   controller.selectedOption.value == "Add Card"
                       ? "assets/images/selected.svg"
@@ -138,11 +138,10 @@ class PaymentMethodsScreen extends GetView<PaymentMethodsController> {
               buttonText: "Continue",
               onTap: () {
                 debugPrint("Continue pressed");
-                // controller.createBooking();
-                // controller.selectedOption.value != ""
-                //     ?
-                    Get.to(() => const ReviewSummaryScreen());
-                //     : null;
+                controller.createBooking();
+                controller.selectedOption.value != ""
+                    ? Get.to(() => const ReviewSummaryScreen())
+                    : null;
               },
             ),
           ),

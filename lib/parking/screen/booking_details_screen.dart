@@ -7,7 +7,7 @@ import 'package:parq/parking/controller/booking_details_controller.dart';
 import 'package:parq/parking/screen/payment_methods_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
+import 'package:intl/intl.dart';
 import '../../app_config/app_colors.dart';
 
 class BookingDetailsScreen extends GetView<BookingDetailsController> {
@@ -394,14 +394,15 @@ class BookingDetailsScreen extends GetView<BookingDetailsController> {
             Obx(
               () => MainButton(
                   height: 50,
-                  color: controller.selectedDateIndex.value != (-1) ||
+                  color: controller.selectedDateIndex.value != (-1) &&
                           controller.selectedTimeIndex.value != (-1)
                       ? AppColors.mainColor
                       : AppColors.grey2,
                   width: Get.size.width / 3,
-                  onTap: () {
+                  onTap: () async {
                     debugPrint("Book pressed");
-                    controller.selectedDateIndex.value != (-1) ||
+                    controller.getSelectedTimestamp();
+                    controller.selectedDateIndex.value != (-1) &&
                         controller.selectedTimeIndex.value != (-1)
                         ? Get.to(() => const PaymentMethodsScreen()): null;
                   },
@@ -443,7 +444,7 @@ class BookingDetailsScreen extends GetView<BookingDetailsController> {
                   );
                 },
                 scrollDirection: Axis.horizontal,
-                itemCount: 24,
+                itemCount: controller.availableDates.length,
                 itemBuilder: (BuildContext context, int index) {
                   return GestureDetector(
                     onTap: () {
@@ -466,7 +467,7 @@ class BookingDetailsScreen extends GetView<BookingDetailsController> {
                                       : Colors.white)),
                           child: Center(
                               child: MainText(
-                            text: "15 Mar",
+                            text: DateFormat('yyyy-MM-dd').format(controller.availableDates[index]),
                             size: 14,
                             weight: FontWeight.w400,
                             color: controller.selectedTimeIndex.value == index
@@ -513,7 +514,7 @@ class BookingDetailsScreen extends GetView<BookingDetailsController> {
                   );
                 },
                 scrollDirection: Axis.horizontal,
-                itemCount: 24,
+                itemCount: controller.availableTimes.length,
                 itemBuilder: (BuildContext context, int index) {
                   return GestureDetector(
                     onTap: () {
@@ -536,7 +537,7 @@ class BookingDetailsScreen extends GetView<BookingDetailsController> {
                                       : Colors.white)),
                           child: Center(
                               child: MainText(
-                            text: "10:00 AM",
+                            text: controller.availableTimes[index],
                             size: 14,
                             weight: FontWeight.w400,
                             color: controller.selectedDateIndex.value == index

@@ -5,6 +5,7 @@ class Constants {
   final loginUrl = "auth/login";
   final sendOtp = "auth/send-otp";
   final createBooking = "bookings/create";
+  final getTicket = "tickets/show/";
   final allParking = "parkings/all";
   final myTransactionsUrl = "https://monorepo-api.khardahapp.com/treasury/transactions/my";
   final myWalletsUrl = "https://monorepo-api.khardahapp.com/treasury/wallets/my";

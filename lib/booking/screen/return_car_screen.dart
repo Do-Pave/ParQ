@@ -124,7 +124,7 @@ class ReturnCarScreen extends GetView<ReturnCarController> {
               color: AppColors.mainColor,
               buttonText: "View E-Ticket",
               onTap: () {
-                Get.to(() => const EticketScreen());
+                Get.to(() => EticketScreen());
               },
             ),
           ),
