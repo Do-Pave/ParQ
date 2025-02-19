@@ -212,9 +212,11 @@ class SignupScreen extends GetView<SignUpController> {
         labelStyle: const TextStyle(
           color: Colors.black,
         ),
+        filled: true,
+        fillColor: AppColors.textFieldBg,
         hintText: 'First name',
         hintStyle: const TextStyle(
-            color: AppColors.grey, fontSize: 12, fontWeight: FontWeight.w400),
+            color: AppColors.textFieldHintColor, fontSize: 12, fontWeight: FontWeight.w400),
         floatingLabelBehavior: FloatingLabelBehavior.always,
         enabledBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: AppColors.textFieldBg),
@@ -254,9 +256,11 @@ class SignupScreen extends GetView<SignUpController> {
         labelStyle: const TextStyle(
           color: Colors.black,
         ),
-        hintText: 'Last Name',
+        filled: true,
+        fillColor: AppColors.textFieldBg,
         hintStyle: const TextStyle(
-            color: AppColors.grey, fontSize: 12, fontWeight: FontWeight.w400),
+            color: AppColors.textFieldHintColor, fontSize: 12, fontWeight: FontWeight.w400),
+        hintText: 'Last Name',
         floatingLabelBehavior: FloatingLabelBehavior.always,
         enabledBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: AppColors.textFieldBg),
@@ -299,8 +303,10 @@ class SignupScreen extends GetView<SignUpController> {
           color: Colors.black,
         ),
         hintText: 'Ex: 01012345678',
+        filled: true,
+        fillColor: AppColors.textFieldBg,
         hintStyle: const TextStyle(
-            color: AppColors.grey, fontSize: 12, fontWeight: FontWeight.w400),
+            color: AppColors.textFieldHintColor, fontSize: 12, fontWeight: FontWeight.w400),
         floatingLabelBehavior: FloatingLabelBehavior.always,
         enabledBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: AppColors.textFieldBg),

@@ -40,13 +40,13 @@ class MyBookingScreen extends GetView<MyBookingController> {
               ),
             ),
             SizedBox(
-              height: Get.size.height -280 ,
+              height: Get.size.height ,
               child: TabBarView(
                 controller: controller.tabController,
                 children: [
                   Flexible(
                     child: ListView.builder(
-
+                      padding: const EdgeInsets.only(bottom: 280),
                       itemCount: 35,
                       itemBuilder: (context, index) {
                         return booking("Timer","E-Ticket",(){
@@ -61,7 +61,7 @@ class MyBookingScreen extends GetView<MyBookingController> {
                   // booking(),
                   Flexible(
                     child: ListView.builder(
-
+                      padding: const EdgeInsets.only(bottom: 280),
                       itemCount: 4,
                       itemBuilder: (context, index) {
                         return booking("Re-Book","E-Ticket",(){
@@ -72,7 +72,7 @@ class MyBookingScreen extends GetView<MyBookingController> {
                       },
                     ),
                   ),
-                  Center(child: Container(height: 100,width: 200,color: AppColors.mainColor,),),
+                 const Center(child:  Text("There are no cancelled bookings!"),),
                 ],
               ),
             ),

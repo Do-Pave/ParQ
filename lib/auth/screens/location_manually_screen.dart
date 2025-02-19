@@ -66,17 +66,19 @@ class LocationManuallyScreen extends GetView<LocationManuallyController> {
             ),
             const SizedBox(height: 15),
             GestureDetector(
-              onTap: controller.requestPermissions, // Trigger location fetch
-              child: Row(
+              onTap: controller.requestPermissions,
+              child: Obx(() => controller.isBusy.value
+                  ? const CircularProgressIndicator()
+                  :Row(
                 children: [
-                  SvgPicture.asset("assets/images/mapIcon.svg"),
+                  SvgPicture.asset("assets/images/mapIcon.svg",color: AppColors.mainColor,),
                   const SizedBox(width: 10),
                   Text(
                     "Use my current location".tr,
                     style: const TextStyle(fontSize: 16),
                   ),
                 ],
-              ),
+              ),)
             ),
           ],
         ),

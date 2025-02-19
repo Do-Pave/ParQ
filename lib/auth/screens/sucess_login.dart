@@ -26,7 +26,7 @@ class SuccessLogin extends StatelessWidget {
           children: [
             const Spacer(),
             Image.asset(
-              "assets/images/verified.png",
+              "assets/images/verified.png",color: AppColors.mainColor,
               width: 120,
               height: 120,
             ),
@@ -48,16 +48,19 @@ class SuccessLogin extends StatelessWidget {
               textAlign: TextAlign.center,
               style: const TextStyle(
                   color: AppColors.grey2,
-                  fontSize: 14,
+                  fontSize: 16,
                   fontWeight: FontWeight.w500),
             ),
             const Spacer(),
-            MainButton(
-                color: AppColors.mainColor,
-                onTap: () {
-                  Get.to(() => const LocationScreen());
-                },
-                buttonText: "Continue".tr)
+            SizedBox(
+              height: 60,
+              child: MainButton(
+                  color: AppColors.mainColor,
+                  onTap: () {
+                    Get.to(() => const LocationScreen());
+                  },
+                  buttonText: "Continue".tr),
+            )
           ],
         ),
       ),

@@ -6,12 +6,14 @@ class Assets {
   static const String assetsImagesArrowsLogout = 'assets/images/ArrowsLogout.svg';
   static const String assetsImagesCarVector = 'assets/images/carVector.svg';
   static const String assetsImagesGoogle = 'assets/images/google.svg';
+  static const String assetsImagesNotification = 'assets/images/notification.svg';
   static const String assetsImagesOnBoarding1 = 'assets/images/onBoarding1.svg';
   static const String assetsImagesOnBoarding2 = 'assets/images/onBoarding2.svg';
   static const String assetsImagesOnBoarding3 = 'assets/images/onBoarding3.svg';
   static const String assetsImagesProfileIcon = 'assets/images/profileIcon.svg';
   static const String assetsImagesScan = 'assets/images/scan.svg';
   static const String imagesAccountIcon = 'assets/images/accountIcon.svg';
+  static const String imagesAddCard = 'assets/images/addCard.svg';
   static const String imagesApple = 'assets/images/apple.png';
   static const String imagesArrowsLogout = 'assets/images/ArrowsLogout.png';
   static const String imagesBankIcon = 'assets/images/bankIcon.svg';
@@ -47,7 +49,7 @@ class Assets {
   static const String imagesMapIcon = 'assets/images/mapIcon.svg';
   static const String imagesMaster = 'assets/images/master.png';
   static const String imagesNonFav = 'assets/images/non-fav.svg';
-  static const String imagesNotification = 'assets/images/notification.svg';
+  static const String imagesNotification = 'assets/images/notification.png';
   static const String imagesNotificationIcon = 'assets/images/notificationIcon.svg';
   static const String imagesOnBoarding1 = 'assets/images/onBoarding1.png';
   static const String imagesOnBoarding2 = 'assets/images/onBoarding2.png';
@@ -82,6 +84,7 @@ class Assets {
   static const String imagesVerified = 'assets/images/verified.png';
   static const String imagesVisa = 'assets/images/visa.png';
   static const String imagesWalletGreen = 'assets/images/walletGreen.svg';
+  static const String imagesWalletYe = 'assets/images/walletYe.svg';
   static const String imagesWash = 'assets/images/wash.svg';
   static const String imagesWebYellow = 'assets/images/webYellow.svg';
   static const String imagesWhatsappYellow = 'assets/images/whatsappYellow.svg';

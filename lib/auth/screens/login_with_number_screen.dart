@@ -33,46 +33,98 @@ class LoginWithNumberScreen extends GetView<LoginWithNumberController> {
           //   debugPrint("Back");
           // },
         ),
-        body: Padding(
-          padding: EdgeInsets.all(20),
-          child: Obx(
-            () => ReactiveForm(
-              formGroup: controller.form,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Text(
-                    "login with a valid local Mobile number".tr,
-                    style: const TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.w500),
-                  ),
-                  const SizedBox(height: 20.0),
-                  // Phone number
-                  Text(
-                    'Phone number'.tr,
-                    style:
-                        const TextStyle(color: AppColors.black, fontSize: 16),
-                    textAlign: TextAlign.start,
-                  ),
-                  const SizedBox(height: 8.0),
-                  phoneNumber(),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  signUp(),
-                  // Submit button
-                  const Spacer(),
-                  submitBtn(),
-
-                  if (controller.isError.value) ...[
-                    const SizedBox(height: 20.0),
-                    Text(
-                      controller.error?.value ?? "Error",
-                      style: const TextStyle(color: Colors.red),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.all(20),
+            child: Obx(
+              () => ReactiveForm(
+                formGroup: controller.form,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+          
+                    Center(
+                      child: Text(
+                        "Sign in".tr,
+                        style:
+                        const TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
+                      ),
                     ),
+                    const SizedBox(height: 15,),
+                    Text(
+                      'Hi! Welcome back , you’ve been missed '.tr,
+                      style:
+                      const TextStyle(color: AppColors.grey1, fontSize: 16),
+                      textAlign: TextAlign.center,
+                    ),
+          
                     const SizedBox(height: 20.0),
+                    // Phone number
+                    Text(
+                      'Phone number'.tr,
+                      style:
+                          const TextStyle(color: AppColors.black, fontSize: 16),
+                      textAlign: TextAlign.start,
+                    ),
+                    const SizedBox(height: 8.0),
+                    phoneNumber(),
+                    const SizedBox(
+                      height: 50,
+                    ),
+
+                    // Submit button
+                    submitBtn(),
+                    const SizedBox(height: 50,),
+
+                    Row(
+                      children: [
+                        const Expanded(
+                          child: Divider(
+                            color: AppColors.grey, // Line color
+                            thickness: 1,       // Line thickness
+                            endIndent: 8,       // Space between line and text
+                          ),
+                        ),
+                        Text(
+                          'or sign up with '.tr,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            color: Color(0xffA1A1A1),
+                          ),
+                        ),
+                        const Expanded(
+                          child: Divider(
+                            color: AppColors.grey, // Line color
+                            thickness: 1,       // Line thickness
+                            indent: 8,          // Space between line and text
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 50,),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        GestureDetector(onTap:(){debugPrint("Google tapped");},child: Image.asset("assets/images/google.png",height: 40,width: 40,)),
+                        const SizedBox(width: 16,),
+                        GestureDetector(onTap:(){debugPrint("Facebook tapped");},child: Image.asset("assets/images/facebook.png",height: 50,width: 50,)),
+                        const SizedBox(width: 16,),
+                        GestureDetector(onTap:(){debugPrint("Apple tapped");},child: Image.asset("assets/images/apple.png",height: 50,width: 50,)),
+                      ],
+                    ),
+                    const SizedBox(height: 25,),
+                    signUp(),
+                    if (controller.isError.value) ...[
+                      const SizedBox(height: 20.0),
+                      Text(
+                        controller.error?.value ?? "Error",
+                        style: const TextStyle(color: Colors.red),
+                      ),
+                      const SizedBox(height: 20.0),
+                    ],
                   ],
-                ],
+                ),
               ),
             ),
           ),
@@ -94,13 +146,15 @@ class LoginWithNumberScreen extends GetView<LoginWithNumberController> {
       },
       keyboardType: TextInputType.phone,
       decoration: InputDecoration(
+        filled: true,
+        fillColor: AppColors.textFieldBg,
         // labelText: 'Phone number',
         labelStyle: const TextStyle(
           color: Colors.black,
         ),
         hintText: 'Ex: 01012345678',
         hintStyle: const TextStyle(
-            color: AppColors.grey, fontSize: 12, fontWeight: FontWeight.w400),
+            color: AppColors.textFieldHintColor, fontSize: 12, fontWeight: FontWeight.w400),
         floatingLabelBehavior: FloatingLabelBehavior.always,
         enabledBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: AppColors.textFieldBg),
@@ -193,4 +247,5 @@ class LoginWithNumberScreen extends GetView<LoginWithNumberController> {
       ),
     );
   }
+
 }

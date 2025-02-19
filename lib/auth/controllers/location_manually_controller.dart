@@ -1,43 +1,60 @@
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:get/get.dart';
 import 'package:parq/app_config/generic_controller.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-class LocationManuallyController extends GenericController{
+class LocationManuallyController extends GenericController {
   final TextEditingController textController = TextEditingController();
 
-  void requestPermissions() async {
-    PermissionStatus status = await Permission.location.request();
-    if (status.isGranted) {
-      // Permissions granted, continue with geolocation operations
-      fetchCurrentLocation();
-    } else {
-      // Handle the case where the user denies the permission
+  Future<void> requestPermissions() async {
+    LocationPermission permission = await Geolocator.checkPermission();
+    isBusy.value = true;
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      isBusy.value = false;
+      Get.snackbar(
+        "Permission Denied",
+        "Location access is permanently denied. Enable it from settings.",
+        snackPosition: SnackPosition.BOTTOM,
+      );
+      return;
+    }
+
+    if (permission == LocationPermission.always ||
+        permission == LocationPermission.whileInUse) {
+      getCurrentLocation();
     }
   }
-  // Get user's current location
-  Future<void> fetchCurrentLocation() async {
-    // Check if location services are enabled
-    await Future.delayed(Duration(seconds: 1)); // Ensure that the app is fully initialized
-    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      // Handle if location services are disabled
-      debugPrint("Location services are disabled.");
-      return;
+
+  Future<void> getCurrentLocation() async {
+    try {
+      Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high,
+      );
+
+      // Convert coordinates to an address (Optional: Use Google Geocoding API)
+
+      List<Placemark> placeMarks =
+          await placemarkFromCoordinates(position.latitude, position.longitude);
+      if (placeMarks.isNotEmpty) {
+        Placemark place = placeMarks.first;
+        String address =
+            "${place.street}, ${place.locality}, ${place.administrativeArea}, ${place.country}";
+        textController.text = address;
+      }
+    } catch (e) {
+      Get.snackbar(
+        "Error",
+        "Failed to get location: $e",
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    } finally {
+      isBusy.value = false;
     }
-
-    // Request location permission
-    LocationPermission permission = await Geolocator.requestPermission();
-    if (permission == LocationPermission.denied || permission == LocationPermission.deniedForever) {
-      // Handle permission denial
-      debugPrint("Location permission denied.");
-      return;
-    }
-
-    // Get current position
-    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-    debugPrint("Latitude: ${position.latitude}, Longitude: ${position.longitude}");
-
-    // You can update your controller state or UI with the coordinates here
   }
 }
