@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:parq/app_config/app_colors.dart';
@@ -24,6 +25,11 @@ class HomeScreen extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent, // Set to transparent or any color
+      statusBarIconBrightness: Brightness.dark, // White icons for dark background
+      statusBarBrightness: Brightness.dark, // For iOS devices
+    ));
     Get.put(HomeController());
     return Scaffold(
 
@@ -32,11 +38,14 @@ class HomeScreen extends GetView<HomeController> {
           controller.getAllParking();
         },
         child: Padding(
-          padding: const EdgeInsets.only(right: 20,left: 20,top: 50),
+          padding: const EdgeInsets.only(right: 20,left: 20,top: 0),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const SizedBox(
+                  height: 50,
+                ),
                 MainText(
                   text: "Location",
                   size: 16,

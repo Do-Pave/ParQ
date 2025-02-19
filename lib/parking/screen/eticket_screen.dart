@@ -27,7 +27,7 @@ class EticketScreen extends GetView<EticketController> {
     // Loading state variable
     RxBool isLoading = false.obs;
 
-    Future<void> _captureAndSaveScreenshot() async {
+    Future<void> captureAndSaveScreenshot() async {
       try {
         isLoading.value = true;  // Start loading
         await Future.delayed(Duration(milliseconds: 50)); // Brief delay
@@ -141,7 +141,7 @@ class EticketScreen extends GetView<EticketController> {
                   buttonText: "Download E-Ticket",
                   onTap: isLoading.value
                       ? null // Disable the button while loading
-                      : _captureAndSaveScreenshot,
+                      : captureAndSaveScreenshot,
                 ),
                 const SizedBox(height: 10),
                 MainButton(

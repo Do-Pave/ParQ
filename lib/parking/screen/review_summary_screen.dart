@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:parq/app_config/custom_app_bar.dart';
 import 'package:parq/app_config/date_utils.dart';
 import 'package:parq/parking/controller/review_summary_controller.dart';
-import 'package:intl/intl.dart';
 import '../../app_config/app_colors.dart';
 import '../../app_config/mains.dart';
 import 'eticket_screen.dart';
@@ -27,81 +26,99 @@ class ReviewSummaryScreen extends GetView<ReviewSummaryController> {
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              nearbyParking(controller),
-              const SizedBox(
-                height: 24,
-              ),
-              summeryRow("Arrival Time", DateUtil.convertDate(booking?.arrivingTime ?? ""), AppColors.textGrey,
-                  () {}),
-              const SizedBox(
-                height: 15,
-              ),
-              summeryRow(
-                  "Exit Time ", DateUtil.convertDate(booking?.exitTime ?? ""), AppColors.textGrey, () {}),
-              const SizedBox(
-                height: 15,
-              ),
-              summeryRow("Vehicle Type",booking?.vehicleType, AppColors.textGrey, () {}),
-              const SizedBox(
-                height: 15,
-              ),
-              summeryRow("Spot", booking?.parkingSpot ?? "", AppColors.textGrey, () {}),
-              const SizedBox(
-                height: 30,
-              ),
-              summeryRow("Amount", "\$${controller.createBookingData.value?.parking?.netPrice}/hr", AppColors.textGrey, () {}),
-              const SizedBox(
-                height: 15,
-              ),
-              summeryRow("Total Hours", "${booking?.totalHours}", AppColors.textGrey, () {}),
-              const SizedBox(
-                height: 15,
-              ),
-              summeryRow("Fees", "\$${booking?.fees}", AppColors.textGrey, () {}),
-              const SizedBox(
-                height: 15,
-              ),
-              summeryRow("Total", "\$${booking?.totalPrice}", AppColors.mainColor, () {}),
-              const SizedBox(
-                height: 30,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SvgPicture.asset("assets/images/paypal.svg"),
-                  const SizedBox(
-                    width: 16,
-                  ),
-                  MainText(
-                    text: "Paypal",
-                    size: 18,
-                    weight: FontWeight.w400,
-                    color: AppColors.textGrey,
-                  ),
-                  const Spacer(),
-                  GestureDetector(
-                      onTap: () {
-                        Get.back();
-                      },
-                      child: MainText(
-                          text: "Change",
-                          size: 16,
-                          weight: FontWeight.w500,
-                          color: AppColors.mainColor))
-                ],
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const Divider(
-                height: 1,
-                color: AppColors.grey2,
-              ),
-            ],
-          ),
+          child: Obx(() {
+            var booking = controller.createBookingData.value?.booking;
+
+            if (booking == null) {
+              return const Center(
+                  child: CircularProgressIndicator()); // Show loader until data is fetched
+            }
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                nearbyParking(controller),
+                const SizedBox(
+                  height: 24,
+                ),
+                summeryRow("Arrival Time",
+                    DateUtil.convertDate(booking?.arrivingTime ?? ""),
+                    AppColors.textGrey,
+                        () {}),
+                const SizedBox(
+                  height: 15,
+                ),
+                summeryRow(
+                    "Exit Time ", DateUtil.convertDate(booking?.exitTime ?? ""),
+                    AppColors.textGrey, () {}),
+                const SizedBox(
+                  height: 15,
+                ),
+                summeryRow("Vehicle Type", booking?.vehicleType,
+                    AppColors.textGrey, () {}),
+                const SizedBox(
+                  height: 15,
+                ),
+                summeryRow("Spot", booking?.parkingSpot ?? "",
+                    AppColors.textGrey, () {}),
+                const SizedBox(
+                  height: 30,
+                ),
+                summeryRow("Amount",
+                    "\$${controller.createBookingData.value?.parking
+                        ?.netPrice}/hr", AppColors.textGrey, () {}),
+                const SizedBox(
+                  height: 15,
+                ),
+                summeryRow("Total Hours", "${booking?.totalHours}",
+                    AppColors.textGrey, () {}),
+                const SizedBox(
+                  height: 15,
+                ),
+                summeryRow(
+                    "Fees", "\$${booking?.fees}", AppColors.textGrey, () {}),
+                const SizedBox(
+                  height: 15,
+                ),
+                summeryRow("Total", "\$${booking?.totalPrice}",
+                    AppColors.mainColor, () {}),
+                const SizedBox(
+                  height: 30,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SvgPicture.asset("assets/images/paypal.svg"),
+                    const SizedBox(
+                      width: 16,
+                    ),
+                    MainText(
+                      text: "Paypal",
+                      size: 18,
+                      weight: FontWeight.w400,
+                      color: AppColors.textGrey,
+                    ),
+                    const Spacer(),
+                    GestureDetector(
+                        onTap: () {
+                          Get.back();
+                        },
+                        child: MainText(
+                            text: "Change",
+                            size: 16,
+                            weight: FontWeight.w500,
+                            color: AppColors.mainColor))
+                  ],
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                const Divider(
+                  height: 1,
+                  color: AppColors.grey2,
+                ),
+              ],
+            );
+          }),
         ),
       ),
       bottomNavigationBar: Padding(

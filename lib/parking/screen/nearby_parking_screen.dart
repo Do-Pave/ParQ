@@ -497,8 +497,7 @@ class NearbyParkingScreen extends GetView<NearbyParkingController> {
   }
 
   Widget total() {
-    return Obx(
-      () => SizedBox(
+    return SizedBox(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Row(
@@ -535,16 +534,16 @@ class NearbyParkingScreen extends GetView<NearbyParkingController> {
               ),
              MainButton(
                 height: 50,
-                color: controller.selectedServices.isNotEmpty ? AppColors.mainColor : AppColors.grey2,
+                color:AppColors.mainColor,
                 width: Get.size.width / 3,
                 onTap: () async {
                   SharedPreferences prefs = await SharedPreferences.getInstance();
                   prefs.setString("parking_id",parkingData?.sId ?? "");
 
-                  if (controller.selectedServices.isNotEmpty) {
+                  // if (controller.selectedServices.isNotEmpty) {
                     debugPrint("Book pressed with: ${controller.selectedServices}");
                     Get.to(() => const BookingDetailsScreen());
-                  }
+                  // }
                 },
                 buttonText: "Book",
               )
@@ -552,7 +551,6 @@ class NearbyParkingScreen extends GetView<NearbyParkingController> {
             ],
           ),
         ),
-      ),
     );
   }
 }
