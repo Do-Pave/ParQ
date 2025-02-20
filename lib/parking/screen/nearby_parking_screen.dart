@@ -503,39 +503,41 @@ class NearbyParkingScreen extends GetView<NearbyParkingController> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  MainText(
-                    text: "Total Price",
-                    size: 18,
-                    weight: FontWeight.w500,
-                  ),
-                  Row(
-                    children: [
-                      MainText(
-                        text: "\$${parkingData?.netPrice ?? ""}",
-                        size: 14,
-                        weight: FontWeight.w500,
-                        color: AppColors.mainColor,
-                      ),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      MainText(
-                        text: "/hr",
-                        size: 18,
-                        weight: FontWeight.w500,
-                        color: AppColors.textGrey,
-                      )
-                    ],
-                  )
-                ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    MainText(
+                      text: "Total Price",
+                      size: 18,
+                      weight: FontWeight.w500,
+                    ),
+                    Row(
+                      children: [
+                        MainText(
+                          text: "\$${parkingData?.netPrice ?? ""}",
+                          size: 14,
+                          weight: FontWeight.w500,
+                          color: AppColors.mainColor,
+                        ),
+                        const SizedBox(
+                          height: 16,
+                        ),
+                        MainText(
+                          text: "/hr",
+                          size: 18,
+                          weight: FontWeight.w500,
+                          color: AppColors.textGrey,
+                        )
+                      ],
+                    )
+                  ],
+                ),
               ),
              MainButton(
                 height: 50,
                 color:AppColors.mainColor,
-                width: Get.size.width / 3,
+                width: Get.size.width / 3.2,
                 onTap: () async {
                   SharedPreferences prefs = await SharedPreferences.getInstance();
                   prefs.setString("parking_id",parkingData?.sId ?? "");

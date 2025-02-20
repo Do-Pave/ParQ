@@ -206,6 +206,7 @@ class SignupScreen extends GetView<SignUpController> {
       },
       validationMessages: {
         ValidationMessage.required: (error) => 'Required',
+        ValidationMessage.pattern: (error)=> "Can't have numbers"
       },
       decoration: InputDecoration(
         // labelText: 'First name',
@@ -243,6 +244,7 @@ class SignupScreen extends GetView<SignUpController> {
 
   Widget lastName() {
     return ReactiveTextField(
+      keyboardType: TextInputType.text,
       formControlName: 'lastName',
       textInputAction: TextInputAction.next,
       onSubmitted: (_) {
@@ -250,6 +252,7 @@ class SignupScreen extends GetView<SignUpController> {
       },
       validationMessages: {
         ValidationMessage.required: (error) => 'Required',
+        ValidationMessage.pattern: (error)=> "Can't have numbers"
       },
       decoration: InputDecoration(
         // labelText: 'Last Name',

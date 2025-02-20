@@ -25,7 +25,7 @@ class HomeScreen extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent, // Set to transparent or any color
       statusBarIconBrightness: Brightness.dark, // White icons for dark background
       statusBarBrightness: Brightness.dark, // For iOS devices

@@ -134,130 +134,130 @@ class BookingDetailsScreen extends GetView<BookingDetailsController> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Obx(() => GestureDetector(
-                              onTap: () async{
-                                SharedPreferences prefs = await SharedPreferences.getInstance();
-                                prefs.setString("bookingType","hourly");
-                                controller.updateOption(1);
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    border: Border.all(
-                                        color:
-                                            controller.selectedOption.value == 1
-                                                ? AppColors.mainColor
-                                                : AppColors.textGrey)),
-                                height: 50,
-                                width: Get.size.width / 2.4,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      right: 0, left: 20, top: 13, bottom: 13),
-                                  child: Row(
-                                    children: [
-                                      MainText(
-                                        text: "Hourly",
-                                        size: 16,
-                                        weight: FontWeight.w500,
-                                        color:
-                                            controller.selectedOption.value == 1
-                                                ? AppColors.mainColor
-                                                : AppColors.textGrey,
-                                      ),
-                                      const Spacer(),
-                                      Obx(() => Radio<int>(
-                                            value: 1,
-                                            groupValue:
-                                                controller.selectedOption.value,
-                                            activeColor: AppColors.mainColor,
-                                            fillColor: MaterialStateProperty
-                                                .resolveWith<Color>(
-                                              (Set<MaterialState> states) {
-                                                if (states.contains(
-                                                    MaterialState.selected)) {
-                                                  return AppColors
-                                                      .mainColor; // Checked color
-                                                }
-                                                return AppColors
-                                                    .textGrey; // Unchecked color
-                                              },
-                                            ),
-                                            onChanged: (value) async {
-                                              if (value != null) {
-                                                controller.updateOption(value);
-                                                SharedPreferences prefs = await SharedPreferences.getInstance();
-                                                prefs.setString("bookingType","hourly");
-                                              }
-                                            },
-                                          )),
-                                    ],
+                          onTap: () async{
+                            SharedPreferences prefs = await SharedPreferences.getInstance();
+                            prefs.setString("bookingType","hourly");
+                            controller.updateOption(1);
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                    color:
+                                    controller.selectedOption.value == 1
+                                        ? AppColors.mainColor
+                                        : AppColors.textGrey)),
+                            height: 50,
+                            width: Get.size.width / 2.4,
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  right: 0, left: 20, top: 13, bottom: 13),
+                              child: Row(
+                                children: [
+                                  MainText(
+                                    text: "Hourly",
+                                    size: 16,
+                                    weight: FontWeight.w500,
+                                    color:
+                                    controller.selectedOption.value == 1
+                                        ? AppColors.mainColor
+                                        : AppColors.textGrey,
                                   ),
-                                ),
+                                  const Spacer(),
+                                  Obx(() => Radio<int>(
+                                    value: 1,
+                                    groupValue:
+                                    controller.selectedOption.value,
+                                    activeColor: AppColors.mainColor,
+                                    fillColor: MaterialStateProperty
+                                        .resolveWith<Color>(
+                                          (Set<MaterialState> states) {
+                                        if (states.contains(
+                                            MaterialState.selected)) {
+                                          return AppColors
+                                              .mainColor; // Checked color
+                                        }
+                                        return AppColors
+                                            .textGrey; // Unchecked color
+                                      },
+                                    ),
+                                    onChanged: (value) async {
+                                      if (value != null) {
+                                        controller.updateOption(value);
+                                        SharedPreferences prefs = await SharedPreferences.getInstance();
+                                        prefs.setString("bookingType","hourly");
+                                      }
+                                    },
+                                  )),
+                                ],
                               ),
-                            )),
+                            ),
+                          ),
+                        )),
                         Obx(() => GestureDetector(
-                              onTap: () async {
-                                SharedPreferences prefs = await SharedPreferences.getInstance();
-                                prefs.setString("bookingType","daily");
-                                controller.updateOption(2);
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    border: Border.all(
-                                        color:
-                                            controller.selectedOption.value == 2
-                                                ? AppColors.mainColor
-                                                : AppColors.textGrey)),
-                                height: 50,
-                                width: Get.size.width / 2.4,
-                                child: Padding(
-                                    padding: const EdgeInsets.only(
-                                        right: 0,
-                                        left: 20,
-                                        top: 13,
-                                        bottom: 13),
-                                    child: Row(
-                                      children: [
-                                        MainText(
-                                          text: "Daily",
-                                          size: 16,
-                                          weight: FontWeight.w500,
-                                          color:
-                                              controller.selectedOption.value ==
-                                                      2
-                                                  ? AppColors.mainColor
-                                                  : AppColors.textGrey,
-                                        ),
-                                        const Spacer(),
-                                        Radio<int>(
-                                          value: 2,
-                                          groupValue:
-                                              controller.selectedOption.value,
-                                          activeColor: AppColors.mainColor,
-                                          fillColor: MaterialStateProperty
-                                              .resolveWith<Color>(
+                          onTap: () async {
+                            SharedPreferences prefs = await SharedPreferences.getInstance();
+                            prefs.setString("bookingType","daily");
+                            controller.updateOption(2);
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                    color:
+                                    controller.selectedOption.value == 2
+                                        ? AppColors.mainColor
+                                        : AppColors.textGrey)),
+                            height: 50,
+                            width: Get.size.width / 2.4,
+                            child: Padding(
+                                padding: const EdgeInsets.only(
+                                    right: 0,
+                                    left: 20,
+                                    top: 13,
+                                    bottom: 13),
+                                child: Row(
+                                  children: [
+                                    MainText(
+                                      text: "Daily",
+                                      size: 16,
+                                      weight: FontWeight.w500,
+                                      color:
+                                      controller.selectedOption.value ==
+                                          2
+                                          ? AppColors.mainColor
+                                          : AppColors.textGrey,
+                                    ),
+                                    const Spacer(),
+                                    Radio<int>(
+                                      value: 2,
+                                      groupValue:
+                                      controller.selectedOption.value,
+                                      activeColor: AppColors.mainColor,
+                                      fillColor: MaterialStateProperty
+                                          .resolveWith<Color>(
                                             (Set<MaterialState> states) {
-                                              if (states.contains(
-                                                  MaterialState.selected)) {
-                                                return AppColors
-                                                    .mainColor; // Checked color
-                                              }
-                                              return AppColors
-                                                  .textGrey; // Unchecked color
-                                            },
-                                          ),
-                                          onChanged: (value) async{
-                                            if (value != null) {
-                                              controller.updateOption(value);
-                                              SharedPreferences prefs = await SharedPreferences.getInstance();
-                                              prefs.setString("bookingType","daily");
-                                            }
-                                          },
-                                        ),
-                                      ],
-                                    )),
-                              ),
-                            )),
+                                          if (states.contains(
+                                              MaterialState.selected)) {
+                                            return AppColors
+                                                .mainColor; // Checked color
+                                          }
+                                          return AppColors
+                                              .textGrey; // Unchecked color
+                                        },
+                                      ),
+                                      onChanged: (value) async{
+                                        if (value != null) {
+                                          controller.updateOption(value);
+                                          SharedPreferences prefs = await SharedPreferences.getInstance();
+                                          prefs.setString("bookingType","daily");
+                                        }
+                                      },
+                                    ),
+                                  ],
+                                )),
+                          ),
+                        )),
                       ],
                     ),
                     const SizedBox(
@@ -362,34 +362,36 @@ class BookingDetailsScreen extends GetView<BookingDetailsController> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                MainText(
-                  text: "Total Price",
-                  size: 18,
-                  weight: FontWeight.w500,
-                ),
-                Row(
-                  children: [
-                    MainText(
-                      text: "\$3.00",
-                      size: 14,
-                      weight: FontWeight.w500,
-                      color: AppColors.mainColor,
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    MainText(
-                      text: "/hr",
-                      size: 18,
-                      weight: FontWeight.w500,
-                      color: AppColors.textGrey,
-                    )
-                  ],
-                )
-              ],
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  MainText(
+                    text: "Total Price",
+                    size: 18,
+                    weight: FontWeight.w500,
+                  ),
+                  Row(
+                    children: [
+                      MainText(
+                        text: "\$3.00",
+                        size: 14,
+                        weight: FontWeight.w500,
+                        color: AppColors.mainColor,
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      MainText(
+                        text: "/hr",
+                        size: 18,
+                        weight: FontWeight.w500,
+                        color: AppColors.textGrey,
+                      )
+                    ],
+                  )
+                ],
+              ),
             ),
             Obx(
               () => MainButton(
@@ -398,7 +400,7 @@ class BookingDetailsScreen extends GetView<BookingDetailsController> {
                           controller.selectedTimeIndex.value != (-1)
                       ? AppColors.mainColor
                       : AppColors.grey2,
-                  width: Get.size.width / 3,
+                  width: Get.size.width / 3.2,
                   onTap: () async {
                     debugPrint("Book pressed");
                     controller.getSelectedTimestamp();

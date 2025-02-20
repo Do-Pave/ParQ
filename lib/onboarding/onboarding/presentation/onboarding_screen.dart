@@ -125,7 +125,7 @@ class _OnBoardingState extends State<OnBoarding> {
                       ),
                   width: Get.size.width,
                   child: Image.asset(
-                    "assets/images/onBoarding1.png",
+                    "assets/images/onBoarding3.png",
                     fit: BoxFit.fill,
                     height: Get.size.height / 1.8,
                   )),
@@ -230,7 +230,7 @@ class _OnBoardingState extends State<OnBoarding> {
                       ),
                   width: Get.size.width,
                   child: Image.asset(
-                    "assets/images/onBoarding2.png",
+                    "assets/images/onBoarding1.png",
                     fit: BoxFit.fill,
                     height: Get.size.height / 1.8,
                   )),
@@ -312,7 +312,7 @@ class _OnBoardingState extends State<OnBoarding> {
               Container(decoration: const BoxDecoration(
                 // color: AppColors.grey,
                 // borderRadius: BorderRadius.only(bottomLeft: Radius.circular(80),bottomRight: Radius.circular(80))
-              ),width: Get.size.width,child: Image.asset("assets/images/onBoarding3.png",fit: BoxFit.fill,height: Get.size.height / 1.8,)),
+              ),width: Get.size.width,child: Image.asset("assets/images/onBoarding2.png",fit: BoxFit.fill,height: Get.size.height / 1.8,)),
               Positioned(top: 30 , right: 20,child:  GestureDetector(
                 onTap: (){
                   Get.offAll(const LoginWithNumberScreen());

@@ -20,8 +20,8 @@ class SignUpController extends GenericController {
 
 
   final form = FormGroup({
-    'firstName': FormControl<String>(validators: [Validators.required]),
-    'lastName': FormControl<String>(validators: [Validators.required]),
+    'firstName': FormControl<String>(validators: [Validators.required,Validators.pattern(r'^(?!\d+$)[a-zA-Z\s]+$'),]),
+    'lastName': FormControl<String>(validators: [Validators.required,Validators.pattern(r'^(?!\d+$)[a-zA-Z\s]+$'),]),
     'phone': FormControl<String>(validators: [
       Validators.required,
       Validators.number,

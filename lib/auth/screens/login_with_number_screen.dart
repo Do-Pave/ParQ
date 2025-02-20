@@ -213,7 +213,7 @@ class LoginWithNumberScreen extends GetView<LoginWithNumberController> {
                         // }
                       }
                     : null,
-                buttonText: "Login",
+                buttonText: "Sign in",
               ),
             );
     });
