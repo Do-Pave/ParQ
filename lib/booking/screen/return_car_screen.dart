@@ -1,6 +1,7 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:parq/app_config/app_colors.dart';
 import 'package:parq/app_config/custom_app_bar.dart';
@@ -41,12 +42,14 @@ class ReturnCarScreen extends GetView<ReturnCarController> {
             color: Colors.white,
             child: Column(
               children: [
+                SvgPicture.asset("assets/images/yellowCar.svg",width: 35,height: 70,),
+                const SizedBox(height: 30,),
                 CircularCountDownTimer(
-                  duration: 5,
+                  duration: 1000,
                   initialDuration: 0,
                   controller: CountDownController(),
                   width: MediaQuery.of(context).size.width / 2,
-                  height: Get.size.height / 4,
+                  height: Get.size.height / 5,
                   ringColor: Colors.grey[300]!,
                   fillColor: AppColors.mainColor,
                   backgroundColor: Colors.transparent,

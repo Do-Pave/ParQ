@@ -87,10 +87,10 @@ class ProfileScreen extends GetView<ProfileController> {
                               ),
                               GestureDetector(
                                   onTap: () {
-                                    debugPrint("Password Manger");
+                                    debugPrint("Password Manager");
                                     Get.to(() => const ResetPasswordScreen());
                                   },
-                                  child: mainProfileRows("Password Manger",
+                                  child: mainProfileRows("Password Manager",
                                       "assets/images/pass.svg")),
                               const SizedBox(
                                 height: 15,

@@ -92,5 +92,6 @@ class Assets {
   static const String imagesWithdraws = 'assets/images/withdraws.svg';
   static const String imagesWs = 'assets/images/ws.svg';
   static const String imagesXYellow = 'assets/images/xYellow.svg';
+  static const String imagesYellowCar = 'assets/images/yellowCar.svg';
 
 }

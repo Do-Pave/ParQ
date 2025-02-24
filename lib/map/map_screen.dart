@@ -8,152 +8,95 @@ class MapScreen extends StatefulWidget {
   _MapScreenState createState() => _MapScreenState();
 }
 
-class _MapScreenState extends State<MapScreen> with WidgetsBindingObserver {
+class _MapScreenState extends State<MapScreen> {
   GoogleMapController? _mapController;
   LatLng? _currentPosition;
-  bool _permissionDenied = false;
-  bool _isSnackBarVisible = false; // Prevent multiple SnackBars
-  bool _hasCheckedPermissions = false; // Ensure permissions are checked only once after resuming
+  bool _showEnableLocationButton = false;
+
   final CameraPosition _initialCameraPosition = CameraPosition(
-    target: LatLng(0, 0), // Default location
-    zoom: 14,
+    target: LatLng(30.0444, 31.2357), // Default location in Cairo
+    zoom: 12,
   );
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addObserver(this); // Observe app lifecycle changes
     _checkPermissionsAndLocation();
   }
 
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this); // Remove observer
-    super.dispose();
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.resumed && !_hasCheckedPermissions) {
-      // Recheck permissions only once when resuming
-      _hasCheckedPermissions = true;
-      _checkPermissionsAndLocation();
-    }
-  }
-
   Future<void> _checkPermissionsAndLocation() async {
-    bool serviceEnabled;
-    LocationPermission permission;
+    LocationPermission permission = await Geolocator.checkPermission();
 
-    // Check if location services are enabled
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      _showSnackBar('Location services are disabled. Please enable them.');
-      setState(() {
-        _permissionDenied = true;
-      });
-      return;
-    }
-
-    // Check for location permissions
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied || permission == LocationPermission.deniedForever) {
-      // Request permissions again
+    if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied || permission == LocationPermission.deniedForever) {
-        _showSnackBar('Location permissions are denied. Please enable them in settings.');
-        setState(() {
-          _permissionDenied = true;
-        });
+      if (permission == LocationPermission.denied) {
+        setState(() => _showEnableLocationButton = true);
         return;
       }
     }
 
-    // If permission is granted, get the current location
-    if (permission == LocationPermission.whileInUse || permission == LocationPermission.always) {
-      await _getCurrentLocation();
-      setState(() {
-        _permissionDenied = false;
-      });
+    if (permission == LocationPermission.deniedForever) {
+      setState(() => _showEnableLocationButton = true);
+      return;
     }
+
+    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      setState(() => _showEnableLocationButton = true);
+      return;
+    }
+
+    await _getCurrentLocation();
+    setState(() => _showEnableLocationButton = false);
   }
 
   Future<void> _getCurrentLocation() async {
     try {
       Position position = await Geolocator.getCurrentPosition();
-      setState(() {
-        _currentPosition = LatLng(position.latitude, position.longitude);
-      });
-
-      // Move the camera to the current location
-      _mapController?.animateCamera(
-        CameraUpdate.newLatLng(_currentPosition!),
-      );
+      setState(() => _currentPosition = LatLng(position.latitude, position.longitude));
+      _mapController?.animateCamera(CameraUpdate.newLatLngZoom(_currentPosition!, 14));
     } catch (e) {
-      _showSnackBar('Error getting location: $e');
-    }
-  }
-
-  void _showSnackBar(String message) {
-    if (!_isSnackBarVisible) {
-      _isSnackBarVisible = true;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(message),
-          duration: Duration(seconds: 3),
-        ),
-      ).closed.then((_) {
-        _isSnackBarVisible = false;
-      });
-    }
-  }
-
-  Future<void> _openAppSettings() async {
-    final isOpened = await openAppSettings();
-    if (!isOpened) {
-      _showSnackBar('Unable to open app settings.');
+      print("Error getting location: $e");
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _permissionDenied
-          ? Center(
-        child: ElevatedButton(
-          onPressed: _openAppSettings,
-          child: Text('Enable Location in Settings'),
-        ),
-      )
-          : _currentPosition == null
-          ? Center(child: CircularProgressIndicator())
-          : Container(
-        height: 300, // Adjust container height
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(20),
-          child: GoogleMap(
+      body: Stack(
+        children: [
+          GoogleMap(
             initialCameraPosition: _initialCameraPosition,
-            onMapCreated: (GoogleMapController controller) {
-              _mapController = controller;
-              if (_currentPosition != null) {
-                _mapController?.animateCamera(
-                  CameraUpdate.newLatLng(_currentPosition!),
-                );
-              }
-            },
+            onMapCreated: (controller) => _mapController = controller,
             markers: _currentPosition != null
                 ? {
               Marker(
                 markerId: MarkerId("myLocation"),
                 position: _currentPosition!,
-                infoWindow: InfoWindow(title: "My Location"), // Custom title
+                infoWindow: InfoWindow(title: "My Location"),
               ),
             }
                 : {},
-            myLocationEnabled: true,
+            myLocationEnabled: _currentPosition != null,
           ),
-        ),
+          if (_showEnableLocationButton)
+            Positioned(
+              bottom: 20,
+              left: 20,
+              child: ElevatedButton(
+                onPressed: () async {
+                  bool opened = await openAppSettings();
+                  if (opened) {
+                    setState(() => _showEnableLocationButton = false);
+                    _checkPermissionsAndLocation();
+                  }
+                },
+                child: Text('Enable Location'),
+              ),
+            ),
+        ],
       ),
     );
   }
 }
+

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:parq/app_config/app_colors.dart';
@@ -36,12 +38,55 @@ class ManageProfileScreen extends GetView<ManageProfileController> {
               padding: const EdgeInsets.all(20),
               child: Obx(
                 () => Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Center(
+                      child: Stack(
+                        children: [
+                          Obx(() => CircleAvatar(
+                                radius: 60,
+                                backgroundColor: Colors.grey,
+                                backgroundImage: controller
+                                        .selectedImagePath.value.isNotEmpty
+                                    ? FileImage(File(
+                                            controller.selectedImagePath.value))
+                                        as ImageProvider
+                                    : null,
+                                child:
+                                    controller.selectedImagePath.value.isEmpty
+                                        ? Icon(Icons.person,
+                                            size: 60, color: Colors.white)
+                                        : null,
+                              )),
+                          Positioned(
+                            bottom: 0,
+                            right: 0,
+                            child: GestureDetector(
+                              onTap: () {controller.pickImage();
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.all(6),
+                                decoration: BoxDecoration(
+                                  color: AppColors.mainColor,
+                                  shape: BoxShape.circle,
+                                  border:
+                                      Border.all(color: Colors.white, width: 2),
+                                ),
+                                child: const Icon(Icons.edit,
+                                    size: 18, color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 33,
+                    ),
                     Text(
                       'Name'.tr,
                       style:
-                      const TextStyle(color: AppColors.black, fontSize: 16),
+                          const TextStyle(color: AppColors.black, fontSize: 16),
                       textAlign: TextAlign.start,
                     ),
                     const SizedBox(height: 8.0),
@@ -50,7 +95,7 @@ class ManageProfileScreen extends GetView<ManageProfileController> {
                     Text(
                       'Phone number'.tr,
                       style:
-                      const TextStyle(color: AppColors.black, fontSize: 16),
+                          const TextStyle(color: AppColors.black, fontSize: 16),
                       textAlign: TextAlign.start,
                     ),
                     const SizedBox(height: 8.0),
@@ -59,7 +104,7 @@ class ManageProfileScreen extends GetView<ManageProfileController> {
                     Text(
                       'Email'.tr,
                       style:
-                      const TextStyle(color: AppColors.black, fontSize: 16),
+                          const TextStyle(color: AppColors.black, fontSize: 16),
                       textAlign: TextAlign.start,
                     ),
                     const SizedBox(height: 8.0),
@@ -68,20 +113,20 @@ class ManageProfileScreen extends GetView<ManageProfileController> {
                     Text(
                       'DOB'.tr,
                       style:
-                      const TextStyle(color: AppColors.black, fontSize: 16),
+                          const TextStyle(color: AppColors.black, fontSize: 16),
                       textAlign: TextAlign.start,
                     ),
                     const SizedBox(height: 8.0),
                     datePickerField(),
-                    const SizedBox(height:  20.0),
+                    const SizedBox(height: 20.0),
                     Text(
                       'Gender'.tr,
                       style:
-                      const TextStyle(color: AppColors.black, fontSize: 16),
+                          const TextStyle(color: AppColors.black, fontSize: 16),
                       textAlign: TextAlign.start,
                     ),
                     const SizedBox(height: 8.0),
-                    SizedBox(height: 100,child: genderSelectionDropdown()),
+                    SizedBox(height: 100, child: genderSelectionDropdown()),
                     if (controller.isError.value) ...[
                       const SizedBox(height: 20.0),
                       Text(
@@ -155,9 +200,9 @@ class ManageProfileScreen extends GetView<ManageProfileController> {
       validationMessages: {
         ValidationMessage.required: (error) => 'Phone number must not be empty',
         ValidationMessage.maxLength: (error) =>
-        'Phone number can\'t exceed 8 digits',
+            'Phone number can\'t exceed 8 digits',
         ValidationMessage.minLength: (error) =>
-        'Phone number can\'t be less than 8 digits',
+            'Phone number can\'t be less than 8 digits',
       },
       keyboardType: TextInputType.phone,
       decoration: InputDecoration(
@@ -269,7 +314,7 @@ class ManageProfileScreen extends GetView<ManageProfileController> {
               },
               validationMessages: {
                 ValidationMessage.required: (error) =>
-                'The date must not be empty',
+                    'The date must not be empty',
               },
               decoration: InputDecoration(
                 labelStyle: const TextStyle(
@@ -301,7 +346,7 @@ class ManageProfileScreen extends GetView<ManageProfileController> {
                   borderRadius: BorderRadius.circular(10.0),
                 ),
 
-                suffixIcon: Icon(Icons.calendar_today,
+                suffixIcon: const Icon(Icons.calendar_today,
                     color: AppColors.grey1), // Add an icon for the calendar
               ),
               style: const TextStyle(
@@ -332,8 +377,10 @@ class ManageProfileScreen extends GetView<ManageProfileController> {
           formControlName: 'gender',
           decoration: InputDecoration(
             filled: true,
-            fillColor: Colors.white, // Same background color as other fields
-            contentPadding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 12.0),
+            fillColor: Colors.white,
+            // Same background color as other fields
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 16.0, horizontal: 12.0),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8.0),
             ),
@@ -354,21 +401,30 @@ class ManageProfileScreen extends GetView<ManageProfileController> {
               borderRadius: BorderRadius.circular(10.0),
             ),
 
-            hintText: 'Select Gender', // Placeholder text
+            hintText: 'Select Gender',
+            // Placeholder text
             hintStyle: TextStyle(color: AppColors.grey.withOpacity(0.8)),
           ),
           items: const [
             DropdownMenuItem(
               value: 'Male',
-              child: Text('Male',style: TextStyle( color: AppColors.black,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400,)),
+              child: Text('Male',
+                  style: TextStyle(
+                    color: AppColors.black,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                  )),
             ),
             DropdownMenuItem(
               value: 'Female',
-              child: Text('Female',style: TextStyle( color: AppColors.black,
-                fontSize: 12,
-                fontWeight: FontWeight.w400,),),
+              child: Text(
+                'Female',
+                style: TextStyle(
+                  color: AppColors.black,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
             ),
           ],
           validationMessages: {
@@ -379,7 +435,6 @@ class ManageProfileScreen extends GetView<ManageProfileController> {
     );
   }
 
-
   Widget saveBtn() {
     return ReactiveFormConsumer(builder: (context, form, child) {
       return controller.isBusy.value
@@ -389,7 +444,7 @@ class ManageProfileScreen extends GetView<ManageProfileController> {
           : SizedBox(
               height: 60,
               child: MainButton(
-                color: form.valid ?  AppColors.mainColor : Colors.grey,
+                color: form.valid ? AppColors.mainColor : Colors.grey,
                 onTap: form.valid
                     ? () async {
                         // await controller.login();

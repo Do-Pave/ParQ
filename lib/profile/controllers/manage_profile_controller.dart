@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:parq/app_config/generic_controller.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -23,6 +24,17 @@ class ManageProfileController extends GenericController{
     'email': FormControl<String>(validators: [Validators.required,Validators.email]),
     'gender': FormControl<String>(validators: [Validators.required])
   });
+
+  var selectedImagePath = ''.obs;
+
+  Future<void> pickImage() async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+
+    if (image != null) {
+      selectedImagePath.value = image.path;
+    }
+  }
 
   final biometricLoginService = BiometricLoginService();
 

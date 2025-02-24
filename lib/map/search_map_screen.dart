@@ -104,41 +104,50 @@ class _SearchMapScreenState extends State<SearchMapScreen> {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 100),
-            child: Positioned(
-                top: 30,
-                left: 30,
-                child: Container(
-                  width: Get.size.width,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: AppColors.grey2, width: 1),
-                    color: Colors.white,
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      children: [
-                        SvgPicture.asset(
-                          'assets/images/searchIcon.svg', // Path to your SVG file
-                          height: 20,
-                          width: 20,
-                          fit: BoxFit.scaleDown,
-                          color: AppColors.mainColor, // Color of the SVG icon
-                        ),
-                        const SizedBox(
-                          width: 12,
-                        ),
-                        MainText(
-                          text: "Search Parking",
-                          color: AppColors.textGrey,
-                          size: 14,
-                          weight: FontWeight.w400,
-                        )
-                      ],
+            child: Container(
+              width: Get.size.width,
+              height: 50,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: AppColors.grey2, width: 1),
+                color: Colors.white,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Row(
+                  children: [
+                    SvgPicture.asset(
+                      'assets/images/searchIcon.svg', // Path to your SVG file
+                      height: 20,
+                      width: 20,
+                      fit: BoxFit.scaleDown,
+                      color: AppColors.mainColor, // Color of the SVG icon
                     ),
-                  ),
-                )),
+                    const SizedBox(width: 12),
+                    const Expanded(
+                      child: TextField(
+                        decoration: InputDecoration(
+                          hintText: "Search Parking",
+                          hintStyle: TextStyle(
+                            color: AppColors.textGrey,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                          ),
+                          border: InputBorder.none, // Removes the default underline
+                        ),
+                        style: TextStyle(
+                          color: AppColors.textGrey,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ),
+
           Positioned(
             top: 50,
             left: 20,

@@ -31,7 +31,7 @@ class PrivacyAndPolicyScreen extends StatelessWidget {
                 style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
-                    color: AppColors.grey2)),
+                    color: AppColors.grey1)),
             const SizedBox(
               height: 35,
             ),
@@ -45,7 +45,7 @@ class PrivacyAndPolicyScreen extends StatelessWidget {
                 style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
-                    color: AppColors.grey2)),
+                    color: AppColors.grey1)),
           ],
         ),
       ),

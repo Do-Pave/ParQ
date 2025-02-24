@@ -7,7 +7,6 @@ import 'package:parq/auth/controllers/location_manually_controller.dart';
 
 class LocationManuallyScreen extends GetView<LocationManuallyController> {
   const LocationManuallyScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     Get.put(LocationManuallyController());
