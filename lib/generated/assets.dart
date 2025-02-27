@@ -49,6 +49,7 @@ class Assets {
   static const String imagesMapIcon = 'assets/images/mapIcon.svg';
   static const String imagesMaster = 'assets/images/master.png';
   static const String imagesNonFav = 'assets/images/non-fav.svg';
+  static const String imagesNotSecured = 'assets/images/notSecured.svg';
   static const String imagesNotification = 'assets/images/notification.png';
   static const String imagesNotificationIcon = 'assets/images/notificationIcon.svg';
   static const String imagesOnBoarding1 = 'assets/images/onBoarding1.png';
@@ -73,6 +74,7 @@ class Assets {
   static const String imagesScan = 'assets/images/scan.png';
   static const String imagesScanIcon = 'assets/images/scanIcon.svg';
   static const String imagesSearchIcon = 'assets/images/searchIcon.svg';
+  static const String imagesSecured = 'assets/images/secured.svg';
   static const String imagesSelected = 'assets/images/selected.svg';
   static const String imagesSend = 'assets/images/send.png';
   static const String imagesSplashImage = 'assets/images/splashImage.svg';

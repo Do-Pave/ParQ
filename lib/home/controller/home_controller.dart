@@ -16,12 +16,13 @@ import '../../models/error_model.dart';
 class HomeController extends GenericController {
   var currentIndex = 0.obs;
   var allParking = [].obs;
+  var isSecured = false.obs;
 
   @override
   void onInit() async{
     // TODO: implement onInit
     super.onInit();
-    getAllParking();
+    // getAllParking();
   }
 
   // Update the current index
