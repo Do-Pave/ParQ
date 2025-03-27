@@ -100,7 +100,7 @@ dependencies:
   swipe_refresh: ^1.1.2
 
   # firebase_auth
-  firebase_auth: ^5.4.1
+  firebase_auth: ^5.5.1
 
   # geocoding
   geocoding: ^3.0.0

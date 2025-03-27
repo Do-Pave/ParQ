@@ -123,7 +123,7 @@ class ParqAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
         title: Text(title ?? "",
             style: const TextStyle(
               fontSize: 18,
